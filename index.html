@@ -4,28 +4,35 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>igroteka</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&family=Sora:wght@100..800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles/styles.css">
 </head>
 <body>
     <header>
         <nav>
-            <div>
+            <div class="left_nav">
+            <div class="img_logo">
                 <img src="styles/GameRankLogo.png" alt="">
                 <h1>GameRank</h1>
             </div>
             <ul>
-                <li><a href="">Журнал</a></li>
-                <li><a href="">Обзоры</a></li>
-                <li><a href="">Новости</a></li>
-                <li><a href="">Статьи</a></li>
+                <li><a href="" class="menu_links"><span>Журнал</span></a></li>
+                <li><a href="" class="menu_links"><span>Обзоры</span></a></li>
+                <li><a href="" class="menu_links"><span>Новости</span></a></li>
+                <li><a href="" class="menu_links"><span>Статьи</span></a></li>
             </ul>
-            <div>
-                <button><img src="styles/Icon.png" alt=""></button>
-                <button>подписаться</button>
+            </div>
+            <div class="right_nav">
+                <button class="lypa"><img src="styles/Icon.png" alt="Кнопка поиска по сайту"></button>
+                <button class="podpisatsa">подписаться</button>
             </div>
         </nav>
     </header>
     <main>
         <section class="project_info">
+            <div class="left_project_info">
             <p>о проекте -----</p>
             <h2>О проекте GameRank</h2>
             <p>
@@ -34,17 +41,23 @@
             <p>
                 Наш проект нацелен на создание крупнейшей русскоязычной базы знаний, где каждый голос имеет значение, а детальная статистика помогает находить именно те игры, которые соответствуют вашим предпочтениям.
             </p>
-            <article>
+            <div>
                 <h2>
                     Будующие возможности:
                 </h2>
+                <div>
                 <ul>
-                    <li>Появяться CSS стили</li>
-                    <li>Появяться карточки игр</li>
-                    <li>Появиться адаптив</li>
+                    <li>личный кабинет</li>
+                    <li>интеграция со стим</li>
                 </ul>
-            </article>
-            <div>
+                <ul>
+                    <li>система рекомендаций</li>
+                    <li>собщество игроков</li>
+                </ul>
+                </div>
+            </div>
+            </div>
+            <div class="right_project_info">
             <figure>
                     <img src="styles/dualsens.png" alt="МакросЪемка правого блока кнопок дуалсенса" width="466" height="683">
                     <figcaption>Твой игровой опыт в новом формате</figcaption>

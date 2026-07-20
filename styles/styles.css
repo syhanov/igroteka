@@ -1,0 +1,105 @@
+* {
+    box-sizing: border-box;
+}
+body {
+    max-width: 1280px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 64px;
+    font-family: "Manrope";
+    background-color: gray;
+}
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 22px;
+}
+.left_nav {
+    display: flex;
+}
+.img_logo {
+    display: flex;
+    align-items: center;
+}
+.left_nav ul {
+    list-style-type: none;
+    display: flex;
+    align-items: center;
+    gap: 24px;
+}
+.img_logo img{
+    display: flex;
+    height: 40px;
+    width: 40px;
+}
+.img_logo h1{
+    font-size: 32px;
+    font-weight: bold;
+    color: #DBFCFF;
+    margin: 0;
+}
+.menu_links {
+    text-decoration: none;
+    color: #DBFCFF;
+    display: inline-block;
+    position: relative;
+    border-bottom: 2px solid transparent;
+    transition: bordercolor 0.3s ease;
+    font-size: 14px;
+    font-weight: bold;
+}
+.menu_links span {
+    display: inline-block;
+    transition: transform 0.3s ease;
+}
+.menu_links:hover {
+    border-bottom-color: #DBFCFF; 
+}
+.menu_links:hover span{
+    transform: translateY(-4px);
+}
+.right_nav {
+    display: flex;
+    align-items: center;
+}
+.lypa {
+    width: 18px;
+    height: 18px;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    margin-right: 8px;
+    cursor: pointer;
+}
+.lypa img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.podpisatsa {
+    width: 172px;
+    height: 33px;
+    padding: 0;
+    line-height: 33px;
+    text-align: center;
+    border: 0;
+    border-radius: 12px;
+    background-color: #00F0FF;
+    color: #006970;
+    font-size: 16px;
+    font-weight: bold;
+    font-family: "Manrope";
+    text-align: center;
+    letter-spacing: 0.3px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+.podpisatsa:hover {
+    background-color: #006970;
+    color: #00F0FF;
+    opacity: 0.85;
+}
+.project_info {
+    display: flex;
+}
