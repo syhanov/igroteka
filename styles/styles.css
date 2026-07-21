@@ -102,4 +102,203 @@ nav {
 }
 .project_info {
     display: flex;
+    margin-bottom: 64px;
+}
+.left_project_info {
+    margin-right: 24px;
+}
+.about_project {
+    display: flex;
+    align-items: center;
+}
+.about_project_text {
+    display: inline-block;
+    background-color: #1a222a; 
+    padding: 3px 10px;
+    font-size: 12px;
+    font-weight: normal;
+    color: #DBFCFF;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-right: 12px;
+}
+.about_project_line {
+    display: inline-block;
+    height: 1px;
+    width: 48px;
+    background-color: #DBFCFF;
+    border: 1px;
+}
+.o_proekte_h2 {
+    font-size: 64px;
+    font-weight: normal;
+    color: #e5e2e1;
+    margin: 24px 0 32px;
+    line-height: 1;
+    max-width: 324px;
+}
+.Gamerank_color_span {
+    font-weight: bold;
+    color: #DBFCFF;
+}
+.project_info p {
+    font-size: 18px;
+    font-weight: normal;
+    color: #E5E2E1;
+}
+.future_opportunities h2 {
+    font-size: 32px;
+    font-weight: bold;
+    color: #DBFCFF;
+    margin: 0;
+    margin-bottom: 24px;
+}
+.future_opportunities {
+    background-color: #13131599;
+    border: 1px solid rgba(219, 252, 255, 0.5);
+    border-radius: 10px;
+    padding: 32px;
+}
+.future_opportunities_wrapper {
+    display: flex;
+}
+.ul_custom_list1 {
+    list-style-type: none;
+    padding-left: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-bottom: 0;
+    color: #E5E2E1;
+    font-weight: bold;
+    width: 282px;
+    margin-right: 32px;
+}
+
+.ul_custom_list1 li::before {
+    content: "";
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    margin-right: 10px;
+    vertical-align: middle;
+}
+.ul_custom_list1 li:nth-child(1)::before {
+    background-image: url(ulicons/lcicon.png);
+}
+.ul_custom_list1 li:nth-child(2)::before {
+    background-image: url(ulicons/gamepadicon.png);
+    height: 14px;
+}
+.ul_custom_list2 {
+    list-style-type: none;
+    padding-left: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-bottom: 0;
+    color: #E5E2E1;
+    font-weight: bold;
+}
+
+.ul_custom_list2 li::before {
+    content: "";
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    margin-right: 10px;
+    vertical-align: middle;
+}
+.ul_custom_list2 li:nth-child(1)::before {
+    background-image: url(ulicons/recomendationicon.png);
+}
+.ul_custom_list2 li:nth-child(2)::before {
+    background-image: url(ulicons/soobshestwoicon.png);
+    width: 24px;
+    height: 12px;
+}
+.right_project_info {
+    position: relative;
+    height: 645px;
+    width: 466px;
+    padding: 32px;
+    flex-shrink: 0;
+    border-radius: 5px;
+    border: 1px solid #13131599;
+    background-image: url(dualsens.png);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    align-items: flex-end;
+}
+.right_project_info p{
+    font-size: 32px;
+    font-weight: bold;
+    color: #FFFFFF;
+    margin: 0;
+}
+.corner {
+    width: 128px;
+    height: 128px;
+    border-right: 2px solid rgba(219, 252, 255, 0.5);
+    border-bottom: 2px solid rgba(219, 252, 255, 0.5);
+    border-bottom-right-radius: 10px;
+    position: absolute;
+    right: -16px;
+    bottom: -16px;
+}
+.found_options {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 48px;
+}
+.left_found_options {
+    border-left: 4px solid #DBFCFF;
+    padding-left: 24px;
+}
+.left_found_options h2,
+.left_found_options p {
+    margin: 0;
+}
+.left_found_options p {
+    font-size: 32px;
+    font-weight: bold;
+    color: #e5e2e1;
+}
+.left_found_options h2 {
+    font-size: 14px;
+    font-weight: bold;
+    color: #b9cacb;
+    text-transform: uppercase;
+}
+.right_found_options input {
+    width: 256px;
+    height: 38px;
+    padding: 10px 17px 10px 41px;
+    font-family: "Manrope";
+    font-size: 14;
+    border-radius: 5px;
+    border: none;
+    background-color: #201F1F66;
+    color: #FFFFFF;
+    border: none;
+    outline: none;
+}
+.right_found_options select {
+    text-align: center;
+    padding: 8px 16px;
+    height: 38px;
+    background-color: #201F1F66;
+    border-radius: 5px;
+    font-family: "Manrope";
+    font-size: 14px;
+    color: #FFFFFF;
+    border: none;
+    outline: none;
 }

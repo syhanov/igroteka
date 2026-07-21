@@ -33,24 +33,26 @@
     <main>
         <section class="project_info">
             <div class="left_project_info">
-            <p>о проекте -----</p>
-            <h2>О проекте GameRank</h2>
+            <div class="about_project">
+                <span class="about_project_text">о проекте</span><span class="about_project_line"></span>
+            </div>
+            <h2 class="o_proekte_h2">О проекте <span class="Gamerank_color_span">GameRank</span></h2>
             <p>
                 GameRank — это современная цифровая платформа, созданная геймерами для геймеров. Мы объединяем страсть к играм с аналитическим подходом,предоставляя пользователям удобный инструмент для отслеживания своего игрового прогресса и формирования честного рейтинга мировых шедевров. 
             </p>
             <p>
                 Наш проект нацелен на создание крупнейшей русскоязычной базы знаний, где каждый голос имеет значение, а детальная статистика помогает находить именно те игры, которые соответствуют вашим предпочтениям.
             </p>
-            <div>
+            <div class="future_opportunities">
                 <h2>
                     Будующие возможности:
                 </h2>
-                <div>
-                <ul>
+                <div class="future_opportunities_wrapper">
+                <ul class="ul_custom_list1">
                     <li>личный кабинет</li>
                     <li>интеграция со стим</li>
                 </ul>
-                <ul>
+                <ul class="ul_custom_list2">
                     <li>система рекомендаций</li>
                     <li>собщество игроков</li>
                 </ul>
@@ -58,28 +60,30 @@
             </div>
             </div>
             <div class="right_project_info">
-            <figure>
-                    <img src="styles/dualsens.png" alt="МакросЪемка правого блока кнопок дуалсенса" width="466" height="683">
-                    <figcaption>Твой игровой опыт в новом формате</figcaption>
-                </figure>
+                <p>Твой игровой опыт в новом формате</p>
+                <span class="corner"></span>
             </div>
         </section>
         <section class="top_games">
-            <nav>
-                <p>отзывы</p>
-                <h2>выбор нашей редакции</h2>
-                <form action="/serch">
-                    <input type="search" placeholder="Поиск игры" required>
-                    <select name="Жанр" id="">
-                        <option value="all">Жанр</option>
-                        <option value="rgp">RPG</option>
-                    </select>
-                    <select name="платформа" id="">
-                        <option value="all">Платформа</option>
-                        <option value="rgp">ПК</option>
-                    </select>
-                </form>
-            </nav>
+            <div class="found_options">
+                <div class="left_found_options">
+                    <p>Отзывы</p>
+                    <h2>выбор нашей редакции</h2>
+                </div>
+                <div class="right_found_options">
+                    <form action="serch">
+                        <input type="search" placeholder="Поиск игры..." required>
+                        <select name="Жанр" id="">
+                            <option value="all">Жанр</option>
+                            <option value="rgp">RPG</option>
+                        </select>
+                        <select name="платформа" id="">
+                            <option value="all">Платформа</option>
+                            <option value="rgp">ПК</option>
+                        </select>
+                    </form>
+                </div>
+            </div>
             <article>
                 <h3>название игры</h3>
                 <p>описание</p>
