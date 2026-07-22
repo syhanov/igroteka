@@ -302,3 +302,172 @@ nav {
     border: none;
     outline: none;
 }
+.top_games_cards {
+    display: grid;
+    grid-template-columns: 7fr 5fr;
+    grid-template-rows: repeat(5, 1fr);
+    gap: 24px;
+    height: 695px;
+}
+.big_card {
+    background-color: #13131599;
+    border-radius: 10px;
+    border: 1px solid rgba(219, 252, 255, 0.5);
+    grid-row: 1/6;
+    flex-direction: column;
+}
+.top_games_cards article {
+    display: flex;
+    min-width: 0;
+    min-height: 0;
+}
+.top_side_card img {
+    height: 100%;
+    width: 100%;
+    min-height: 0;
+    flex-shrink: 1;
+    object-fit: contain;
+}
+.big_card img {
+    display: block;
+    object-fit: unset;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+.bage_rait {
+    padding: 4px 12px;
+    background-color: #DBFCFF;
+    color: #00363A;
+    font-size: 18px;
+    font-weight: bold;
+    border-radius: 2px;
+    position: absolute;
+    top: 16px;
+    right: 16px;
+}
+.big_card>.top_side_card {
+    position: relative;
+}
+.bage_text {
+    padding: 3px 12px;
+    display: inline-block;
+    background-color: #1a222a; 
+    font-size: 14px;
+    font-weight: normal;
+    color: #DBFCFF;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    position: relative;
+    bottom: 36px;
+    left: 16px;
+    border-radius: 2px;
+}
+.big_bot_side_card {
+    padding: 32px;
+}
+.big_bot_side_card h3{
+    margin: 0;
+    font-size: 48px;
+    font-weight: bold;
+    color: #E5E2E1;
+}
+.big_bot_side_card div{
+    display: flex;
+    align-items: center;
+    font-size: 18px;
+    color: #B9CACB;
+}
+.design_ul {
+    padding: 0;
+    margin: 0;
+    list-style-type: none;
+}
+.design_ul li {
+    position: relative;
+    padding-left: 20px; 
+    margin-left: 8px;
+    color: #B9CACB;
+}
+.design_ul li::before {
+    content: "•";
+    color: #B9CACB; 
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+.big_bot_side_card p{
+    margin: 24px 0 32px;
+    color: #B9CACB;
+    font-size: 16px;
+}
+.card_buttons button{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.card_buttons button:first-child {
+    all: unset;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 142px;
+    height: 17px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+    text-transform: uppercase;
+    gap: 8px;
+    padding: 10px 10px;
+
+}
+.card_buttons button:nth-child(2) {
+    width: 145px;
+    height: 36px;
+    background-color: #2A2A2A;
+    border: 1px solid #3B494B;
+    gap: 15px;
+    margin-right: 8px;
+    border-radius: 5px;
+}
+.card_buttons button:last-child {
+    width: 108px;
+    height: 36px;
+    background-color: #2A2A2A;
+    border: 1px solid #3B494B;
+    gap: 11px;
+    border-radius: 5px;
+}
+.small_card {
+    background-color: #13131599;
+    border-radius: 10px;
+    border: 1px solid rgba(219, 252, 255, 0.5);
+    padding: 10px 10px;
+}
+.small_card .top_side_card {
+    position: relative;
+    margin-right: 16px;
+}
+.small_card .top_side_card span{
+    position: absolute;
+    bottom: 5px;
+    left: 5px;
+    font-size: 16px;
+    color: #DBFCFF;
+    font-weight: bold;
+}
+.bot_side_card {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+.bot_side_card h3{
+    color: #E5E2E1;
+    font-size: 20px;
+    font-weight: normal;
+    margin: 0;
+}
+.bot_side_card div{
+    display: flex;
+    color: #b9cacb;
+    font-size: 14px;
+}
