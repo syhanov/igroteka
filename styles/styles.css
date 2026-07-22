@@ -7,7 +7,9 @@ body {
     margin: 0 auto;
     padding: 0 64px;
     font-family: "Manrope";
-    background-color: gray;
+    background-image: url(ulicons/bcg3.png);
+    background-size: cover;
+    background-repeat: no-repeat;
 }
 nav {
     display: flex;
@@ -263,15 +265,15 @@ nav {
     padding-left: 24px;
 }
 .left_found_options h2,
-.left_found_options p {
+.left_found_options h3 {
     margin: 0;
 }
-.left_found_options p {
+.left_found_options h2 {
     font-size: 32px;
     font-weight: bold;
     color: #e5e2e1;
 }
-.left_found_options h2 {
+.left_found_options h3 {
     font-size: 14px;
     font-weight: bold;
     color: #b9cacb;
@@ -301,6 +303,9 @@ nav {
     color: #FFFFFF;
     border: none;
     outline: none;
+}
+.top_games {
+    margin-bottom: 64px;
 }
 .top_games_cards {
     display: grid;
@@ -365,7 +370,7 @@ nav {
 .big_bot_side_card {
     padding: 32px;
 }
-.big_bot_side_card h3{
+.big_bot_side_card h4{
     margin: 0;
     font-size: 48px;
     font-weight: bold;
@@ -449,10 +454,13 @@ nav {
 }
 .small_card .top_side_card span{
     position: absolute;
-    bottom: 5px;
-    left: 5px;
+    top: 0;
+    right: 0;
     font-size: 16px;
-    color: #DBFCFF;
+    padding: 5px;
+    border-radius: 5px;
+    background-color: #DBFCFF;
+    color: #00363A;
     font-weight: bold;
 }
 .bot_side_card {
@@ -460,7 +468,7 @@ nav {
     justify-content: center;
     flex-direction: column;
 }
-.bot_side_card h3{
+.bot_side_card h4{
     color: #E5E2E1;
     font-size: 20px;
     font-weight: normal;
@@ -470,4 +478,46 @@ nav {
     display: flex;
     color: #b9cacb;
     font-size: 14px;
+}
+.all_games {
+    margin-bottom: 145px;
+}
+.all_games h2 {
+    font-size: 14px;
+    font-weight: bold;
+    color: #b9cacb;
+    text-transform: uppercase;
+    margin-bottom: 48px;
+}
+.all_games_cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: repeat(6 1fr);
+    height: 840px;
+    gap: 8px;
+}
+.all_games_cards article {
+    display: flex;
+    min-width: 0;
+    min-height: 0;
+}
+.all_games button {
+    all: unset;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 142px;
+    height: 17px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+    text-transform: uppercase;
+    gap: 8px;
+    padding: 10px 10px;
+    color: #b9cacb;
+    margin-top: 25px;
+}
+.all_games_button_wrapper {
+    display: flex;
+    justify-content: center;
 }
