@@ -59,7 +59,7 @@ nav {
     display: inline-block;
     position: relative;
     border-bottom: 2px solid transparent;
-    transition: bordercolor 0.3s ease;
+    transition: border-color 0.3s ease;
     font-size: 14px;
     font-weight: bold;
 }
@@ -580,7 +580,7 @@ nav {
     border: 1px dotted #3B494B66;
     border-radius: 10px;
 }
-.all_games h2 {
+.all_games h3 {
     font-size: 14px;
     font-weight: bold;
     color: #b9cacb;
