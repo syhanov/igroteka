@@ -4,382 +4,395 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>igroteka</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&family=Sora:wght@100..800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles/styles.css">
 </head>
 <body>
-    <header>
-        <nav>
-            <div class="left_nav">
-            <div class="img_logo">
-                <img src="styles/GameRankLogo.png" alt="лого GameRank">
-                <h1>GameRank</h1>
+    <header class="site-header">
+        <nav class="site-nav">
+            <div class="site-nav__brand">
+                <div class="logo">
+                    <img src="styles/GameRankLogo.png" alt="лого GameRank">
+                    <h1 class="logo__title">GameRank</h1>
+                </div>
+                <ul class="site-nav__list">
+                    <li class="site-nav__item"><a href="#o_nas" class="site-nav__link"><span>Журнал</span></a></li>
+                    <li class="site-nav__item"><a href="#news" class="site-nav__link"><span>Новости</span></a></li>
+                    <li class="site-nav__item"><a href="#obzor" class="site-nav__link"><span>Обзоры</span></a></li>
+                    <li class="site-nav__item"><a href="" class="site-nav__link"><span>Статьи</span></a></li>
+                </ul>
             </div>
-            <ul>
-                <li><a href="#o_nas" class="menu_links"><span>Журнал</span></a></li>
-                <li><a href="#news" class="menu_links"><span>Новости</span></a></li>
-                <li><a href="#obzor" class="menu_links"><span>Обзоры</span></a></li>
-                <li><a href="" class="menu_links"><span>Статьи</span></a></li>
-            </ul>
-            </div>
-            <div class="right_nav">
-                <button class="lypa"><img src="styles/Icon.png" alt="Кнопка поиска по сайту"></button>
-                <button class="podpisatsa">подписаться</button>
+            <div class="site-nav__actions">
+                <button class="site-nav__serch"><img src="styles/Icon.png" alt="Кнопка поиска по сайту"></button>
+                <button class="site-nav__subsribe">подписаться</button>
             </div>
         </nav>
     </header>
     <main>
-        <section>
-            <div class="project_info">
-                <div class="left_project_info">
-                <div class="about_project">
-                    <span class="about_project_text">о проекте</span><span class="about_project_line"></span>
+        <section class="project">
+            <div class="project__info">
+                <div class="project__content">
+                <div class="section-label">
+                    <span class="section-label__text">о проекте</span><span class="section-label__line"></span>
                 </div>
-                <h2 class="o_proekte_h2" id="o_nas">О проекте <span class="Gamerank_color_span">GameRank</span></h2>
-                <p>
+                <h2 class="project__title" id="o_nas">О проекте <span class="project__title-accent">GameRank</span></h2>
+                <p class="project__text">
                     GameRank — это современная цифровая платформа, созданная геймерами для геймеров. Мы объединяем страсть к играм с аналитическим подходом,предоставляя пользователям удобный инструмент для отслеживания своего игрового прогресса и формирования честного рейтинга мировых шедевров. 
                 </p>
-                <p>
+                <p class="project__text">
                     Наш проект нацелен на создание крупнейшей русскоязычной базы знаний, где каждый голос имеет значение, а детальная статистика помогает находить именно те игры, которые соответствуют вашим предпочтениям.
                 </p>
-                <div class="future_opportunities">
-                    <h2>
+                <div class="project__features">
+                    <h2 class="project__features-title">
                         Будующие возможности:
                     </h2>
-                    <div class="future_opportunities_wrapper">
-                    <ul class="ul_custom_list1">
-                        <li>личный кабинет</li>
-                        <li>интеграция со стим</li>
+                    <div class="project__features-list">
+                    <ul class="features-list">
+                        <li class="features-list__item">личный кабинет</li>
+                        <li class="features-list__item">интеграция со стим</li>
                     </ul>
-                    <ul class="ul_custom_list2">
-                        <li>система рекомендаций</li>
-                        <li>собщество игроков</li>
+                    <ul class="features-list">
+                        <li class="features-list__item">система рекомендаций</li>
+                        <li class="features-list__item">собщество игроков</li>
                     </ul>
                     </div>
                 </div>
                 </div>
-                <div class="right_project_info">
+                <div class="project__visual">
                     <img src="styles/dualsens.png" alt="МакросЪемка правого блока кнопок dualsens"
-                    class="right_project_img">
+                    class="project__image">
                     <p>Твой игровой опыт в новом формате</p>
-                    <span class="corner"></span>
+                    <span class="project__corner"></span>
                 </div>
             </div>
             <div class="anons">
-                <div class="anons_left_side">
-                    <h2>анонсы номеров</h2>
-                    <ul class="ul_custom_list3">
-                        <li>Возрождение E3: Прямой эфир</li>
-                        <li>Воркшоп по BCI-интеграции</li>
-                        <li>Утечка Game Pass 3.0</li>
+                <div class="anons__content">
+                    <h2 class="anons__title">анонсы номеров</h2>
+                    <ul class="anons-list">
+                        <li class="anons-list__item">Возрождение E3: Прямой эфир</li>
+                        <li class="anons-list__item">Воркшоп по BCI-интеграции</li>
+                        <li class="anons-list__item">Утечка Game Pass 3.0</li>
                     </ul>
                 </div>
-                <div class="anons_right_side" id="news">
-                    <a href=""><span>Перейти в архив</span><img src="styles/ulicons/righticon.png" alt=""></a>
+                <div class="anons-archive" id="news">
+                    <a href="" class="anons-archive__links"><span>Перейти в архив</span><img src="styles/ulicons/righticon.png" alt=""></a>
                 </div>
             </div>
         </section>
-        <section class="top_games">
-            <div class="found_options">
-                <div class="left_found_options">
-                    <h2 id="obzor">Отзывы</h2>
-                    <h3>выбор нашей редакции</h3>
+        <section class="catalog">
+            <div class="catalog__toolbar">
+                <div class="catalog__heading">
+                    <h2 id="obzor" class="catalog__title">Отзывы</h2>
+                    <h3 class="catalog__subtitle">выбор нашей редакции</h3>
                 </div>
-                <div class="right_found_options">
-                    <form action="serch">
-                        <input type="search" placeholder="Поиск игры..." required>
-                        <select name="Жанр" id="zhanr">
+                <div class="catalog__filter">
+                    <form action="serch" class="filter-form">
+                        <input type="search" placeholder="Поиск игры..." required class="filter-form__founder">
+                        <select name="Жанр" class="filter-form__selector" id="zhanr">
                             <option value="all">Жанр</option>
                             <option value="rgp">RPG</option>
                         </select>
-                        <select name="платформа" id="platforma">
+                        <select name="платформа" class="filter-form__selector" id="platforma">
                             <option value="all">Платформа</option>
                             <option value="rgp">ПК</option>
                         </select>
                     </form>
                 </div>
             </div>
-            <div class="top_games_cards">
-                <article class="big_card">
-                    <div class="top_side_card">
+            <div class="catalog__featured-games">
+                <article class="game-card game-card--featured">
+                    <div class="game-card--featured__cover">
                         <img src="styles/ulicons/eldenring.jpg" alt="">
-                        <span class="bage_rait">8/10</span>
-                        <span class="bage_text">выбор редакции</span>
+                        <span class="game-card--featured__raitbage">8/10</span>
+                        <span class="game-card--featured__textbage">выбор редакции</span>
                     </div>
-                    <div class="big_bot_side_card">
-                        <h4>Elden Ring</h4>
-                        <div>
-                            <span>2022</span>
-                            <ul class="design_ul">
-                                <li>Action RPG</li>
+                    <div class="game-card--featured__content">
+                        <h4 class="game-card--featured__title">Elden Ring</h4>
+                        <div class="game-card--featured__meta">
+                            <span class="game-card--featured__year">2022</span>
+                            <ul class="genre-list">
+                                <li class="genre-list__item">Action RPG</li>
                             </ul>
                         </div>
-                        <p>Погрузитесь в захватывающее приключение в Междуземье, новом фэнтезийном мире, созданном Хидэтакой Миядзаки и Джорджем Р. Р. Мартином.</p>
-                        <div class="card_buttons">
-                            <button>
+                        <p class="game-card--featured__description">Погрузитесь в захватывающее приключение в Междуземье, новом фэнтезийном мире, созданном Хидэтакой Миядзаки и Джорджем Р. Р. Мартином.</p>
+                        <div class="game-card--featured__actions">
+                            <button class="game-card--featured__button">
                                 <span>читать обзор</span>
                                 <img src="styles/ulicons/chitatobzor.png" alt="">
                             </button>
-                            <button>
+                            <button class="game-card--featured__button">
                                 <img src="styles/ulicons/zakladkiicon.png" alt="">
                                 <span class="zakladki">в закладки</span>
                             </button>
-                            <button>
+                            <button class="game-card--featured__button">
                                 <img src="styles/ulicons/videoicon.png" alt="Кадр из игры где главный герой стоит на фоне Древо Эрд">
                                 <span class="video">видео</span>
                             </button>
                         </div>
                     </div>
                 </article>
-                <article class="small_card">
-                    <div class="top_side_card">
+                <article class="game-card">
+                    <div class="game-card__cover">
                         <img src="styles/ulicons/cyberpunk.webp" alt="Обложка игры Cyberpunk 2077">
-                        <span>9/10</span>
+                        <span class="game-card__raitbage">9/10</span>
                     </div>
-                    <div class="bot_side_card">
-                        <h4>Cyberpunk 2077</h4>
-                        <div>
-                            <span>2020</span>
-                            <ul class="design_ul">
-                                <li>RPG</li>
+                    <div class="game-card__content">
+                        <h4 class="game-card__title">Cyberpunk 2077</h4>
+                        <div class="game-card__meta">
+                            <span class="game-card__year">2020</span>
+                            <ul class="genre-list">
+                                <li class="genre-list__item">RPG</li>
                             </ul>
                         </div>
                     </div>
                 </article>
-                <article class="small_card">
-                    <div class="top_side_card">
+                <article class="game-card">
+                    <div class="game-card__cover">
                         <img src="styles/ulicons/witcher3.webp" alt="Обложка игры Ведьмак 3">
-                        <span>10/10</span>
+                        <span class="game-card__raitbage">10/10</span>
                     </div>
-                    <div class="bot_side_card">
-                        <h4>Ведьмак 3</h4>
-                        <div>
-                            <span>2015</span>
-                            <ul class="design_ul">
-                                <li>Action RPG</li>
+                    <div class="game-card__content">
+                        <h4 class="game-card__title">Ведьмак 3</h4>
+                        <div class="game-card__meta">
+                            <span class="game-card__year">2015</span>
+                            <ul class="genre-list">
+                                <li class="genre-list__item">Action RPG</li>
                             </ul>
                         </div>
                     </div>
                 </article>
-                <article class="small_card">
-                    <div class="top_side_card">
+                <article class="game-card">
+                    <div class="game-card__cover">
                         <img src="styles/ulicons/hotlinemiami.webp" alt="Обложка игры Hotline Miami 2">
-                        <span>9/10</span>
+                        <span class="game-card__raitbage">9/10</span>
                     </div>
-                    <div class="bot_side_card">
-                        <h4>Hotline Miami 2</h4>
-                        <div>
-                            <span>2015</span>
-                            <ul class="design_ul">
-                                <li>Action</li>
+                    <div class="game-card__content">
+                        <h4 class="game-card__title">Hotline Miami 2</h4>
+                        <div class="game-card__meta">
+                            <span class="game-card__year">2015</span>
+                            <ul class="genre-list">
+                                <li class="genre-list__item">Action</li>
                             </ul>
                         </div>
                     </div>
                 </article>
             </div>
         </section>
-        <section class="all_games">
-            <h3>все игры</h3>
-            <div class="all_games_cards">
-                <article class="small_card all_games_card">
-                    <div class="top_side_card">
+        <section class="games">
+            <h3 class="games__title">все игры</h3>
+            <div class="games__grid">
+                <article class="game-card game-card--catalog">
+                    <div class="game-card__cover">
                         <img src="styles/ulicons/cyberpunk.webp" alt="Обложка игры Cyberpunk 2077">
-                        <span>9/10</span>
+                        <span class="game-card__raitbage">9/10</span>
                     </div>
-                    <div class="bot_side_card">
-                        <h4>Cyberpunk 2077</h4>
-                        <div>
-                            <span>2020</span>
-                            <ul class="design_ul">
-                                <li>RPG</li>
+                    <div class="game-card__content">
+                        <h4 class="game-card__title">Cyberpunk 2077</h4>
+                        <div class="game-card__meta">
+                            <span class="game-card__year">2020</span>
+                            <ul class="genre-list">
+                                <li class="genre-list__item">RPG</li>
                             </ul>
                         </div>
                     </div>
                 </article>
-                <article class="small_card all_games_card">
-                    <div class="top_side_card">
+                <article class="game-card game-card--catalog">
+                    <div class="game-card__cover">
                         <img src="styles/ulicons/witcher3.webp" alt="Обложка игры Ведьмак 3">
-                        <span>10/10</span>
+                        <span class="game-card__raitbage">10/10</span>
                     </div>
-                    <div class="bot_side_card">
-                        <h4>Ведьмак 3</h4>
-                        <div>
-                            <span>2015</span>
-                            <ul class="design_ul">
-                                <li>Action RPG</li>
+                    <div class="game-card__content">
+                        <h4 class="game-card__title">Ведьмак 3</h4>
+                        <div class="game-card__meta">
+                            <span class="game-card__year">2015</span>
+                            <ul class="genre-list">
+                                <li class="genre-list__item">Action RPG</li>
                             </ul>
                         </div>
                     </div>
                 </article>
-                <article class="small_card all_games_card">
-                    <div class="top_side_card">
+                <article class="game-card game-card--catalog">
+                    <div class="game-card__cover">
                         <img src="styles/ulicons/hotlinemiami.webp" alt="Обложка игры Hotline Miami 2">
-                        <span>9/10</span>
+                        <span class="game-card__raitbage">9/10</span>
                     </div>
-                    <div class="bot_side_card">
-                        <h4>Hotline Miami 2</h4>
-                        <div>
-                            <span>2015</span>
-                            <ul class="design_ul">
-                                <li>Action</li>
+                    <div class="game-card__content">
+                        <h4 class="game-card__title">Hotline Miami 2</h4>
+                        <div class="game-card__meta">
+                            <span class="game-card__year">2015</span>
+                            <ul class="genre-list">
+                                <li class="genre-list__item">Action</li>
                             </ul>
                         </div>
                     </div>
                 </article>
-                <article class="small_card all_games_card">
-                    <div class="top_side_card">
+                <article class="game-card game-card--catalog">
+                    <div class="game-card__cover">
                         <img src="styles/ulicons/blackflag.webp" alt="Обложка игры Assassin 4 Black Flag">
-                        <span>8/10</span>
+                        <span class="game-card__raitbage">8/10</span>
                     </div>
-                    <div class="bot_side_card">
-                        <h4>Assassin 4 Black Flag</h4>
-                        <div>
-                            <span>2013</span>
-                            <ul class="design_ul">
-                                <li>Action Adventure</li>
+                    <div class="game-card__content">
+                        <h4 class="game-card__title">Assassin 4 Black Flag</h4>
+                        <div class="game-card__meta">
+                            <span class="game-card__year">2013</span>
+                            <ul class="genre-list">
+                                <li class="genre-list__item">Action Adventure</li>
                             </ul>
                         </div>
                     </div>
                 </article>
-                <article class="small_card all_games_card">
-                    <div class="top_side_card">
+                <article class="game-card game-card--catalog">
+                    <div class="game-card__cover">
                         <img src="styles/ulicons/bord2.webp" alt="Обложка игры Borderlands 2">
-                        <span>6/10</span>
+                        <span class="game-card__raitbage">6/10</span>
                     </div>
-                    <div class="bot_side_card">
-                        <h4>Borderlands 2</h4>
-                        <div>
-                            <span>2012</span>
-                            <ul class="design_ul">
-                                <li>Action RPG</li>
+                    <div class="game-card__content">
+                        <h4 class="game-card__title">Borderlands 2</h4>
+                        <div class="game-card__meta">
+                            <span class="game-card__year">2012</span>
+                            <ul class="genre-list">
+                                <li class="genre-list__item">Action RPG</li>
                             </ul>
                         </div>
                     </div>
                 </article>
-                <article class="small_card all_games_card">
-                    <div class="top_side_card">
+                <article class="game-card game-card--catalog">
+                    <div class="game-card__cover">
                         <img src="styles/ulicons/co1yc6.webp" alt="Обложка игры Fallout 4">
-                        <span>6/10</span>
+                        <span class="game-card__raitbage">6/10</span>
                     </div>
-                    <div class="bot_side_card">
-                        <h4>Fallout 4</h4>
-                        <div>
-                            <span>2015</span>
-                            <ul class="design_ul">
-                                <li>Action RPG</li>
+                    <div class="game-card__content">
+                        <h4 class="game-card__title">Fallout 4</h4>
+                        <div class="game-card__meta">
+                            <span class="game-card__year">2015</span>
+                            <ul class="genre-list">
+                                <li class="genre-list__item">Action RPG</li>
                             </ul>
                         </div>
                     </div>
                 </article>
-                <article class="small_card all_games_card">
-                    <div class="top_side_card">
+                <article class="game-card game-card--catalog">
+                    <div class="game-card__cover">
                         <img src="styles/ulicons/dyinglite.webp" alt="Обложка игры Dying Light">
-                        <span>9/10</span>
+                        <span class="game-card__raitbage">9/10</span>
                     </div>
-                    <div class="bot_side_card">
-                        <h4>Dying Light</h4>
-                        <div>
-                            <span>2015</span>
-                            <ul class="design_ul">
-                                <li>Action Adventure</li>
+                    <div class="game-card__content">
+                        <h4 class="game-card__title">Dying Light</h4>
+                        <div class="game-card__meta">
+                            <span class="game-card__year">2015</span>
+                            <ul class="genre-list">
+                                <li class="genre-list__item">Action Adventure</li>
                             </ul>
                         </div>
                     </div>
                 </article>
-                <article class="small_card all_games_card">
-                    <div class="top_side_card">
+                <article class="game-card game-card--catalog">
+                    <div class="game-card__cover">
                         <img src="styles/ulicons/gta5.webp" alt="Обложка игры Grand Theft Auto V">
-                        <span>10/10</span>
+                        <span class="game-card__raitbage">10/10</span>
                     </div>
-                    <div class="bot_side_card">
-                        <h4>Grand Theft Auto V</h4>
-                        <div>
-                            <span>2013</span>
-                            <ul class="design_ul">
-                                <li>Action Adventure</li>
+                    <div class="game-card__content">
+                        <h4 class="game-card__title">Grand Theft Auto V</h4>
+                        <div class="game-card__meta">
+                            <span class="game-card__year">2013</span>
+                            <ul class="genre-list">
+                                <li class="genre-list__item">Action Adventure</li>
                             </ul>
                         </div>
                     </div>
                 </article>
-                <article class="small_card all_games_card">
-                    <div class="top_side_card">
+                <article class="game-card game-card--catalog">
+                    <div class="game-card__cover">
                         <img src="styles/ulicons/wolfenstain2.webp" alt="Обложка игры Wolfenstein II: The New Colossus">
-                        <span>9/10</span>
+                        <span class="game-card__raitbage">9/10</span>
                     </div>
-                    <div class="bot_side_card">
-                        <h4>Wolfenstein II: The New Colossus</h4>
-                        <div>
-                            <span>2017</span>
-                            <ul class="design_ul">
-                                <li>Action FPS</li>
+                    <div class="game-card__content">
+                        <h4 class="game-card__title">Wolfenstein II: The New Colossus</h4>
+                        <div class="game-card__meta">
+                            <span class="game-card__year">2017</span>
+                            <ul class="genre-list">
+                                <li class="genre-list__item">Action FPS</li>
                             </ul>
                         </div>
                     </div>
                 </article>
-                <article class="small_card all_games_card">
-                    <div class="top_side_card">
+                <article class="game-card game-card--catalog">
+                    <div class="game-card__cover">
                         <img src="styles/ulicons/skyrim.webp" alt="Обложка игры The Elder Scrolls V: Skyrim">
-                        <span>10/10</span>
+                        <span class="game-card__raitbage">10/10</span>
                     </div>
-                    <div class="bot_side_card">
-                        <h4>The Elder Scrolls V: Skyrim</h4>
-                        <div>
-                            <span>2011</span>
-                            <ul class="design_ul">
-                                <li>Action RPG</li>
+                    <div class="game-card__content">
+                        <h4 class="game-card__title">The Elder Scrolls V: Skyrim</h4>
+                        <div class="game-card__meta">
+                            <span class="game-card__year">2011</span>
+                            <ul class="genre-list">
+                                <li class="genre-list__item">Action RPG</li>
                             </ul>
                         </div>
                     </div>
                 </article>
-                <article class="small_card all_games_card">
-                    <div class="top_side_card">
+                <article class="game-card game-card--catalog">
+                    <div class="game-card__cover">
                         <img src="styles/ulicons/rdr2.webp" alt="Обложка игры Red Dead Redemption 2">
-                        <span>8/10</span>
+                        <span class="game-card__raitbage">8/10</span>
                     </div>
-                    <div class="bot_side_card">
-                        <h4>Red Dead Redemption 2</h4>
-                        <div>
-                            <span>2019</span>
-                            <ul class="design_ul">
-                                <li>Action Adventure</li>
+                    <div class="game-card__content">
+                        <h4 class="game-card__title">Red Dead Redemption 2</h4>
+                        <div class="game-card__meta">
+                            <span class="game-card__year">2019</span>
+                            <ul class="genre-list">
+                                <li class="genre-list__item">Action Adventure</li>
                             </ul>
                         </div>
                     </div>
                 </article>
-                <article class="small_card all_games_card">
-                    <div class="top_side_card">
+                <article class="game-card game-card--catalog">
+                    <div class="game-card__cover">
                         <img src="styles/ulicons/odesey.webp" alt="Обложка игры Assassin’s Creed Odyssey">
-                        <span>9/10</span>
+                        <span class="game-card__raitbage">9/10</span>
                     </div>
-                    <div class="bot_side_card">
-                        <h4>Assassin’s Creed Odyssey</h4>
-                        <div>
-                            <span>2018</span>
-                            <ul class="design_ul">
-                                <li>Action RPG</li>
+                    <div class="game-card__content">
+                        <h4 class="game-card__title">Assassin’s Creed Odyssey</h4>
+                        <div class="game-card__meta">
+                            <span class="game-card__year">2018</span>
+                            <ul class="genre-list">
+                                <li class="genre-list__item">Action RPG</li>
+                            </ul>
+                        </div>
+                    </div>
+                </article>
+                <article class="game-card game-card--catalog">
+                    <div class="game-card__cover">
+                        <img src="styles/ulicons/eldenring2.webp" alt="Обложка игры Elden Ring">
+                        <span class="game-card__raitbage">8/10</span>
+                    </div>
+                    <div class="game-card__content">
+                        <h4 class="game-card__title">Elden Ring</h4>
+                        <div class="game-card__meta">
+                            <span class="game-card__year">2022</span>
+                            <ul class="genre-list">
+                                <li class="genre-list__item">Action RPG</li>
                             </ul>
                         </div>
                     </div>
                 </article>
             </div>
-            <div class="all_games_button_wrapper">
-                <button><span>показать еще</span><img src="styles/ulicons/pokazateshe.png" alt=""></button>
+            <div class="games__more">
+                <button class="games__more-button"><span>показать еще</span><img src="styles/ulicons/pokazateshe.png" alt=""></button>
             </div>
         </section>
     </main>
-    <footer>
-        <div class="footer_wraper">
-            <div class="footer_img_logo">
+    <footer class="site-footer">
+        <div class="site-footer__content">
+            <div class="logo logo--footer">
                 <img src="styles/GameRankLogo.png" alt="лого GameRank">
                 <span>GameRank</span>
             </div>
-            <ul>
-                <li><a href="" class="footer_links">privace Policy</a></li>
-                <li><a href="" class="footer_links">terms of service</a></li>
-                <li><a href="tg://resolve?domain=qop_qop_qop" class="footer_links">contact</a></li>
-                <li><a href="https://github.com/syhanov/igroteka" class="footer_links button_link"><img src="styles/ulicons/repoicon.png" alt=""><span>repository</span></a></li>
+            <ul class="site-footer__links">
+                <li><a href="" class="site-footer__link">privace Policy</a></li>
+                <li><a href="" class="site-footer__link">terms of service</a></li>
+                <li><a href="tg://resolve?domain=qop_qop_qop" class="site-footer__link">contact</a></li>
+                <li><a href="https://github.com/syhanov/igroteka" class="site-footer__link button_link"><img src="styles/ulicons/repoicon.png" alt=""><span>repository</span></a></li>
             </ul>
         </div>
     </footer>
