@@ -522,6 +522,7 @@ main {
 .game-card__cover {
     position: relative;
     margin-right: 16px;
+    flex-shrink: 0;
 }
 .game-card__raitbage {
     position: absolute;
