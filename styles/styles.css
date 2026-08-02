@@ -276,6 +276,11 @@ main {
     border-radius: 5px;
     border: 1px solid #13131599;
 }
+.project___figure {
+    height: 100%; 
+    width: 100%;
+    margin: 0;
+}
 .project__image {
     object-fit: cover;
     height: 100%;
@@ -283,7 +288,7 @@ main {
     flex-shrink: 0;
     border-radius: 5px;
 }
-.project__visual p {
+.project__caption {
     max-width: 400px;
     font-size: 32px;
     font-weight: bold;
