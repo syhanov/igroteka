@@ -140,15 +140,15 @@ main {
 }
 .project__title {
     font-size: 64px;
-    font-weight: normal;
-    color: #e5e2e1;
     margin: 24px 0 32px;
     line-height: 1;
-    max-width: 324px;
-}
-.project__title-accent {
+    max-width: 350px;
     font-weight: bold;
     color: #DBFCFF;
+}
+.project__title-accent {
+    font-weight: normal;
+    color: #e5e2e1;
 }
 .project__text {
     font-size: 18px;
