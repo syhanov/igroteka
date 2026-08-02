@@ -169,21 +169,16 @@ main {
     padding: 32px;
 }
 .project__features-list {
-    display: flex;
 }
 .features-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
     list-style-type: none;
     padding-left: 0;
-    display: flex;
-    flex-direction: column;
     gap: 16px;
     margin-bottom: 0;
     color: #E5E2E1;
     font-weight: bold;
-}
-.features-list:first-of-type {
-    width: 282px;
-    margin-right: 32px;
 }
 .features-list__item::before {
     content: "";
@@ -448,23 +443,10 @@ main {
     font-size: 18px;
     color: #B9CACB;
 }
-.genre-list {
-    padding: 0;
-    margin: 0;
-    list-style-type: none;
-}
-.genre-list__item {
-    position: relative;
-    padding-left: 20px; 
-    margin-left: 8px;
-    color: #B9CACB;
-}
-.genre-list__item::before {
+.game-card__genre::before {
     content: "•";
-    color: #B9CACB; 
-    position: absolute;
-    left: 0;
-    top: 0;
+    margin-right: 3px;
+    color: #B9CACB;
 }
 .game-card--featured__description {
     margin: 24px 0 32px;
@@ -553,6 +535,7 @@ main {
 }
 .game-card__meta {
     display: flex;
+    gap: 5px;
     color: #b9cacb;
     font-size: 14px;
 }
