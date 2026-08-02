@@ -366,7 +366,6 @@ main {
 .catalog__featured-games {
     display: grid;
     grid-template-columns: 7fr 5fr;
-    grid-template-rows: repeat(4, 1fr);
     gap: 24px;
 }
 .game-card {
