@@ -192,17 +192,17 @@ main {
     margin-right: 10px;
     vertical-align: middle;
 }
-.features-list:first-of-type .features-list__item:nth-child(1)::before {
+.features-list__item--lc::before {
     background-image: url(ulicons/lcicon.png);
 }
-.features-list:first-of-type .features-list__item:nth-child(2)::before {
+.features-list__item--steam::before {
     background-image: url(ulicons/gamepadicon.png);
     height: 14px;
 }
-.features-list:last-of-type .features-list__item:nth-child(1)::before {
+.features-list__item--recommendation::before {
     background-image: url(ulicons/recomendationicon.png);
 }
-.features-list:last-of-type .features-list__item:nth-child(2)::before {
+.features-list__item--community::before {
     background-image: url(ulicons/soobshestwoicon.png);
     width: 24px;
     height: 12px;
@@ -235,15 +235,15 @@ main {
 .anons-list__item::before {
     margin-right: 8px;
 }
-.anons-list__item:nth-child(1)::before {
+.anons-list__item--e3::before {
     background-image: url(ulicons/e3icon.png);
 }
-.anons-list__item:nth-child(2)::before {
+.anons-list__item--workshop::before {
     background-image: url(ulicons/brainicon.png);
     width: 18px;
     height: 20px;
 }
-.anons-list__item:nth-child(3)::before {
+.anons-list__item--gamepass::before {
     background-image: url(ulicons/zapicon.png);
     width: 16px;
     height: 20px;
@@ -389,7 +389,6 @@ main {
     color: #00363A;
     font-weight: bold;
     border-radius: 2px;
-
 }
 .game-card--featured .game-card__rating-badge {
     padding: 4px 12px;
@@ -440,7 +439,7 @@ main {
     align-items: center;
     justify-content: center;
 }
-.game-card--featured .game-card__button:first-child {
+.game-card__button--readmore {
     all: unset;
     display: flex;
     align-items: center;
@@ -455,31 +454,31 @@ main {
     padding: 10px 10px;
     color: #DBFCFF;
 }
-.game-card--featured .game-card__button:first-child:focus-visible {
+.game-card__button--readmore:focus-visible {
     outline: 2px solid #DBFCFF;
     outline-offset: 2px;
     border-radius: 2px;
 }
-.game-card--featured .game-card__button:nth-child(2) span,
-.game-card--featured .game-card__button:last-child span {
+.game-card__button--bookmark span,
+.game-card__button--video span {
     font-size: 12px;
     color: #E5E2E1;
     text-transform: uppercase;
 }
-.game-card--featured .game-card__button:nth-child(2),
-.game-card--featured .game-card__button:last-child  {
+.game-card__button--bookmark,
+.game-card__button--video  {
     background-color: #2A2A2A;
     border: 1px solid #3B494B;
     border-radius: 5px;
     cursor: pointer;
 }
-.game-card--featured .game-card__button:nth-child(2) {
+.game-card__button--bookmark {
     width: 145px;
     height: 36px;
     gap: 15px;
     margin-right: 8px;
 }
-.game-card--featured .game-card__button:last-child {
+.game-card__button--video {
     width: 108px;
     height: 36px;
     gap: 11px;
