@@ -168,14 +168,16 @@ main {
 }
 .features-list,
 .anons-list {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
     list-style-type: none;
     padding-left: 0;
-    gap: 16px;
     margin-bottom: 0;
     color: #E5E2E1;
     font-weight: bold;
+}
+.features-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
 }
 .features-list__item::before,
 .anons-list__item::before {
