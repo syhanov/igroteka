@@ -1,6 +1,12 @@
 * {
     box-sizing: border-box;
 }
+a:focus-visible,
+button:focus-visible {
+    outline: 2px solid #DBFCFF;
+    outline-offset: 2px;
+    border-radius: 2px;
+}
 body {
     font-family: "Manrope";
     background-image: url(ulicons/lastbcg.png);
@@ -323,6 +329,12 @@ main {
     border: 1px solid #3B494B99;
     height: 38px;
 }
+.filter-form__search:focus-visible, 
+.filter-form__selector:focus-visible {
+    outline: 2px solid #DBFCFF;
+    outline-offset: 2px;
+    border-radius: 2px;
+}
 .filter-form__search {
     width: 256px;
     padding: 10px 17px 10px 41px;
@@ -438,6 +450,7 @@ main {
     align-items: center;
     justify-content: center;
 }
+
 .game-card--featured__button:first-child {
     all: unset;
     display: flex;
@@ -452,6 +465,11 @@ main {
     gap: 8px;
     padding: 10px 10px;
     color: #DBFCFF;
+}
+.game-card--featured__button:first-child:focus-visible {
+    outline: 2px solid #DBFCFF;
+    outline-offset: 2px;
+    border-radius: 2px;
 }
 .game-card--featured__button:nth-child(2) span,
 .game-card--featured__button:last-child span {
