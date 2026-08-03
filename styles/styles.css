@@ -357,6 +357,7 @@ main {
 }
 .game-card {
     display: flex;
+    gap: 16px;
     background-color: #131315cc;
     border-radius: 10px;
     border: 1px solid #ffffff1a;
@@ -370,25 +371,19 @@ main {
     grid-row: 1/6;
     flex-direction: column;
 }
-.game-card__cover img,
-.game-card--featured__cover img {
+.game-card__cover img {
     height: 100%;
     width: 100%;
     min-height: 0;
-    flex-shrink: 1;
     object-fit: contain;
 }
-.game-card--featured__cover img {
+.game-card--featured .game-card__cover img {
     display: block;
     object-fit: unset;
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
 }
-.game-card--featured__cover {
-    position: relative;
-}
-.game-card__rating-badge,
-.game-card--featured__rating-badge {
+.game-card__rating-badge {
     position: absolute;
     background-color: #DBFCFF;
     color: #00363A;
@@ -396,13 +391,13 @@ main {
     border-radius: 2px;
 
 }
-.game-card--featured__rating-badge {
+.game-card--featured .game-card__rating-badge {
     padding: 4px 12px;
     font-size: 18px;
     top: 16px;
     right: 16px;
 }
-.game-card--featured__text-badge {
+.game-card--featured .game-card__text-badge {
     padding: 3px 12px;
     display: inline-block;
     background-color: #1a222a; 
@@ -416,41 +411,36 @@ main {
     left: 23px;
     border-radius: 2px;
 }
-.game-card--featured__content {
-    padding: 32px;
+.game-card--featured .game-card__content {
+    padding: 16px 32px 32px;
 }
-.game-card--featured__title {
-    margin: 0;
+.game-card--featured .game-card__title {
     font-size: 48px;
     font-weight: bold;
-    color: #E5E2E1;
 }
-.game-card--featured__meta {
-    display: flex;
-    align-items: center;
+.game-card--featured .game-card__meta {
     font-size: 18px;
-    color: #B9CACB;
 }
 .game-card__genre::before {
     content: "•";
     margin-right: 3px;
     color: #B9CACB;
 }
-.game-card--featured__description {
+.game-card--featured .game-card__description {
     margin: 24px 0 32px;
     color: #B9CACB;
     font-size: 16px;
 }
-.game-card--featured__actions {
+.game-card--featured .game-card__actions {
     display: flex;
     flex-wrap: wrap;
 }
-.game-card--featured__button {
+.game-card__button {
     display: flex;
     align-items: center;
     justify-content: center;
 }
-.game-card--featured__button:first-child {
+.game-card--featured .game-card__button:first-child {
     all: unset;
     display: flex;
     align-items: center;
@@ -465,38 +455,37 @@ main {
     padding: 10px 10px;
     color: #DBFCFF;
 }
-.game-card--featured__button:first-child:focus-visible {
+.game-card--featured .game-card__button:first-child:focus-visible {
     outline: 2px solid #DBFCFF;
     outline-offset: 2px;
     border-radius: 2px;
 }
-.game-card--featured__button:nth-child(2) span,
-.game-card--featured__button:last-child span {
+.game-card--featured .game-card__button:nth-child(2) span,
+.game-card--featured .game-card__button:last-child span {
     font-size: 12px;
     color: #E5E2E1;
     text-transform: uppercase;
 }
-.game-card--featured__button:nth-child(2),
-.game-card--featured__button:last-child  {
+.game-card--featured .game-card__button:nth-child(2),
+.game-card--featured .game-card__button:last-child  {
     background-color: #2A2A2A;
     border: 1px solid #3B494B;
     border-radius: 5px;
     cursor: pointer;
 }
-.game-card--featured__button:nth-child(2) {
+.game-card--featured .game-card__button:nth-child(2) {
     width: 145px;
     height: 36px;
     gap: 15px;
     margin-right: 8px;
 }
-.game-card--featured__button:last-child {
+.game-card--featured .game-card__button:last-child {
     width: 108px;
     height: 36px;
     gap: 11px;
 }
 .game-card__cover {
     position: relative;
-    margin-right: 16px;
     flex-shrink: 0;
 }
 .game-card__rating-badge {
