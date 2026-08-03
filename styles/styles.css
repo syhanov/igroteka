@@ -43,7 +43,6 @@ main {
     gap: 24px;
 }
 .logo img{
-    display: flex;
     height: 40px;
     width: 40px;
 }
@@ -95,7 +94,6 @@ main {
     width: 172px;
     height: 33px;
     padding: 0;
-    line-height: 33px;
     text-align: center;
     border: 0;
     border-radius: 12px;
@@ -104,7 +102,6 @@ main {
     font-size: 16px;
     font-weight: bold;
     font-family: "Manrope";
-    text-align: center;
     letter-spacing: 0.3px;
     cursor: pointer;
 }
@@ -135,7 +132,6 @@ main {
     height: 1px;
     width: 48px;
     background-color: #DBFCFF;
-    border: 1px;
 }
 .project__title {
     font-size: 64px;
@@ -250,7 +246,6 @@ main {
     text-decoration: none;
     font-size: 12px;
     color: #B9CACB;
-    margin-right: 8px;
 }
 .anons-archive a span{
     margin-right: 4px;
@@ -277,7 +272,6 @@ main {
     font-size: 32px;
     font-weight: bold;
     color: #FFFFFF;
-    margin: 0;
     position: absolute;
     bottom: 32px;
     left: 32px;
@@ -323,7 +317,6 @@ main {
     font-family: "Manrope";
     font-size: 14px;
     border-radius: 5px;
-    border: none;
     background-color: #201F1F66;
     color: #FFFFFF;
     outline: none;
@@ -352,8 +345,6 @@ main {
 }
 .game-card {
     display: flex;
-    min-width: 0;
-    min-height: 0;
     background-color: #131315cc;
     border-radius: 10px;
     border: 1px solid #ffffff1a;
@@ -530,21 +521,14 @@ main {
 }
 .games__grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(466px, 1fr));;
+    grid-template-columns: repeat(auto-fit, minmax(466px, 1fr));
     gap: 8px;
     margin-bottom: 16px;
     padding: 0 16px;
-
 }
 .game-card--catalog {
     background-color: #201F1F66;
     border: 0;
-}
-.button_link,
-.games__more-button {
-    display: flex;
-    align-items: center;
-    justify-content: center;
 }
 .games__more-button {
     all: unset;
@@ -557,7 +541,12 @@ main {
     gap: 8px;
     padding: 10px 10px;
     color: #b9cacb;
-    margin-top: 25px;
+}
+.button_link,
+.games__more-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 .games__more {
     display: flex;
