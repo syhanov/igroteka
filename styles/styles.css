@@ -298,7 +298,7 @@ main {
 .catalog__heading {
     border-left: 4px solid #DBFCFF;
     padding-left: 24px;
-    max-height: 58px
+    max-height: 58px;
 }
 .catalog__title,
 .catalog__subtitle {
