@@ -544,7 +544,7 @@ main {
     padding: 10px 10px;
     color: #b9cacb;
 }
-.button__link,
+.site-footer__link--button,
 .games__more-button {
     display: flex;
     align-items: center;
@@ -594,7 +594,7 @@ main {
     color: #DBFCFF;
     transform: translateY(-3px);
 }
-.button__link {
+.site-footer__link--button {
     display: flex;
     gap: 3px;
     color: #DBFCFF;
@@ -605,7 +605,7 @@ main {
     border-radius: 5px;
     transition: background-color 0.3s ease, transform 0.3s ease;
 }
-.button__link:hover {
+.site-footer__link--button:hover {
     background-color: #3A3A3A;
     transform: translateY(-2px);
 }
