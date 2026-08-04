@@ -268,7 +268,6 @@ main {
     object-fit: cover;
     height: 100%;
     width: 466px;
-    flex-shrink: 0;
     border-radius: 5px;
 }
 .project__caption {
@@ -373,7 +372,6 @@ main {
 .game-card__image {
     height: 100%;
     width: 100%;
-    min-height: 0;
     object-fit: contain;
 }
 .game-card--featured .game-card__image {
@@ -556,9 +554,6 @@ main {
     align-items: center;
     border-top: 1px dotted #3B494B66;
     height: 66px;
-}
-.games__more .games__more-button{
-    margin: 0;
 }
 .site-footer {
     background-color: #0E0E0E66;
