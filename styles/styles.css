@@ -458,7 +458,7 @@ main {
     outline-offset: 2px;
     border-radius: 2px;
 }
-.game-card__button--text {
+.game-card__button-text {
     font-size: 12px;
     color: #E5E2E1;
     text-transform: uppercase;
