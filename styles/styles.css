@@ -8,7 +8,7 @@ button:focus-visible {
     border-radius: 2px;
 }
 body {
-    font-family: "Manrope";
+    font-family: "Manrope", sans-serif;
     background-image: url(ulicons/lastbcg.png);
     background-size: cover;
     background-repeat: no-repeat;
@@ -109,7 +109,7 @@ main {
     color: #006970;
     font-size: 16px;
     font-weight: bold;
-    font-family: "Manrope";
+    font-family: "Manrope", sans-serif;
     letter-spacing: 0.3px;
     cursor: pointer;
 }
@@ -316,7 +316,7 @@ main {
 }
 .filter-form__search, 
 .filter-form__selector {
-    font-family: "Manrope";
+    font-family: "Manrope", sans-serif;
     font-size: 14px;
     border-radius: 5px;
     background-color: #201F1F66;
