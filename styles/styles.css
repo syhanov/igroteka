@@ -8,23 +8,24 @@ button:focus-visible {
     border-radius: 2px;
 }
 body {
-    font-family: "Manrope", sans-serif;
+    font-family: "Manrope";
     background-image: url(ulicons/lastbcg.png);
     background-size: cover;
     background-repeat: no-repeat;
     margin: 0;
 }
 main {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
     max-width: 1280px;
     width: 100%;
-    margin: 0 auto;
-    padding: 0 64px;
+    margin: 22px auto 145px;
+    padding: 0 16px;
 }
 .site-header {
     background-color: #13131399;
     border-bottom: 1px dotted #3B494B66;
-    height: 73px;
-    margin-bottom: 22px;
 }
 .site-nav {
     display: flex;
@@ -111,16 +112,13 @@ main {
     font-size: 16px;
     font-weight: bold;
     font-family: "Manrope";
-    text-align: center;
     letter-spacing: 0.3px;
     cursor: pointer;
 }
 .project__info {
     display: flex;
-    margin-bottom: 64px;
-}
-.project__content {
-    margin-right: 24px;
+    flex-direction: column;
+    gap: 24px;
 }
 .section-label {
     display: flex;
@@ -180,9 +178,10 @@ main {
     color: #E5E2E1;
     font-weight: bold;
 }
-.features-list:first-of-type {
-    width: 282px;
-    margin-right: 32px;
+.features-list {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
 }
 .features-list__item::before,
 .anons-list__item::before {
@@ -210,67 +209,6 @@ main {
     width: 24px;
     height: 12px;
 }
-.anons {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
-    border-top: 1px dotted #3B494B66;
-    min-height: 53px;
-    margin-bottom: 64px;
-}
-.anons__content {
-    display: flex;
-    align-items: flex-end;
-}
-.anons__title {
-    margin: 0;
-    margin-right: 48px;
-    font-size: 14px;
-    font-weight: bold;
-    color: #DBFCFF;
-    text-transform: uppercase;
-}
-.anons-list {
-    list-style-type: none;
-    padding-left: 0;
-    display: flex;
-    gap: 48px;
-    margin-bottom: 0;
-    color: #E5E2E1;
-    font-size: 12px;
-}
-.anons-list__item::before {
-    content: "";
-    display: inline-block;
-    width: 20px;
-    height: 20px;
-    margin-right: 8px;
-    background-size: contain;
-    background-repeat: no-repeat;
-    vertical-align: middle;
-}
-.anons-list__item:nth-child(1)::before {
-    background-image: url(ulicons/e3icon.png);
-}
-.anons-list__item:nth-child(2)::before {
-    background-image: url(ulicons/brainicon.png);
-    width: 18px;
-    height: 20px;
-}
-.anons-list__item:nth-child(3)::before {
-    background-image: url(ulicons/zapicon.png);
-    width: 16px;
-    height: 20px;
-}
-.anons-archive a {
-    text-decoration: none;
-    font-size: 12px;
-    color: #B9CACB;
-    margin-right: 8px;
-}
-.anons-archive a span{
-    margin-right: 4px;
-}
 .project__visual {
     position: relative;
     border-radius: 5px;
@@ -280,7 +218,7 @@ main {
 .project__content {
     order: 2;
 }
-.project__figure {
+.project___figure {
     height: 100%; 
     width: 100%;
     margin: 0;
@@ -288,7 +226,7 @@ main {
 .project__image {
     object-fit: cover;
     height: 100%;
-    width: 466px;
+    width: 100%;
     flex-shrink: 0;
     border-radius: 5px;
 }
@@ -314,12 +252,62 @@ main {
 .anons {
     display: flex;
     justify-content: space-between;
-    align-items: flex-end;
-    margin-bottom: 48px;
+    align-items: center;
+    border-top: 1px dotted #3B494B66;
+    min-height: 53px;
+}
+.anons__content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.anons__title {
+    margin: 0;
+    margin-right: 48px;
+    font-size: 14px;
+    font-weight: bold;
+    color: #DBFCFF;
+    text-transform: uppercase;
+}
+.anons-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 48px;
+    font-size: 12px; 
+}
+.anons-list__item::before {
+    margin-right: 8px;
+}
+.anons-list__item--e3::before {
+    background-image: url(ulicons/e3icon.png);
+}
+.anons-list__item--workshop::before {
+    background-image: url(ulicons/brainicon.png);
+    width: 18px;
+    height: 20px;
+}
+.anons-list__item--gamepass::before {
+    background-image: url(ulicons/zapicon.png);
+    width: 16px;
+    height: 20px;
+}
+.anons-archive__link {
+    text-decoration: none;
+    font-size: 12px;
+    color: #B9CACB;
+}
+.anons-archive__text{
+    margin-right: 4px;
+}
+.catalog__toolbar {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    border-left: 4px solid #DBFCFF;
 }
 .catalog__heading {
     padding-left: 24px;
-    max-height: 58px;
+    max-height: 58px
 }
 .catalog__title,
 .catalog__subtitle {
@@ -336,10 +324,17 @@ main {
     color: #b9cacb;
     text-transform: uppercase;
 }
-.filter-form__search {
-    width: 256px;
-    height: 38px;
-    padding: 10px 17px 10px 41px;
+.catalog__filter {
+    padding-left: 24px;
+}
+.filter-form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 8px;
+}
+.filter-form__search, 
+.filter-form__selector {
     font-family: "Manrope";
     font-size: 14px;
     border-radius: 5px;
@@ -347,12 +342,23 @@ main {
     color: #FFFFFF;
     outline: none;
     border: 1px solid #3B494B99;
+    height: 38px;
+}
+.filter-form__search:focus-visible, 
+.filter-form__selector:focus-visible {
+    outline: 2px solid #DBFCFF;
+    outline-offset: 2px;
+    border-radius: 2px;
+}
+.filter-form__search {
+    padding: 10px 17px 10px 41px;
+    grid-column: 1/3;
 }
 .filter-form__selector {
     text-align: center;
     padding: 8px 16px;
 }
-.filter-form__option {
+.filter-form__selector option {
     background-color: #201F1F;
     border-radius: 5px;
 }
@@ -363,8 +369,7 @@ main {
 }
 .catalog__featured-games {
     display: grid;
-    grid-template-columns: 7fr 5fr;
-    grid-template-rows: repeat(5, 1fr);
+    grid-template-columns: 1fr;
     gap: 24px;
 }
 .game-card {
@@ -387,7 +392,6 @@ main {
     height: 100%;
     width: 100%;
     min-height: 0;
-    flex-shrink: 1;
     object-fit: contain;
 }
 .game-card--featured .game-card__image {
@@ -402,7 +406,10 @@ main {
     color: #00363A;
     font-weight: bold;
     border-radius: 2px;
-    position: absolute;
+}
+.game-card--featured .game-card__rating-badge {
+    padding: 4px 12px;
+    font-size: 18px;
     top: 16px;
     right: 16px;
 }
@@ -443,6 +450,8 @@ main {
 .game-card--featured .game-card__actions {
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
 }
 .game-card__button {
     display: flex;
@@ -463,8 +472,9 @@ main {
     gap: 8px;
     padding: 10px 10px;
     color: #DBFCFF;
+    order: 1;
 }
-.game-card--featured__button:nth-child(2) span {
+.game-card__button--text {
     font-size: 12px;
     color: #E5E2E1;
     text-transform: uppercase;
@@ -492,15 +502,10 @@ main {
     flex-shrink: 0;
 }
 .game-card__rating-badge {
-    position: absolute;
     top: 0;
     right: 0;
     font-size: 16px;
     padding: 5px;
-    border-radius: 5px;
-    background-color: #DBFCFF;
-    color: #00363A;
-    font-weight: bold;
 }
 .game-card__content {
     display: flex;
@@ -534,7 +539,7 @@ main {
 }
 .games__grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(466px, 1fr));;
+    grid-template-columns: repeat(auto-fit, minmax(min(466px, 100%), 1fr));
     gap: 8px;
     margin-bottom: 16px;
     padding: 0 16px;
@@ -554,7 +559,12 @@ main {
     gap: 8px;
     padding: 10px 10px;
     color: #b9cacb;
-    margin-top: 25px;
+}
+.button__link,
+.games__more-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 .games__more {
     display: flex;
@@ -562,6 +572,9 @@ main {
     align-items: center;
     border-top: 1px dotted #3B494B66;
     height: 66px;
+}
+.games__more .games__more-button{
+    margin: 0;
 }
 .site-footer {
     background-color: #0E0E0E66;
@@ -599,7 +612,7 @@ main {
     color: #DBFCFF;
     transform: translateY(-3px);
 }
-.button_link {
+.button__link {
     display: flex;
     gap: 3px;
     color: #DBFCFF;
@@ -608,4 +621,9 @@ main {
     background-color: #2A2A2A;
     border: 1px solid #3B494B;
     border-radius: 5px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+.button__link:hover {
+    background-color: #3A3A3A;
+    transform: translateY(-2px);
 }
