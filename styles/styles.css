@@ -17,7 +17,7 @@ body {
 main {
     display: flex;
     flex-direction: column;
-    gap: 64px;
+    gap: 32px;
     max-width: 1280px;
     width: 100%;
     margin: 22px auto 32px;
@@ -34,7 +34,7 @@ main {
     height: 100%;
     margin: 0 auto;
     max-width: 1280px;
-    padding: 32px;
+    padding: 32px 16px;
 }
 .site-nav__brand {
     display: flex;
@@ -75,12 +75,6 @@ main {
 .site-nav__text {
     display: inline-block;
     transition: transform 0.3s ease;
-}
-.site-nav__link:hover {
-    border-bottom-color: #DBFCFF; 
-}
-.site-nav__link:hover .site-nav__text{
-    transform: translateY(-4px);
 }
 .site-nav__actions {
     display: flex;
@@ -517,15 +511,16 @@ main {
 }
 .game-card__title{
     color: #E5E2E1;
-    font-size: 20px;
+    font-size: 15px;
     font-weight: normal;
     margin: 0;
 }
 .game-card__meta {
     display: flex;
+    flex-wrap: wrap;
     gap: 5px;
     color: #b9cacb;
-    font-size: 14px;
+    font-size: 12px;
 }
 .games {
     background-color: #13131599;
@@ -587,7 +582,7 @@ main {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 32px;
+    padding: 32px 16px;
     max-width: 1280px;
     margin: 0 auto;
 }
@@ -611,10 +606,6 @@ main {
     font-size: 12px;
     transition: color 0.3s ease, transform 0.3s ease;
 }
-.site-footer__link:hover {
-    color: #DBFCFF;
-    transform: translateY(-3px);
-}
 .button__link {
     display: flex;
     gap: 3px;
@@ -626,11 +617,8 @@ main {
     border-radius: 5px;
     transition: background-color 0.3s ease, transform 0.3s ease;
 }
-.button__link:hover {
-    background-color: #3A3A3A;
-    transform: translateY(-2px);
-}
-@media (min-width:680px) {
+/*Изначально брейкпоинт был запланирован на 680 px с учётом будущих возможностей. Позже я увеличил его значение  на 40 px, чтобы объединить несколько изменений в одном медиазапросе и избежать создания отдельного брейкпоинта для этого списка. Благодаря этому форма поиска и футер корректно отображаются при увеличенной ширине экрана.*/
+@media (min-width:720px) {
     .features-list {
         flex-direction: row;
         grid-template-columns: 1fr 1fr;
@@ -652,7 +640,55 @@ main {
         order: 0;
     }
 }
-@media (min-width:980px) {
+/*Этот брейкпоинт специально подобран под адаптацию навигации и футера. Раньше я пробовал его сдвинуть, но при этом пункты меню сильно сжимались и буквально «налипали» друг на друга — из‑за этого страдала читаемость и удобство клика. Поэтому оставил текущее значение: оно даёт элементам достаточно пространства и сохраняет структуру.*/
+@media (min-width:927px) {
+    main {
+        padding: 0 32px;
+        gap: 48px;
+    }
+    .site-footer {
+        flex-direction: row;
+        padding: 16px 32px;
+    }
+    .site-footer__content,
+    .site-footer__list {
+        flex-direction: row;
+    }
+    .site-footer__content {
+        justify-content: space-between;
+
+    }
+    .games__grid {
+        grid-template-columns: repeat(auto-fit, minmax(min(380px, 100%), 1fr));
+    }
+        .site-nav {
+        justify-content: space-between;
+        padding: 16px 32px;
+    }
+    .site-nav__brand,
+    .site-nav__list,
+    .site-nav {
+        flex-direction: row;
+    }
+    .site-nav__list {
+        margin-left: 40px;
+    }
+        .catalog__featured-games {
+        grid-template-columns: 7fr 5fr;
+    }
+}
+/* Верстка возвращена к десктоп-версии. Брейкпоинт выбран так, чтобы картинка в хедере встала на своё место: при меньших значениях либо текст сильно сжимается, либо картинка искажается (становится вытянутой) — оба варианта выглядят плохо. */
+@media (min-width:1070px) {
+    main {
+        padding: 0 64px;
+        gap: 64px;
+    }
+    .site-nav {
+        padding: 16px 64px;
+    }
+    .site-footer {
+        padding: 16px 64px;
+    }
     .project__info {
         flex-direction: row;
     }
@@ -673,30 +709,20 @@ main {
     .anons {
         align-items: flex-end;
     }
-    .catalog__featured-games {
-        grid-template-columns: 7fr 5fr;
-    }
-    .site-nav {
-        justify-content: space-between;
-    }
-    .site-nav__brand,
-    .site-nav__list,
-    .site-nav {
-        flex-direction: row;
-    }
-    .site-nav__list {
-        margin-left: 40px;
-    }
-    .site-footer {
-        flex-direction: row;
-        padding: 32px;
-    }
-    .site-footer__content,
-    .site-footer__list {
-        flex-direction: row;
-    }
-    .site-footer__content {
-        justify-content: space-between;
-
-    }
+}
+@media(hover:hover) {
+    .site-nav__link:hover {
+    border-bottom-color: #DBFCFF; 
+}
+.site-nav__link:hover .site-nav__text{
+    transform: translateY(-4px);
+}
+.site-footer__link:hover {
+    color: #DBFCFF;
+    transform: translateY(-3px);
+}
+.button__link:hover {
+    background-color: #3A3A3A;
+    transform: translateY(-2px);
+}
 }
