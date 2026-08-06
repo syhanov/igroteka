@@ -57,7 +57,7 @@ main {
     width: 40px;
 }
 .logo__title {
-    font-size: 32px;
+    font-size: 2rem;
     font-weight: bold;
     color: #DBFCFF;
     margin: 0;
@@ -69,7 +69,7 @@ main {
     position: relative;
     border-bottom: 2px solid transparent;
     transition: border-color 0.3s ease;
-    font-size: 14px;
+    font-size: 1rem;
     font-weight: bold;
 }
 .site-nav__text {
@@ -103,7 +103,7 @@ main {
     border-radius: 12px;
     background-color: #00F0FF;
     color: #006970;
-    font-size: 16px;
+    font-size: 0.875rem;
     font-weight: bold;
     font-family: "Manrope";
     letter-spacing: 0.3px;
@@ -122,7 +122,7 @@ main {
     display: inline-block;
     background-color: #1a222a; 
     padding: 3px 10px;
-    font-size: 12px;
+    font-size: 0.75rem;
     font-weight: normal;
     color: #DBFCFF;
     text-transform: uppercase;
@@ -136,10 +136,9 @@ main {
     background-color: #DBFCFF;
 }
 .project__title {
-    font-size: 64px;
+    font-size: clamp(2.5rem, 5vw, 4rem);
     margin: 24px 0 32px;
     line-height: 1;
-    max-width: 350px;
     font-weight: bold;
     color: #DBFCFF;
 }
@@ -149,10 +148,11 @@ main {
     color: #e5e2e1;
 }
 .project__text {
-    font-size: 18px;
+    font-size: 1rem;
+    max-width: 75ch;
 }
 .project__features-title {
-    font-size: 32px;
+    font-size: 1.5rem;
     font-weight: bold;
     color: #DBFCFF;
     margin: 0;
@@ -227,13 +227,13 @@ main {
     border-radius: 5px;
 }
 .project__caption {
-    max-width: 400px;
-    font-size: 32px;
+
+    font-size: 1rem;
     font-weight: bold;
     color: #FFFFFF;
     position: absolute;
-    bottom: 32px;
-    left: 32px;
+    bottom: 16px;
+    left: 16px;
 }
 .project__corner {
     width: 128px;
@@ -261,7 +261,7 @@ main {
 .anons__title {
     margin: 0;
     margin-right: 48px;
-    font-size: 14px;
+    font-size: 0.875rem;
     font-weight: bold;
     color: #DBFCFF;
     text-transform: uppercase;
@@ -270,7 +270,7 @@ main {
     display: flex;
     flex-wrap: wrap;
     gap: 24px;
-    font-size: 12px; 
+    font-size: 0.75rem; 
 }
 .anons-list__item::before {
     margin-right: 8px;
@@ -290,7 +290,7 @@ main {
 }
 .anons-archive__link {
     text-decoration: none;
-    font-size: 12px;
+    font-size: 0.75rem;
     color: #B9CACB;
 }
 .anons-archive__text{
@@ -311,12 +311,12 @@ main {
     margin: 0;
 }
 .catalog__title {
-    font-size: 32px;
+    font-size: 1.75rem;
     font-weight: bold;
     color: #e5e2e1;
 }
 .catalog__subtitle {
-    font-size: 14px;
+    font-size: 0.875rem;
     font-weight: bold;
     color: #b9cacb;
     text-transform: uppercase;
@@ -333,7 +333,7 @@ main {
 .filter-form__search, 
 .filter-form__selector {
     font-family: "Manrope";
-    font-size: 14px;
+    font-size: 0.875rem;
     border-radius: 5px;
     background-color: #201F1F66;
     color: #FFFFFF;
@@ -406,7 +406,7 @@ main {
 }
 .game-card--featured .game-card__rating-badge {
     padding: 4px 12px;
-    font-size: 18px;
+    font-size: 1.125rem;
     top: 16px;
     right: 16px;
 }
@@ -414,7 +414,7 @@ main {
     padding: 3px 12px;
     display: inline-block;
     background-color: #1a222a; 
-    font-size: 14px;
+    font-size: 0.875rem;
     font-weight: normal;
     color: #DBFCFF;
     text-transform: uppercase;
@@ -425,14 +425,14 @@ main {
     border-radius: 2px;
 }
 .game-card--featured .game-card__content {
-    padding: 16px 32px 32px;
+    padding: 16px;
 }
 .game-card--featured .game-card__title {
-    font-size: 48px;
+    font-size: 2rem;
     font-weight: bold;
 }
 .game-card--featured .game-card__meta {
-    font-size: 18px;
+    font-size: 1rem;
 }
 .game-card__genre::before {
     content: "•";
@@ -440,9 +440,9 @@ main {
     color: #B9CACB;
 }
 .game-card--featured .game-card__description {
-    margin: 24px 0 32px;
+    margin: 16px 0;
     color: #B9CACB;
-    font-size: 16px;
+    font-size: 1rem;
 }
 .game-card--featured .game-card__actions {
     display: flex;
@@ -463,7 +463,7 @@ main {
     width: 142px;
     height: 17px;
     cursor: pointer;
-    font-size: 14px;
+    font-size: 0.875rem;
     font-weight: bold;
     text-transform: uppercase;
     gap: 8px;
@@ -472,7 +472,7 @@ main {
     order: 1;
 }
 .game-card__button-text {
-    font-size: 12px;
+    font-size: 0.75rem;
     color: #E5E2E1;
     text-transform: uppercase;
 }
@@ -501,7 +501,7 @@ main {
 .game-card__rating-badge {
     top: 0;
     right: 0;
-    font-size: 16px;
+    font-size: 1rem;
     padding: 5px;
 }
 .game-card__content {
@@ -511,7 +511,7 @@ main {
 }
 .game-card__title{
     color: #E5E2E1;
-    font-size: 15px;
+    font-size: 0.9375rem;
     font-weight: normal;
     margin: 0;
 }
@@ -520,7 +520,7 @@ main {
     flex-wrap: wrap;
     gap: 5px;
     color: #b9cacb;
-    font-size: 12px;
+    font-size: 0.875rem;
 }
 .games {
     background-color: #13131599;
@@ -528,7 +528,7 @@ main {
     border-radius: 10px;
 }
 .games__title {
-    font-size: 14px;
+    font-size: 1rem;
     font-weight: bold;
     color: #b9cacb;
     text-transform: uppercase;
@@ -551,7 +551,7 @@ main {
     width: 142px;
     height: 17px;
     cursor: pointer;
-    font-size: 14px;
+    font-size: 0.875rem;
     font-weight: bold;
     text-transform: uppercase;
     gap: 8px;
@@ -587,7 +587,7 @@ main {
     margin: 0 auto;
 }
 .logo--footer .logo__title {
-    font-size: 24px;
+    font-size: 1.5rem;
     color: #E5E2E1;
 }
 .site-footer__list {
@@ -603,7 +603,7 @@ main {
     text-decoration: none;
     color: #B9CACB;
     text-transform: uppercase;
-    font-size: 12px;
+    font-size: 0.75rem;
     transition: color 0.3s ease, transform 0.3s ease;
 }
 .button__link {
@@ -639,6 +639,14 @@ main {
     .game-card__button--readmore {
         order: 0;
     }
+    .project__text {
+        font-size: 1.175rem;
+    }
+    .project__caption {
+        font-size: 2rem;
+        left: 32px;
+        bottom: 32px;
+    }
 }
 /*Этот брейкпоинт специально подобран под адаптацию навигации и футера. Раньше я пробовал его сдвинуть, но при этом пункты меню сильно сжимались и буквально «налипали» друг на друга — из‑за этого страдала читаемость и удобство клика. Поэтому оставил текущее значение: оно даёт элементам достаточно пространства и сохраняет структуру.*/
 @media (min-width:927px) {
@@ -673,8 +681,28 @@ main {
     .site-nav__list {
         margin-left: 40px;
     }
-        .catalog__featured-games {
+    .catalog__featured-games {
         grid-template-columns: 7fr 5fr;
+    }
+    .game-card--featured .game-card__content {
+        padding: 16px 32px 32px;
+    }
+    .game-card--featured .game-card__meta {
+        font-size: 1.125rem;
+    }
+    .game-card--featured .game-card__description {
+        margin: 24px 0 32px;
+        color: #B9CACB;
+        font-size: 1rem;
+    }
+    .game-card__meta {
+        font-size: 1rem;
+    }
+    .game-card__title {
+        font-size: 1.175rem;
+    }
+        .game-card--featured .game-card__title {
+        font-size: 3rem;
     }
 }
 /* Верстка возвращена к десктоп-версии. Брейкпоинт выбран так, чтобы картинка в хедере встала на своё место: при меньших значениях либо текст сильно сжимается, либо картинка искажается (становится вытянутой) — оба варианта выглядят плохо. */
@@ -709,20 +737,33 @@ main {
     .anons {
         align-items: flex-end;
     }
+    .project__title {
+        max-width: 8ch;
+    }
+    .project__features-title {
+        font-size: 2rem;
+    }
+    .catalog__title {
+        font-size: 2rem;
+    }
+        .project__caption {
+        max-width: 19ch;
+    }
 }
+
 @media(hover:hover) {
     .site-nav__link:hover {
     border-bottom-color: #DBFCFF; 
-}
-.site-nav__link:hover .site-nav__text{
-    transform: translateY(-4px);
-}
-.site-footer__link:hover {
-    color: #DBFCFF;
-    transform: translateY(-3px);
-}
-.button__link:hover {
-    background-color: #3A3A3A;
-    transform: translateY(-2px);
-}
+    }
+    .site-nav__link:hover .site-nav__text{
+        transform: translateY(-4px);
+    }
+    .site-footer__link:hover {
+        color: #DBFCFF;
+        transform: translateY(-3px);
+    }
+    .button__link:hover {
+        background-color: #3A3A3A;
+        transform: translateY(-2px);
+    }
 }
