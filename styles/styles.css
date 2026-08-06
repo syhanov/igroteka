@@ -34,7 +34,7 @@ main {
     height: 100%;
     margin: 0 auto;
     max-width: 1280px;
-    padding: 32px 64px;
+    padding: 32px;
 }
 .site-nav__brand {
     display: flex;
@@ -177,6 +177,8 @@ main {
     margin-bottom: 0;
     color: #E5E2E1;
     font-weight: bold;
+    display: flex;
+    flex-direction: column;
 }
 .features-list {
     display: grid;
@@ -475,7 +477,7 @@ main {
     color: #DBFCFF;
     order: 1;
 }
-.game-card__button--text {
+.game-card__button-text {
     font-size: 12px;
     color: #E5E2E1;
     text-transform: uppercase;
@@ -540,7 +542,7 @@ main {
 }
 .games__grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(min(466px, 100%), 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
     gap: 8px;
     margin-bottom: 16px;
     padding: 0 16px;
@@ -585,7 +587,7 @@ main {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 48px 0;
+    padding: 32px;
     max-width: 1280px;
     margin: 0 auto;
 }
@@ -627,4 +629,74 @@ main {
 .button__link:hover {
     background-color: #3A3A3A;
     transform: translateY(-2px);
+}
+@media (min-width:680px) {
+    .features-list {
+        flex-direction: row;
+        grid-template-columns: 1fr 1fr;
+    }
+    .catalog__toolbar {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: flex-end;
+    }
+    .filter-form {
+        display: inline-block;
+
+    }
+    .game-card--featured .game-card__actions {
+        gap: 0px;
+        justify-content: flex-start;
+    }
+    .game-card__button--readmore {
+        order: 0;
+    }
+}
+@media (min-width:980px) {
+    .project__info {
+        flex-direction: row;
+    }
+    .project__content {
+        order: 0;
+    }
+    .project__image {
+        width: 466px;
+    }
+    .games__grid {
+        grid-template-columns: repeat(auto-fit, minmax(min(450px, 100%), 1fr));
+    }
+    .anons__content,
+    .anons-list {
+        flex-direction: row;
+        align-items: flex-end;
+    }
+    .anons {
+        align-items: flex-end;
+    }
+    .catalog__featured-games {
+        grid-template-columns: 7fr 5fr;
+    }
+    .site-nav {
+        justify-content: space-between;
+    }
+    .site-nav__brand,
+    .site-nav__list,
+    .site-nav {
+        flex-direction: row;
+    }
+    .site-nav__list {
+        margin-left: 40px;
+    }
+    .site-footer {
+        flex-direction: row;
+        padding: 32px;
+    }
+    .site-footer__content,
+    .site-footer__list {
+        flex-direction: row;
+    }
+    .site-footer__content {
+        justify-content: space-between;
+
+    }
 }
