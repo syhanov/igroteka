@@ -18,7 +18,6 @@ main {
     display: flex;
     flex-direction: column;
     gap: 32px;
-    max-width: 1280px;
     width: 100%;
     margin: 22px auto 32px;
     padding: 0 16px;
@@ -33,7 +32,6 @@ main {
     align-items: center;
     height: 100%;
     margin: 0 auto;
-    max-width: 1280px;
     padding: 32px 16px;
 }
 .site-nav__brand {
@@ -57,7 +55,7 @@ main {
     width: 40px;
 }
 .logo__title {
-    font-size: clamp(2.5rem, 5vw, 5rem);
+    font-size: 2rem;
     font-weight: bold;
     color: #DBFCFF;
     margin: 0;
@@ -111,6 +109,9 @@ main {
     letter-spacing: 0.3px;
     cursor: pointer;
 }
+.project {
+    margin: 0 auto;
+}
 .project__info {
     display: flex;
     flex-direction: column;
@@ -151,7 +152,6 @@ main {
 }
 .project__text {
     font-size: 1rem;
-    max-width: 75ch;
 }
 .project__features-title {
     font-size: 1.5rem;
@@ -561,7 +561,7 @@ main {
     padding: 10px 10px;
     color: #b9cacb;
 }
-.button__link,
+.site-footer__link--button,
 .games__more-button {
     display: flex;
     align-items: center;
@@ -586,7 +586,6 @@ main {
     flex-direction: column;
     align-items: center;
     padding: 32px 16px;
-    max-width: 1280px;
     margin: 0 auto;
 }
 .logo--footer .logo__title {
@@ -610,17 +609,6 @@ main {
     font-size: 0.75rem;
     transition: color 0.3s ease, transform 0.3s ease;
     height: 44px;
-}
-.button__link {
-    display: flex;
-    gap: 3px;
-    color: #DBFCFF;
-    width: 150px;
-    height: 36px;
-    background-color: #2A2A2A;
-    border: 1px solid #3B494B;
-    border-radius: 5px;
-    transition: background-color 0.3s ease, transform 0.3s ease;
 }
 /*Изначально брейкпоинт был запланирован на 680 px с учётом будущих возможностей. Позже я увеличил его значение  на 40 px, чтобы объединить несколько изменений в одном медиазапросе и избежать создания отдельного брейкпоинта для этого списка. Благодаря этому форма поиска и футер корректно отображаются при увеличенной ширине экрана.*/
 @media (min-width:720px) {
@@ -727,21 +715,21 @@ main {
     main {
         padding: 0 64px;
         gap: 64px;
-    }
-    .site-nav {
-        padding: 16px 64px;
-    }
-    .site-footer {
-        padding: 16px 64px;
+        max-width: 1920px;
     }
     .project__info {
         flex-direction: row;
+        max-width: 1500px;
+        margin: 0 auto; 
+    }
+    .project__text {
+        max-width: 75ch;
     }
     .project__content {
         order: 0;
     }
     .project__image {
-        max-height: none;
+        max-height: none;            
         width: 466px;
     }
     .games__grid {
@@ -764,8 +752,30 @@ main {
     .catalog__title {
         font-size: 2rem;
     }
-        .project__caption {
+    .project__caption {
         max-width: 19ch;
+    }
+    .site-nav {
+        max-width: 1920px;
+    }
+    .site-footer__content {
+        max-width: 1920px;
+        margin: 0 auto;
+        padding: 32px 64px;
+    }
+    .site-footer {
+        padding: 0;
+    }
+    .site-footer__link--button {
+        display: flex;
+        gap: 3px;
+        color: #DBFCFF;
+        width: 150px;
+        height: 36px;
+        background-color: #2A2A2A;
+        border: 1px solid #3B494B;
+        border-radius: 5px;
+        transition: background-color 0.3s ease, transform 0.3s ease;
     }
 }
 
@@ -780,7 +790,7 @@ main {
         color: #DBFCFF;
         transform: translateY(-3px);
     }
-    .button__link:hover {
+    .site-footer__link--button:hover {
         background-color: #3A3A3A;
         transform: translateY(-2px);
     }
