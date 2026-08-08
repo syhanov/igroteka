@@ -757,6 +757,10 @@ main {
     .anons-list {
         flex-direction: row;
         align-items: flex-end;
+        flex-grow: 1;
+    }
+    .anons-list {
+        justify-content: space-evenly;
     }
     .anons {
         align-items: flex-end;
@@ -775,6 +779,14 @@ main {
     }
     .site-nav {
         max-width: 1920px;
+    }
+    .site-nav__brand {
+        flex-grow: 1;
+    }
+    .site-nav__list {
+        flex-grow: 1;
+        max-width: 50%;
+        justify-content: space-evenly;
     }
     .site-footer__content {
         max-width: 1920px;
