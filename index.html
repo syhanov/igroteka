@@ -14,7 +14,7 @@
         <nav class="site-nav">
             <div class="site-nav__brand">
                 <div class="logo">
-                    <img src="styles/GameRankLogo.png" alt="лого GameRank" class="logo__image" width="40" height="40">
+                    <img src="styles/assets/ulicons/GameRankLogo.png" alt="лого GameRank" class="logo__image" width="40" height="40">
                     <span class="logo__title">GameRank</span>
                 </div>
                 <ul class="site-nav__list">
@@ -25,7 +25,7 @@
                 </ul>
             </div>
             <div class="site-nav__actions">
-                <button class="site-nav__search"><img src="styles/Icon.png" alt="Кнопка поиска по сайту" class="site-nav__icon"></button>
+                <button class="site-nav__search"><img src="styles/assets/ulicons/Icon.png" alt="Кнопка поиска по сайту" class="site-nav__icon"></button>
                 <button class="site-nav__subscribe">подписаться</button>
             </div>
         </nav>
@@ -60,10 +60,18 @@
                 </div> 
                 <div class="project__visual">
                     <figure class="project___figure">
-                        <img src="styles/dualsens.png" alt="Макросъёмка правого блока кнопок dualsens"
-                        class="project__image"
-                        width="1024"
-                        height="1024">
+                            <picture>
+                                <source media="(max-width: 1069px)"
+                                        srcset="styles/assets/covers/dualsens-h-400.jpg 400w,
+                                                styles/assets/covers/dualsens-h-700.jpg 700w,
+                                                styles/assets/covers/dualsens-h-932.jpg 932w,
+                                                styles/assets/covers/dualsens-h-1024.jpg 1024w"
+                                        sizes="100vw">
+                            <img src="styles/assets/covers/src/dualsens.png" alt="Макросъёмка правого блока кнопок dualsens"
+                                class="project__image"
+                                width="1024"
+                                height="1024">
+                            </picture>
                         <figcaption class="project__caption">Твой игровой опыт в новом формате</figcaption>
                     </figure>
                     <span class="project__corner"></span>
@@ -80,7 +88,7 @@
                     </ul>
                 </div>
                 <div class="anons-archive">
-                    <a href="magazine.html" class="anons-archive__link"><span class="anons-archive__text">Перейти в архив</span><img src="styles/ulicons/righticon.png" alt=""></a>
+                    <a href="magazine.html" class="anons-archive__link"><span class="anons-archive__text">Перейти в архив</span><img src="styles/assets/ulicons/righticon.png" alt=""></a>
                 </div>
             </section>
         <section class="catalog">
@@ -106,7 +114,14 @@
             <div class="catalog__featured-games">
                 <article class="game-card game-card--featured">
                     <div class="game-card__cover">
-                        <img src="styles/ulicons/src/eldenring.jpg" alt="Кадр из игры где главный герой стоит на фоне Древа Эрд" class="game-card__image"
+                        <img
+                        src="styles/assets/covers/src/eldenring.jpg"
+                        srcset="styles/assets/covers/cover-300.jpg 300w,
+                        styles/assets/covers/cover-450.jpg 450w,
+                        styles/assets/covers/cover-640.jpg 640w,
+                        styles/assets/covers/cover-830.jpg 830w,
+                        styles/assets/covers/cover-1280.jpg 1280w"
+                        alt="Кадр из игры где главный герой стоит на фоне Древа Эрд" class="game-card__image"
                         width="1280"
                         height="720">
                         <span class="game-card__rating-badge">8/10</span>
@@ -122,14 +137,14 @@
                         <div class="game-card__actions">
                             <button class="game-card__button game-card__button--readmore">
                                 <span class="game-card__button-text">читать обзор</span>
-                                <img src="styles/ulicons/chitatobzor.png" alt="">
+                                <img src="styles/assets/ulicons/chitatobzor.png" alt="">
                             </button>
                             <button class="game-card__button game-card__button--bookmark">
-                                <img src="styles/ulicons/zakladkiicon.png" alt="">
+                                <img src="styles/assets/ulicons/zakladkiicon.png" alt="">
                                 <span class="game-card__button-text">в закладки</span>
                             </button>
                             <button class="game-card__button game-card__button--video">
-                                <img src="styles/ulicons/videoicon.png" alt="">
+                                <img src="styles/assets/ulicons/videoicon.png" alt="">
                                 <span class="game-card__button-text">видео</span>
                             </button>
                         </div>
@@ -137,9 +152,15 @@
                 </article>
                 <article class="game-card">
                     <div class="game-card__cover">
-                        <img src="styles/ulicons/src/cyberpunk600x900.jpg" alt="Обложка игры Cyberpunk 2077" class="game-card__image"
-                        width="600"
-                        height="900">
+                        <img 
+                            src="styles/assets/covers/cyberpunk600x900-170.jpg"
+                            srcset="styles/assets/covers/cyberpunk600x900-85.jpg 85w,
+                            styles/assets/covers/cyberpunk600x900-170.jpg 170w,
+                            styles/assets/covers/cyberpunk600x900-255.jpg 255w"  
+                            sizes="85px"
+                            alt="Обложка игры Cyberpunk 2077" class="game-card__image"
+                            width="600"
+                            height="900">
                         <span class="game-card__rating-badge">9/10</span>
                     </div>
                     <div class="game-card__content">
@@ -152,9 +173,15 @@
                 </article>
                 <article class="game-card">
                     <div class="game-card__cover">
-                        <img src="styles/ulicons/src/witcher600x900.jpg" alt="Обложка игры Ведьмак 3" class="game-card__image"
-                        width="600"
-                        height="900">
+                        <img
+                            src="styles/assets/covers/witcher600x900-170.jpg"
+                            srcset="styles/assets/covers/witcher600x900-85.jpg 85w,
+                            styles/assets/covers/witcher600x900-170.jpg 170w,
+                            styles/assets/covers/witcher600x900-255.jpg 255w"  
+                            sizes="85px"
+                            alt="Обложка игры Ведьмак 3" class="game-card__image"
+                            width="600"
+                            height="900">
                         <span class="game-card__rating-badge">10/10</span>
                     </div>
                     <div class="game-card__content">
@@ -167,9 +194,15 @@
                 </article>
                 <article class="game-card">
                     <div class="game-card__cover">
-                        <img src="styles/ulicons/src/hotlinemiami2600x900.jpg" alt="Обложка игры Hotline Miami 2" class="game-card__image"
-                        width="600"
-                        height="900">
+                        <img
+                            src="styles/assets/covers/hotlinemiami2600x900-170.jpg"
+                            srcset="styles/assets/covers/hotlinemiami2600x900-85.jpg 85w,
+                            styles/assets/covers/hotlinemiami2600x900-170.jpg 170w,
+                            styles/assets/covers/hotlinemiami2600x900-255.jpg 255w"  
+                            sizes="85px"
+                            alt="Обложка игры Hotline Miami 2" class="game-card__image"
+                            width="600"
+                            height="900">
                         <span class="game-card__rating-badge">9/10</span>
                     </div>
                     <div class="game-card__content">
@@ -187,9 +220,14 @@
             <div class="games__grid">
                 <article class="game-card game-card--catalog">
                     <div class="game-card__cover">
-                        <img src="styles/ulicons/src/cyberpunk600x900.jpg" alt="Обложка игры Cyberpunk 2077" class="game-card__image"
-                        width="600"
-                        height="900">
+                        <img 
+                            src="styles/assets/covers/cyberpunk600x900-170.jpg"
+                            srcset="styles/assets/covers/cyberpunk600x900-85.jpg 85w,
+                            styles/assets/covers/cyberpunk600x900-170.jpg 170w,
+                            styles/assets/covers/cyberpunk600x900-255.jpg 255w"                            
+                            alt="Обложка игры Cyberpunk 2077" class="game-card__image"
+                            width="600"
+                            height="900">
                         <span class="game-card__rating-badge">9/10</span>
                     </div>
                     <div class="game-card__content">
@@ -202,9 +240,15 @@
                 </article>
                 <article class="game-card game-card--catalog">
                     <div class="game-card__cover">
-                        <img src="styles/ulicons/src/witcher600x900.jpg" alt="Обложка игры Ведьмак 3" class="game-card__image"
-                        width="600"
-                        height="900">
+                        <img 
+                            src="styles/assets/covers/witcher600x900-170witcher.jpg"
+                            srcset="styles/assets/covers/witcher600x900-85.jpg 85w,
+                            styles/assets/covers/witcher600x900-170.jpg 170w,
+                            styles/assets/covers/witcher600x900-255.jpg 255w"  
+                            sizes="85px"
+                            alt="Обложка игры Ведьмак 3" class="game-card__image"
+                            width="600"
+                            height="900">
                         <span class="game-card__rating-badge">10/10</span>
                     </div>
                     <div class="game-card__content">
@@ -217,9 +261,15 @@
                 </article>
                 <article class="game-card game-card--catalog">
                     <div class="game-card__cover">
-                        <img src="styles/ulicons/src/hotlinemiami2600x900.jpg" alt="Обложка игры Hotline Miami 2" class="game-card__image"
-                        width="600"
-                        height="900">
+                        <img 
+                            src="styles/assets/covers/hotlinemiami2600x900-170.jpg"
+                            srcset="styles/assets/covers/hotlinemiami2600x900-85.jpg 85w,
+                            styles/assets/covers/hotlinemiami2600x900-170.jpg 170w,
+                            styles/assets/covers/hotlinemiami2600x900-255.jpg 255w"  
+                            sizes="85px"
+                            alt="Обложка игры Hotline Miami 2" class="game-card__image"
+                            width="600"
+                            height="900">
                         <span class="game-card__rating-badge">9/10</span>
                     </div>
                     <div class="game-card__content">
@@ -232,9 +282,15 @@
                 </article>
                 <article class="game-card game-card--catalog">
                     <div class="game-card__cover">
-                        <img src="styles/ulicons/src/blackflag600x900.jpg" alt="Обложка игры Assassin's Creed IV: Black Flag" class="game-card__image"
-                        width="600"
-                        height="900">
+                        <img
+                            src="styles/assets/covers/blackflag600x900-170.jpg"
+                            srcset="styles/assets/covers/blackflag600x900-85.jpg 85w,
+                            styles/assets/covers/blackflag600x900-170.jpg 170w,
+                            styles/assets/covers/blackflag600x900-255.jpg 255w"  
+                            sizes="85px" 
+                            alt="Обложка игры Assassin's Creed IV: Black Flag" class="game-card__image"
+                            width="600"
+                            height="900">
                         <span class="game-card__rating-badge">8/10</span>
                     </div>
                     <div class="game-card__content">
@@ -247,9 +303,16 @@
                 </article>
                 <article class="game-card game-card--catalog">
                     <div class="game-card__cover">
-                        <img src="styles/ulicons/src/borderlands.jpg" alt="Обложка игры Borderlands 2" class="game-card__image"
-                        width="600"
-                        height="900">
+                        <img
+                            src="styles/assets/covers/borderlands-170.jpg"
+                            srcset="styles/assets/covers/borderlands-85.jpg 85w,
+                            styles/assets/covers/borderlands-170.jpg 170w,
+                            styles/assets/covers/borderlands-255.jpg 255w"  
+                            sizes="85px"                      
+                            alt="Обложка игры Borderlands 2"
+                            class="game-card__image"
+                            width="600"
+                            height="900">
                         <span class="game-card__rating-badge">6/10</span>
                     </div>
                     <div class="game-card__content">
@@ -262,9 +325,15 @@
                 </article>
                 <article class="game-card game-card--catalog">
                     <div class="game-card__cover">
-                        <img src="styles/ulicons/src/fallout600x900.jpgg" alt="Обложка игры Fallout 4" class="game-card__image"
-                        width="600"
-                        height="900">
+                        <img
+                            src="styles/assets/covers/fallout600x900-170.jpg"
+                            srcset="styles/assets/covers/fallout600x900-85.jpg 85w,
+                            styles/assets/covers/fallout600x900-170.jpg 170w,
+                            styles/assets/covers/fallout600x900-255.jpg 255w"  
+                            sizes="85px"
+                            alt="Обложка игры Fallout 4" class="game-card__image"
+                            width="600"
+                            height="900">
                         <span class="game-card__rating-badge">6/10</span>
                     </div>
                     <div class="game-card__content">
@@ -277,9 +346,15 @@
                 </article>
                 <article class="game-card game-card--catalog">
                     <div class="game-card__cover">
-                        <img src="styles/ulicons/src/dyinglight600x900.jpg" alt="Обложка игры Dying Light" class="game-card__image"
-                        width="600"
-                        height="900">
+                        <img
+                            src="styles/assets/covers/dyinglight600x900-170.jpg"
+                            srcset="styles/assets/covers/dyinglight600x900-85.jpg 85w,
+                            styles/assets/covers/dyinglight600x900-170.jpg 170w,
+                            styles/assets/covers/dyinglight600x900-255.jpg 255w"  
+                            sizes="85px"
+                            alt="Обложка игры Dying Light" class="game-card__image"
+                            width="600"
+                            height="900">
                         <span class="game-card__rating-badge">9/10</span>
                     </div>
                     <div class="game-card__content">
@@ -292,9 +367,15 @@
                 </article>
                 <article class="game-card game-card--catalog">
                     <div class="game-card__cover">
-                        <img src="styles/ulicons/src/gta600x900.jpg" alt="Обложка игры Grand Theft Auto V" class="game-card__image"
-                        width="600"
-                        height="900">
+                        <img
+                            src="styles/assets/covers/gta600x900-170.jpg"
+                            srcset="styles/assets/covers/gta600x900-85.jpg 85w,
+                            styles/assets/covers/gta600x900-170.jpg 170w,
+                            styles/assets/covers/gta600x900-255.jpg 255w"  
+                            sizes="85px"
+                            alt="Обложка игры Grand Theft Auto V" class="game-card__image"
+                            width="600"
+                            height="900">
                         <span class="game-card__rating-badge">10/10</span>
                     </div>
                     <div class="game-card__content">
@@ -307,9 +388,15 @@
                 </article>
                 <article class="game-card game-card--catalog">
                     <div class="game-card__cover">
-                        <img src="styles/ulicons/src/wolfenstain600x900.jpg" alt="Обложка игры Wolfenstein II: The New Colossus" class="game-card__image"
-                        width="600"
-                        height="900">
+                        <img
+                            src="styles/assets/covers/wolfenstain600x900-170.jpg"
+                            srcset="styles/assets/covers/wolfenstain600x900-85.jpg 85w,
+                            styles/assets/covers/wolfenstain600x900-170.jpg 170w,
+                            styles/assets/covers/wolfenstain600x900-255.jpg 255w"  
+                            sizes="85px"
+                            alt="Обложка игры Wolfenstein II: The New Colossus" class="game-card__image"
+                            width="600"
+                            height="900">
                         <span class="game-card__rating-badge">9/10</span>
                     </div>
                     <div class="game-card__content">
@@ -322,9 +409,15 @@
                 </article>
                 <article class="game-card game-card--catalog">
                     <div class="game-card__cover">
-                        <img src="styles/ulicons/src/tes600x900.jpg" alt="Обложка игры The Elder Scrolls V: Skyrim" class="game-card__image"
-                        width="600"
-                        height="900">
+                        <img
+                            src="styles/assets/covers/tes600x900-170.jpg"
+                            srcset="styles/assets/covers/tes600x900-85.jpg 85w,
+                            styles/assets/covers/tes600x900-170.jpg 170w,
+                            styles/assets/covers/tes600x900-255.jpg 255w"  
+                            sizes="85px"
+                            alt="Обложка игры The Elder Scrolls V: Skyrim" class="game-card__image"
+                            width="600"
+                            height="900">
                         <span class="game-card__rating-badge">10/10</span>
                     </div>
                     <div class="game-card__content">
@@ -337,9 +430,15 @@
                 </article>
                 <article class="game-card game-card--catalog">
                     <div class="game-card__cover">
-                        <img src="styles/ulicons/src/rdr600x900.jpg" alt="Обложка игры Red Dead Redemption 2" class="game-card__image"
-                        width="600"
-                        height="900">
+                        <img
+                            src="styles/assets/covers/rdr600x900-170.jpg"
+                            srcset="styles/assets/covers/rdr600x900-85.jpg 85w,
+                            styles/assets/covers/rdr600x900-170.jpg 170w,
+                            styles/assets/covers/rdr600x900-255.jpg 255w"  
+                            sizes="85px"
+                            alt="Обложка игры Red Dead Redemption 2" class="game-card__image"
+                            width="600"
+                            height="900">
                         <span class="game-card__rating-badge">8/10</span>
                     </div>
                     <div class="game-card__content">
@@ -352,9 +451,15 @@
                 </article>
                 <article class="game-card game-card--catalog">
                     <div class="game-card__cover">
-                        <img src="styles/ulicons/src/odesey600x900.jpg" alt="Обложка игры Assassin’s Creed Odyssey" class="game-card__image"
-                        width="600"
-                        height="900">
+                        <img
+                            src="styles/assets/covers/odesey600x900-170.jpg"
+                            srcset="styles/assets/covers/odesey600x900-85.jpg 85w,
+                            styles/assets/covers/odesey600x900-170.jpg 170w,
+                            styles/assets/covers/odesey600x900-255.jpg 255w"  
+                            sizes="85px"
+                            alt="Обложка игры Assassin’s Creed Odyssey" class="game-card__image"
+                            width="600"
+                            height="900">
                         <span class="game-card__rating-badge">9/10</span>
                     </div>
                     <div class="game-card__content">
@@ -367,9 +472,15 @@
                 </article>
                 <article class="game-card game-card--catalog">
                     <div class="game-card__cover">
-                        <img src="styles/ulicons/src/eldenring600x900_.jpg" alt="Обложка игры Elden Ring" class="game-card__image"
-                        width="600"
-                        height="900">
+                        <img
+                            src="styles/assets/covers/eldenring600x900-170.jpg"
+                            srcset="styles/assets/covers/eldenring600x900-85.jpg 85w,
+                            styles/assets/covers/eldenring600x900-170.jpg 170w,
+                            styles/assets/covers/eldenring600x900-255.jpg 255w"  
+                            sizes="85px"
+                            alt="Обложка игры Elden Ring" class="game-card__image"
+                            width="600"
+                            height="900">
                         <span class="game-card__rating-badge">8/10</span>
                     </div>
                     <div class="game-card__content">
@@ -382,21 +493,21 @@
                 </article>
             </div>
             <div class="games__more">
-                <button class="games__more-button"><span>показать еще</span><img src="styles/ulicons/pokazateshe.png" alt=""></button>
+                <button class="games__more-button"><span>показать еще</span><img src="styles/assets/ulicons/pokazateshe.png" alt=""></button>
             </div>
         </section>
     </main>
     <footer class="site-footer">
         <div class="site-footer__content">
             <div class="logo logo--footer">
-                <img src="styles/GameRankLogo.png" alt="лого GameRank" width="40" height="40">
+                <img src="styles/assets/ulicons/GameRankLogo.png" alt="лого GameRank" width="40" height="40">
                 <span class="logo__title">GameRank</span>
             </div>
             <ul class="site-footer__list">
                 <li><a href="privacy-policy.html" class="site-footer__link">privacy Policy</a></li>
                 <li><a href="terms.html" class="site-footer__link">terms of service</a></li>
                 <li><a href="https://t.me/qop_qop_qop" class="site-footer__link">contact</a></li>
-                <li><a href="https://github.com/syhanov/igroteka" class="site-footer__link site-footer__link--button"><img src="styles/ulicons/repoicon.png" alt=""><span>repository</span></a></li>
+                <li><a href="https://github.com/syhanov/igroteka" class="site-footer__link site-footer__link--button"><img src="styles/assets/ulicons/repoicon.png" alt=""><span>repository</span></a></li>
             </ul>
         </div>
     </footer>

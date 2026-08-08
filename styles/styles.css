@@ -9,7 +9,7 @@ button:focus-visible {
 }
 body {
     font-family: "Manrope";
-    background-image: url(ulicons/lastbcg.png);
+    background-image: url(assets/ulicons/lastbcg.png);
     background-size: cover;
     background-repeat: no-repeat;
     margin: 0;
@@ -194,17 +194,17 @@ main {
     vertical-align: middle;
 }
 .features-list__item--lc::before {
-    background-image: url(ulicons/lcicon.png);
+    background-image: url(assets/ulicons/lcicon.png);
 }
 .features-list__item--steam::before {
-    background-image: url(ulicons/gamepadicon.png);
+    background-image: url(assets/ulicons/gamepadicon.png);
     height: 14px;
 }
 .features-list__item--recommendation::before {
-    background-image: url(ulicons/recomendationicon.png);
+    background-image: url(assets/ulicons/recomendationicon.png);
 }
 .features-list__item--community::before {
-    background-image: url(ulicons/soobshestwoicon.png);
+    background-image: url(assets/ulicons/soobshestwoicon.png);
     width: 24px;
     height: 12px;
 }
@@ -232,7 +232,6 @@ main {
     aspect-ratio: 4/3;
 }
 .project__caption {
-
     font-size: 1rem;
     font-weight: bold;
     color: #FFFFFF;
@@ -281,15 +280,15 @@ main {
     margin-right: 8px;
 }
 .anons-list__item--e3::before {
-    background-image: url(ulicons/e3icon.png);
+    background-image: url(assets/ulicons/e3icon.png);
 }
 .anons-list__item--workshop::before {
-    background-image: url(ulicons/brainicon.png);
+    background-image: url(assets/ulicons/brainicon.png);
     width: 18px;
     height: 20px;
 }
 .anons-list__item--gamepass::before {
-    background-image: url(ulicons/zapicon.png);
+    background-image: url(assets/ulicons/zapicon.png);
     width: 16px;
     height: 20px;
 }
@@ -393,14 +392,16 @@ main {
 .game-card__image {
     height: 100%;
     width: 100%;
+    aspect-ratio: 3/4;
     min-height: 0;
-    object-fit: contain;
+    object-fit: cover;
 }
 .game-card--featured .game-card__image {
     display: block;
-    object-fit: unset;
+    object-fit: cover;
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
+    aspect-ratio: 16/9;
 }
 .game-card__rating-badge {
     position: absolute;
@@ -612,6 +613,17 @@ main {
     transition: color 0.3s ease, transform 0.3s ease;
     height: 44px;
 }
+.site-footer__link--button {
+    display: flex;
+    gap: 3px;
+    color: #DBFCFF;
+    width: 150px;
+    height: 36px;
+    background-color: #2A2A2A;
+    border: 1px solid #3B494B;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
 /*Изначально брейкпоинт был запланирован на 680 px с учётом будущих возможностей. Позже я увеличил его значение  на 40 px, чтобы объединить несколько изменений в одном медиазапросе и избежать создания отдельного брейкпоинта для этого списка. Благодаря этому форма поиска и футер корректно отображаются при увеличенной ширине экрана.*/
 @media (min-width:720px) {
     .features-list {
@@ -667,6 +679,10 @@ main {
     .site-footer__link {
         display: inline-block;
         height: auto;
+    }
+    .site-footer__link--button  {
+        height: 36px;
+        display: flex;
     }
     .games__grid {
         grid-template-columns: repeat(auto-fit, minmax(min(380px, 100%), 1fr));
@@ -770,14 +786,7 @@ main {
     }
     .site-footer__link--button {
         display: flex;
-        gap: 3px;
-        color: #DBFCFF;
-        width: 150px;
         height: 36px;
-        background-color: #2A2A2A;
-        border: 1px solid #3B494B;
-        border-radius: 5px;
-        transition: background-color 0.3s ease, transform 0.3s ease;
     }
 }
 
