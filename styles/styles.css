@@ -737,8 +737,7 @@ main {
     }
     .project__info {
         flex-direction: row;
-        max-width: 1500px;
-        margin: 0 auto; 
+        align-items: stretch;
     }
     .project__text {
         max-width: 75ch;
@@ -746,9 +745,14 @@ main {
     .project__content {
         order: 0;
     }
+    .project__visual {
+        flex: 1 1 auto;
+    }
     .project__image {
         max-height: none;            
         width: 466px;
+        height: 100%;
+        object-fit: cover;
     }
     .games__grid {
         grid-template-columns: repeat(auto-fit, minmax(min(450px, 100%), 1fr));
@@ -779,6 +783,7 @@ main {
     }
     .site-nav {
         max-width: 1920px;
+        padding: 1rem 64px;
     }
     .site-nav__brand {
         flex-grow: 1;
@@ -801,7 +806,26 @@ main {
         height: 36px;
     }
 }
-
+/*
+  Дополнительный брейкпоинт нужен для согласования ширины intro
+  с остальными блоками страницы. Изначально intro имел отдельное
+  ограничение max-width: 1500px, из-за чего на широких экранах
+  его ширина отличалась от остальных блоков. Я решил убрать это
+  отдельное ограничение и использовать тот же принцип ширины,
+  что и для остальных блоков. Другого способа сохранить одинаковую
+  ширину без дополнительной точки перехода я не нашёл.
+*/
+@media (min-width: 1350px) {
+    .project__image {
+        max-height: none;            
+        width: 100%;
+        height: 620px;
+        object-fit: cover;
+    }
+    .project {
+        width: 100%;
+    }
+}
 @media(hover:hover) {
     .site-nav__link:hover {
     border-bottom-color: #DBFCFF; 
