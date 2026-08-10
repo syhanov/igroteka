@@ -17,9 +17,9 @@ body {
 main {
     display: flex;
     flex-direction: column;
-    gap: 32px;
+    gap: 2rem;
     width: 100%;
-    margin: 22px auto 32px;
+    margin: 1.375rem auto 2rem;
     padding: 0 16px;
 }
 .site-header {
@@ -32,7 +32,7 @@ main {
     align-items: center;
     height: 100%;
     margin: 0 auto;
-    padding: 32px 16px;
+    padding: 2rem 16px;
 }
 .site-nav__brand {
     display: flex;
@@ -47,7 +47,7 @@ main {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 10px;
+    gap: 0.625rem;
     padding: 0;
 }
 .logo__image{
@@ -116,7 +116,7 @@ main {
 .project__info {
     display: flex;
     flex-direction: column;
-    gap: 24px;
+    gap: 1.5rem;
 }
 .section-label {
     display: flex;
@@ -125,7 +125,7 @@ main {
 .section-label__text {
     display: inline-block;
     background-color: #1a222a; 
-    padding: 3px 10px;
+    padding: 0.1875rem 10px;
     font-size: 0.75rem;
     font-weight: normal;
     color: #DBFCFF;
@@ -141,7 +141,7 @@ main {
 }
 .project__title {
     font-size: clamp(2.5rem, 5vw, 4rem);
-    margin: 24px 0 32px;
+    margin: 1.5rem 0 2rem;
     line-height: 1;
     font-weight: bold;
     color: #DBFCFF;
@@ -159,13 +159,13 @@ main {
     font-weight: bold;
     color: #DBFCFF;
     margin: 0;
-    margin-bottom: 24px;
+    margin-bottom: 1.5rem;
 }
 .project__features {
     background-color: #13131599;
     border: 1px solid rgba(219, 252, 255, 0.5);
     border-radius: 10px;
-    padding: 32px;
+    padding: 2rem 32px;
 }
 .features-list,
 .anons-list {
@@ -180,7 +180,7 @@ main {
 .features-list {
     display: grid;
     grid-template-columns: 1fr;
-    gap: 16px;
+    gap: 1rem;
 }
 .features-list__item::before,
 .anons-list__item::before {
@@ -259,8 +259,8 @@ main {
 .anons__content {
     display: flex;
     flex-direction: column;
-    gap: 24px;
-    padding-top: 24px;
+    gap: 1.5rem;
+    padding-top: 1.5rem;
 }
 .anons__title {
     margin: 0;
@@ -273,7 +273,7 @@ main {
 .anons-list {
     display: flex;
     flex-wrap: wrap;
-    gap: 24px;
+    gap: 1.5rem;
     font-size: 0.75rem; 
 }
 .anons-list__item::before {
@@ -303,7 +303,7 @@ main {
 .catalog__toolbar {
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    gap: 1rem;
     border-left: 4px solid #DBFCFF;
 }
 .catalog__heading {
@@ -332,7 +332,7 @@ main {
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr 1fr;
-    gap: 8px;
+    gap: 0.5rem;
 }
 .filter-form__search, 
 .filter-form__selector {
@@ -352,12 +352,12 @@ main {
     border-radius: 2px;
 }
 .filter-form__search {
-    padding: 10px 17px 10px 41px;
+    padding: 0.625rem 17px 0.625rem 41px;
     grid-column: 1/3;
 }
 .filter-form__selector {
     text-align: center;
-    padding: 8px 16px;
+    padding: 0.5rem 16px;
 }
 .filter-form__selector option {
     background-color: #201F1F;
@@ -366,20 +366,20 @@ main {
 .catalog {
     display: flex;
     flex-direction: column;
-    gap: 48px;
+    gap: 3rem;
 }
 .catalog__featured-games {
     display: grid;
     grid-template-columns: 1fr;
-    gap: 24px;
+    gap: 1.5rem;
 }
 .game-card {
     display: flex;
-    gap: 16px;
+    gap: 1rem;
     background-color: #131315cc;
     border-radius: 10px;
     border: 1px solid #ffffff1a;
-    padding: 10px 10px;
+    padding: 0.625rem 10px;
     max-height: 134px;
 }
 .game-card--featured {
@@ -411,13 +411,13 @@ main {
     border-radius: 2px;
 }
 .game-card--featured .game-card__rating-badge {
-    padding: 4px 12px;
+    padding: 0.25rem 12px;
     font-size: 1.125rem;
     top: 16px;
     right: 16px;
 }
 .game-card--featured .game-card__text-badge {
-    padding: 3px 12px;
+    padding: 0.1875rem 12px;
     display: inline-block;
     background-color: #1a222a; 
     font-size: 0.875rem;
@@ -431,7 +431,7 @@ main {
     border-radius: 2px;
 }
 .game-card--featured .game-card__content {
-    padding: 16px;
+    padding: 1rem 16px;
 }
 .game-card--featured .game-card__title {
     font-size: 2rem;
@@ -446,7 +446,7 @@ main {
     color: #B9CACB;
 }
 .game-card--featured .game-card__description {
-    margin: 16px 0;
+    margin: 1rem 0;
     color: #B9CACB;
     font-size: 1rem;
 }
@@ -454,7 +454,7 @@ main {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 12px;
+    gap: 0.75rem;
 }
 .game-card__button {
     display: flex;
@@ -472,8 +472,8 @@ main {
     font-size: 0.875rem;
     font-weight: bold;
     text-transform: uppercase;
-    gap: 8px;
-    padding: 10px 10px;
+    gap: 0.5rem;
+    padding: 0.625rem 10px;
     color: #DBFCFF;
     order: 1;
 }
@@ -492,13 +492,13 @@ main {
 .game-card__button--bookmark {
     width: 145px;
     height: 36px;
-    gap: 15px;
+    gap: 0.9375rem;
     margin-right: 8px;
 }
 .game-card__button--video {
     width: 108px;
     height: 36px;
-    gap: 11px;
+    gap: 0.6875rem;
 }
 .game-card__cover {
     position: relative;
@@ -508,7 +508,7 @@ main {
     top: 0;
     right: 0;
     font-size: 1rem;
-    padding: 5px;
+    padding: 0.3125rem 5px;
 }
 .game-card__content {
     display: flex;
@@ -524,7 +524,7 @@ main {
 .game-card__meta {
     display: flex;
     flex-wrap: wrap;
-    gap: 5px;
+    gap: 0.3215rem;
     color: #b9cacb;
     font-size: 0.875rem;
 }
@@ -538,14 +538,14 @@ main {
     font-weight: bold;
     color: #b9cacb;
     text-transform: uppercase;
-    margin-bottom: 48px;
-    margin-left: 24px;
+    margin-bottom: 3rem;
+    margin-left: 1.5rem;
 }
 .games__grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
-    gap: 8px;
-    margin-bottom: 16px;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
     padding: 0 16px;
 }
 .game-card--catalog {
@@ -560,8 +560,8 @@ main {
     font-size: 0.875rem;
     font-weight: bold;
     text-transform: uppercase;
-    gap: 8px;
-    padding: 10px 10px;
+    gap: 0.5rem;
+    padding: 0.625rem 10px;
     color: #b9cacb;
 }
 .site-footer__link--button,
@@ -588,7 +588,7 @@ main {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 32px 16px;
+    padding: 2rem 16px;
     margin: 0 auto;
 }
 .logo--footer .logo__title {
@@ -601,7 +601,7 @@ main {
     flex-direction: column;
     align-items: center;
     padding: 0;
-    gap: 10px;
+    gap: 0.625rem;
 }
 .site-footer__link {
     display: flex;
@@ -615,7 +615,7 @@ main {
 }
 .site-footer__link--button {
     display: flex;
-    gap: 3px;
+    gap: 0.1875rem;
     color: #DBFCFF;
     width: 150px;
     height: 36px;
@@ -659,11 +659,11 @@ main {
 @media (min-width:927px) {
     main {
         padding: 0 32px;
-        gap: 48px;
+        gap: 3rem;
     }
     .site-footer {
         flex-direction: row;
-        padding: 16px 32px;
+        padding: 1rem 32px;
     }
     .site-footer__content,
     .site-footer__list {
@@ -674,7 +674,7 @@ main {
 
     }
     .site-footer__list {
-        gap: 24px;
+        gap: 1.5rem;
     }
     .site-footer__link {
         display: inline-block;
@@ -689,7 +689,7 @@ main {
     }
         .site-nav {
         justify-content: space-between;
-        padding: 16px 32px;
+        padding: 1rem 32px;
     }
     .site-nav__brand,
     .site-nav__list,
@@ -698,7 +698,7 @@ main {
     }
     .site-nav__list {
         margin-left: 40px;
-        gap: 24px;
+        gap: 1.5rem;
     }
     .site-nav__link {
         display: inline-block;
@@ -708,13 +708,13 @@ main {
         grid-template-columns: 7fr 5fr;
     }
     .game-card--featured .game-card__content {
-        padding: 16px 32px 32px;
+        padding: 1rem 32px 2rem;
     }
     .game-card--featured .game-card__meta {
         font-size: 1.125rem;
     }
     .game-card--featured .game-card__description {
-        margin: 24px 0 32px;
+        margin: 1.5rem 0 2rem;
         color: #B9CACB;
         font-size: 1rem;
     }
@@ -732,7 +732,7 @@ main {
 @media (min-width:1070px) {
     main {
         padding: 0 64px;
-        gap: 64px;
+        gap: 4rem;
         max-width: 1920px;
     }
     .project__info {
@@ -791,7 +791,7 @@ main {
     .site-footer__content {
         max-width: 1920px;
         margin: 0 auto;
-        padding: 32px 64px;
+        padding: 2rem 64px;
     }
     .site-footer {
         padding: 0;
