@@ -8,7 +8,7 @@ button:focus-visible {
     border-radius: 2px;
 }
 body {
-    font-family: "Manrope";
+    font-family: "Manrope", sans-serif;
     background-image: url(assets/ulicons/lastbcg.png);
     background-size: cover;
     background-repeat: no-repeat;
@@ -106,7 +106,7 @@ main {
     color: #006970;
     font-size: 0.875rem;
     font-weight: bold;
-    font-family: "Manrope";
+    font-family: "Manrope", sans-serif;
     letter-spacing: 0.3px;
     cursor: pointer;
 }
@@ -308,7 +308,7 @@ main {
 }
 .catalog__heading {
     padding-left: 24px;
-    max-height: 58px
+    max-height: 58px;
 }
 .catalog__title,
 .catalog__subtitle {
@@ -336,7 +336,7 @@ main {
 }
 .filter-form__search, 
 .filter-form__selector {
-    font-family: "Manrope";
+    font-family: "Manrope", sans-serif;
     font-size: 0.875rem;
     border-radius: 5px;
     background-color: #201F1F66;
@@ -524,7 +524,7 @@ main {
 .game-card__meta {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.3215rem;
+    gap: 0.3125rem;
     color: #b9cacb;
     font-size: 0.875rem;
 }
