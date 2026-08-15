@@ -217,7 +217,7 @@ main {
 .project__content {
     order: 2;
 }
-.project___figure {
+.project__figure {
     height: 100%; 
     width: 100%;
     margin: 0;
@@ -744,15 +744,15 @@ main {
     }
     .project__content {
         order: 0;
+        flex: 1 1 auto;
     }
     .project__visual {
         flex: 1 1 auto;
     }
     .project__image {
         max-height: none;            
-        width: 466px;
+        width: 100%;
         height: 100%;
-        object-fit: cover;
     }
     .games__grid {
         grid-template-columns: repeat(auto-fit, minmax(min(450px, 100%), 1fr));
@@ -816,12 +816,6 @@ main {
   ширину без дополнительной точки перехода я не нашёл.
 */
 @media (min-width: 1350px) {
-    .project__image {
-        max-height: none;            
-        width: 100%;
-        height: 620px;
-        object-fit: cover;
-    }
     .project {
         width: 100%;
     }
