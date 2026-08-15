@@ -97,8 +97,8 @@ main {
     object-fit: cover;
 }
 .site-nav__subscribe {
-    width: 172px;
-    height: 33px;
+    min-width: 172px;
+    min-height: 33px;
     padding: 0;
     text-align: center;
     border: 0;
@@ -344,7 +344,7 @@ main {
     color: #FFFFFF;
     outline: none;
     border: 1px solid #3B494B99;
-    height: 38px;
+    min-height: 38px;
 }
 .filter-form__search:focus-visible, 
 .filter-form__selector:focus-visible {
@@ -467,8 +467,8 @@ main {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 142px;
-    height: 17px;
+    min-width: 142px;
+    min-height: 17px;
     cursor: pointer;
     font-size: 0.875rem;
     font-weight: bold;
@@ -491,14 +491,14 @@ main {
     cursor: pointer;
 }
 .game-card__button--bookmark {
-    width: 145px;
-    height: 36px;
+    min-width: 145px;
+    min-height: 36px;
     gap: 0.9375rem;
     margin-right: 8px;
 }
 .game-card__button--video {
-    width: 108px;
-    height: 36px;
+    min-width: 108px;
+    min-height: 36px;
     gap: 0.6875rem;
 }
 .game-card__cover {
@@ -555,8 +555,8 @@ main {
 }
 .games__more-button {
     all: unset;
-    width: 142px;
-    height: 17px;
+    min-width: 142px;
+    min-height: 17px;
     cursor: pointer;
     font-size: 0.875rem;
     font-weight: bold;
@@ -576,7 +576,7 @@ main {
     justify-content: center;
     align-items: center;
     border-top: 1px dotted #3B494B66;
-    height: 66px;
+    min-height: 66px;
 }
 .games__more .games__more-button{
     margin: 0;
@@ -618,8 +618,8 @@ main {
     display: flex;
     gap: 0.1875rem;
     color: #DBFCFF;
-    width: 150px;
-    height: 36px;
+    min-width: 150px;
+    min-height: 36px;
     background-color: #2A2A2A;
     border: 1px solid #3B494B;
     border-radius: 5px;
@@ -682,7 +682,7 @@ main {
         height: auto;
     }
     .site-footer__link--button  {
-        height: 36px;
+        min-height: 36px;
         display: flex;
     }
     .games__grid {
@@ -754,6 +754,7 @@ main {
         max-height: none;            
         width: 100%;
         height: 100%;
+        aspect-ratio: 4/2;
     }
     .games__grid {
         grid-template-columns: repeat(auto-fit, minmax(min(450px, 100%), 1fr));
@@ -805,20 +806,6 @@ main {
     .site-footer__link--button {
         display: flex;
         height: 36px;
-    }
-}
-/*
-  Дополнительный брейкпоинт нужен для согласования ширины intro
-  с остальными блоками страницы. Изначально intro имел отдельное
-  ограничение max-width: 1500px, из-за чего на широких экранах
-  его ширина отличалась от остальных блоков. Я решил убрать это
-  отдельное ограничение и использовать тот же принцип ширины,
-  что и для остальных блоков. Другого способа сохранить одинаковую
-  ширину без дополнительной точки перехода я не нашёл.
-*/
-@media (min-width: 1350px) {
-    .project {
-        width: 100%;
     }
 }
 @media(hover:hover) {
