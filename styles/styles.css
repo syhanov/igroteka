@@ -9,7 +9,8 @@ button:focus-visible {
 }
 body {
     font-family: "Manrope", sans-serif;
-    background-image: url(assets/ulicons/lastbcg.png);
+    background-image: url(assets/ulicons/circuit_background.svg);
+    background-color: #131418;
     background-size: cover;
     background-repeat: no-repeat;
     margin: 0;
