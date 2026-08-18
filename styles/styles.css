@@ -72,7 +72,7 @@ main {
     transition: border-color 0.3s ease;
     font-size: 1rem;
     font-weight: bold;
-    height: 44px;
+    min-height: 44px;
 }
 .site-nav__text {
     display: inline-block;
@@ -113,6 +113,7 @@ main {
 }
 .project {
     margin: 0 auto;
+    width: 100%;
 }
 .project__info {
     display: flex;
@@ -128,7 +129,7 @@ main {
     background-color: #1a222a; 
     padding: 0.1875rem 10px;
     font-size: 0.75rem;
-    font-weight: normal;
+
     color: #DBFCFF;
     text-transform: uppercase;
     letter-spacing: 1px;
@@ -175,13 +176,15 @@ main {
     margin-bottom: 0;
     color: #E5E2E1;
     font-weight: bold;
-    display: flex;
-    flex-direction: column;
 }
 .features-list {
     display: grid;
     grid-template-columns: 1fr;
     gap: 1rem;
+}
+.anons-list {
+    display: flex;
+    flex-direction: column;
 }
 .features-list__item::before,
 .anons-list__item::before {
@@ -230,7 +233,6 @@ main {
     width: 100%;
     flex-shrink: 0;
     border-radius: 5px;
-    aspect-ratio: 4/3;
 }
 .project__caption {
     font-size: 1rem;
@@ -299,7 +301,9 @@ main {
 }
 .anons-archive__link {
     text-decoration: none;
-    height: 44px;
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
     font-size: 0.75rem;
     color: #B9CACB;
 }
@@ -314,7 +318,7 @@ main {
 }
 .catalog__heading {
     padding-left: 24px;
-    max-height: 58px;
+    min-height: 58px;
 }
 .catalog__title,
 .catalog__subtitle {
@@ -349,7 +353,7 @@ main {
     color: #FFFFFF;
     outline: none;
     border: 1px solid #3B494B99;
-    min-height: 38px;
+    min-height: 41px;
 }
 .filter-form__search:focus-visible, 
 .filter-form__selector:focus-visible {
@@ -398,9 +402,11 @@ main {
 .game-card__image {
     height: 100%;
     width: 100%;
-    aspect-ratio: 3/4;
     min-height: 0;
     object-fit: cover;
+}
+.game-card--featured .game-card__cover {
+    aspect-ratio: 16/9;
 }
 .game-card--featured .game-card__image {
     display: block;
@@ -472,8 +478,9 @@ main {
     display: flex;
     align-items: center;
     justify-content: center;
+    box-sizing: border-box;
     min-width: 142px;
-    min-height: 17px;
+    min-height: 37px;
     cursor: pointer;
     font-size: 0.875rem;
     font-weight: bold;
@@ -497,18 +504,19 @@ main {
 }
 .game-card__button--bookmark {
     min-width: 145px;
-    min-height: 36px;
+    min-height: 37px;
     gap: 0.9375rem;
     margin-right: 8px;
 }
 .game-card__button--video {
     min-width: 108px;
-    min-height: 36px;
+    min-height: 37px;
     gap: 0.6875rem;
 }
 .game-card__cover {
     position: relative;
     flex-shrink: 0;
+    aspect-ratio: 3/4;
 }
 .game-card__rating-badge {
     top: 0;
@@ -561,7 +569,7 @@ main {
 .games__more-button {
     all: unset;
     min-width: 142px;
-    min-height: 17px;
+    min-height: 39px;
     cursor: pointer;
     font-size: 0.875rem;
     font-weight: bold;
@@ -617,7 +625,7 @@ main {
     text-transform: uppercase;
     font-size: 0.75rem;
     transition: color 0.3s ease, transform 0.3s ease;
-    height: 44px;
+    min-height: 44px;
 }
 .site-footer__link--button {
     display: flex;
@@ -684,7 +692,7 @@ main {
     }
     .site-footer__link {
         display: inline-block;
-        height: auto;
+        min-height: auto;
     }
     .site-footer__link--button  {
         min-height: 36px;
@@ -708,7 +716,7 @@ main {
     }
     .site-nav__link {
         display: inline-block;
-        height: auto;
+        min-height: auto;
     }
     .catalog__featured-games {
         grid-template-columns: 7fr 5fr;
@@ -742,24 +750,30 @@ main {
         max-width: 1920px;
     }
     .project__info {
-        flex-direction: row;
-        align-items: stretch;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
     }
     .project__text {
         max-width: 75ch;
     }
     .project__content {
         order: 0;
-        flex: 1 1 auto;
     }
     .project__visual {
-        flex: 1 1 auto;
+        min-height: 0;
+        min-width: 0;
+    }
+    .project__figure {
+        min-height: 0;
+        position: absolute;
+        inset: 0;
     }
     .project__image {
-        max-height: none;            
-        width: 100%;
-        height: 100%;
-        aspect-ratio: 4/2;
+        max-height: none;
+        display: block;       
+    }
+    .anons-archive__link {
+        min-height: auto;
     }
     .games__grid {
         grid-template-columns: repeat(auto-fit, minmax(min(450px, 100%), 1fr));
@@ -811,7 +825,7 @@ main {
     }
     .site-footer__link--button {
         display: flex;
-        height: 36px;
+        min-height: 36px;
     }
 }
 @media(hover:hover) {
