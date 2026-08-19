@@ -76,10 +76,12 @@ magick eldenring.jpg -resize 300x cover-300.jpg
 magick eldenring.jpg -resize 450x cover-450.jpg
 magick eldenring.jpg -resize 640x cover-640.jpg
 magick eldenring.jpg -resize 830x cover-830.jpg
+magick eldenring.jpg -resize 860x cover-860.jpg
+magick eldenring.jpg -resize 1000x cover-1000.jpg
 magick eldenring.jpg -resize 1280x cover-1280.jpg
 ```
 
-Ширины: 300w, 450w, 640w, 830w, 1280w — покрывают диапазон слота от 286px
+Ширины: 300w, 450w, 640w, 830w, 860w, 1000w, 1280w — покрывают диапазон слота от 286px
 до 830px с запасом под retina-экраны (DPR 2x).
 
 ### Иллюстрация в блоке "О проекте" (DualSense)
@@ -88,10 +90,9 @@ magick eldenring.jpg -resize 1280x cover-1280.jpg
 
 **Обычные ширины (масштаб без кропа, для десктопа ≥1070px):**
 ```bash
-magick dualsens.png -resize 400x dualsens-400.jpg
-magick dualsens.png -resize 700x dualsens-700.jpg
-magick dualsens.png -resize 932x dualsens-932.jpg
-magick dualsens.png -resize 1024x dualsens-1024.jpg
+magick dualsens.png -resize 508x dualsens-d-508.jpg
+magick dualsens.png -resize 700x dualsens-d-700.jpg
+magick dualsens.png -resize 978x dualsens-d-978.jpg
 ```
 
 **Горизонтальный кроп (мобильная/планшетная версия, ≤1069px)** —
