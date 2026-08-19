@@ -369,7 +369,7 @@ main {
     text-align: center;
     padding: 0.5rem 16px;
 }
-.filter-form__selector option {
+.filter-form__option {
     background-color: #201F1F;
     border-radius: 5px;
 }
