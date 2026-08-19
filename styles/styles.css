@@ -482,13 +482,15 @@ main {
     min-width: 142px;
     min-height: 37px;
     cursor: pointer;
-    font-size: 0.875rem;
-    font-weight: bold;
     text-transform: uppercase;
     gap: 0.5rem;
     padding: 0.625rem 10px;
-    color: #DBFCFF;
     order: 1;
+}
+.game-card__button--readmore .game-card__button-text {
+    font-size: 0.875rem;
+    font-weight: bold;
+    color: #DBFCFF;
 }
 .game-card__button-text {
     font-size: 0.75rem;
@@ -659,6 +661,7 @@ main {
     }
     .game-card__button--readmore {
         order: 0;
+        margin-right: 16px;
     }
     .project__text {
         font-size: 1.175rem;
