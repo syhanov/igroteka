@@ -570,6 +570,7 @@ main {
 }
 .games__more-button {
     all: unset;
+    box-sizing: border-box;
     min-width: 142px;
     min-height: 39px;
     cursor: pointer;
