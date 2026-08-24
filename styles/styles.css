@@ -222,14 +222,14 @@ main {
     order: 2;
 }
 .project__figure {
-    height: 100%; 
     width: 100%;
     margin: 0;
 }
 .project__image {
     object-fit: cover;
     max-height: 300px;
-    height: 100%;
+    aspect-ratio: 2.286 / 1;
+    height: auto;
     width: 100%;
     flex-shrink: 0;
     border-radius: 5px;
@@ -768,13 +768,14 @@ main {
         min-width: 0;
     }
     .project__figure {
-        min-height: 0;
         position: absolute;
         inset: 0;
     }
     .project__image {
+        display: block;
         max-height: none;
-        display: block;       
+        height: 100%;
+        aspect-ratio: auto; 
     }
     .anons-archive__link {
         min-height: auto;
