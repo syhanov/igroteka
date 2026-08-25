@@ -476,7 +476,8 @@ main {
     text-transform: uppercase;
 }
 .game-card__button--readmore {
-    all: unset;
+    background: none;
+    border: none;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -564,7 +565,8 @@ main {
     border: 0;
 }
 .games__more-button {
-    all: unset;
+    background: none;
+    border: none;
     box-sizing: border-box;
     min-width: 142px;
     min-height: 39px;
