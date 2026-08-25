@@ -60,9 +60,9 @@ https://cdn.akamai.steamstatic.com/steam/apps/{APP_ID}/library_600x900.jpg
 Исходник: 600×900px (соотношение 2:3).
 
 ```bash
-magick cover.jpg -resize 85x cover-85.jpg
-magick cover.jpg -resize 170x cover-170.jpg
-magick cover.jpg -resize 255x cover-255.jpg
+magick <game-name>.jpg -resize 85x <game-name>-85.jpg
+magick <game-name>.jpg -resize 170x <game-name>-170.jpg
+magick <game-name>.jpg -resize 255x <game-name>-255.jpg
 ```
 
 Ширины: 85w, 170w, 255w (1x / 2x / 3x под фиксированный слот 85px).
@@ -82,7 +82,7 @@ magick eldenring.jpg -resize 1280x cover-1280.jpg
 ```
 
 Ширины: 300w, 450w, 640w, 830w, 860w, 1000w, 1280w — покрывают диапазон слота от 286px
-до 830px с запасом под retina-экраны (DPR 2x).
+до 1029px с запасом под retina-экраны (DPR 2x).
 
 ### Иллюстрация в блоке "О проекте" (DualSense)
 
