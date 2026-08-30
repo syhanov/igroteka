@@ -5,9 +5,9 @@ const games = [
         id : 1,
         title : "Cyberpunk 2077",
         alt : "Обложка игры Cyberpunk 2077",
-        rating : "4.5",
+        rating : 4.5,
         year : "2020",
-        genre : ["RGP"],
+        genre : ["RPG"],
         imgSrc : "styles/assets/covers/cyberpunk600x900-170.jpg" ,
         srcSet : "styles/assets/covers/cyberpunk600x900-85.jpg 85w , styles/assets/covers/cyberpunk600x900-170.jpg 170w, styles/assets/covers/cyberpunk600x900-255.jpg 255w"
     },
@@ -15,9 +15,9 @@ const games = [
         id : 2,
         title : "Ведьмак 3",
         alt : "Обложка игры Ведьмак 3",
-        rating : "5",
+        rating : 5,
         year : "2015",
-        genre : ["Action RGP"],
+        genre : ["Action RPG"],
         imgSrc : "styles/assets/covers/witcher600x900-170.jpg" ,
         srcSet : "styles/assets/covers/witcher600x900-85.jpg 85w, styles/assets/covers/witcher600x900-170.jpg 170w, styles/assets/covers/witcher600x900-255.jpg 255w"
     },
@@ -25,7 +25,7 @@ const games = [
         id : 3,
         title : "Hotline Miami 2",
         alt : "Обложка игры Hotline Miami 2",
-        rating : "4.5",
+        rating : 4.5,
         year : "2015",
         genre : ["Action"],
         imgSrc : "styles/assets/covers/hotlinemiami2600x900-170.jpg" ,
@@ -35,7 +35,7 @@ const games = [
         id : 4,
         title : "Assassin's Creed IV: Black Flag",
         alt : "Обложка игры Assassin's Creed IV: Black Flag",
-        rating : "4",
+        rating : 4,
         year : "2013",
         genre : ["Action Adventure"],
         imgSrc : "styles/assets/covers/blackflag600x900-170.jpg" ,
@@ -45,9 +45,9 @@ const games = [
         id : 5,
         title : "Borderlands 2",
         alt : "Обложка игры Borderlands 2",
-        rating : "3",
+        rating : 3,
         year : "2012",
-        genre : ["Action RGP"],
+        genre : ["Action RPG"],
         imgSrc : "styles/assets/covers/borderlands-170.jpg" ,
         srcSet : "styles/assets/covers/borderlands-85.jpg 85w, styles/assets/covers/borderlands-170.jpg 170w, styles/assets/covers/borderlands-255.jpg 255w" 
     },
@@ -55,9 +55,9 @@ const games = [
         id : 6,
         title : "Fallout 4",
         alt : "Обложка игры Fallout 4",
-        rating : "3",
+        rating : 3,
         year : "2015",
-        genre : ["Action RGP"],
+        genre : ["Action RPG"],
         imgSrc : "styles/assets/covers/fallout600x900-170.jpg" ,
         srcSet : "styles/assets/covers/fallout600x900-85.jpg 85w, styles/assets/covers/fallout600x900-170.jpg 170w, styles/assets/covers/fallout600x900-255.jpg 255w"
     },
@@ -65,7 +65,7 @@ const games = [
         id : 7,
         title : "Dying Light",
         alt : "Обложка игры Dying Light",
-        rating : "4.5",
+        rating : 4.5,
         year : "2015",
         genre : ["Action Adventure"],
         imgSrc : "styles/assets/covers/dyinglight600x900-170.jpg" ,
@@ -75,7 +75,7 @@ const games = [
         id : 8,
         title : "Grand Theft Auto V",
         alt : "Обложка игры Grand Theft Auto V",
-        rating : "5",
+        rating : 5,
         year : "2013",
         genre : ["Action Adventure"],
         imgSrc : "styles/assets/covers/gta600x900-170.jpg" ,
@@ -85,7 +85,7 @@ const games = [
         id : 9,
         title : "Wolfenstein II: The New Colossus",
         alt : "Обложка игры Wolfenstein II: The New Colossus",
-        rating : "4.5",
+        rating : 4.5,
         year : "2017",
         genre : ["Action FPS"],
         imgSrc : "styles/assets/covers/wolfenstain600x900-170.jpg" ,
@@ -95,9 +95,9 @@ const games = [
         id : 10,
         title : "The Elder Scrolls V: Skyrim",
         alt : "Обложка игры The Elder Scrolls V: Skyrim",
-        rating : "5",
+        rating : 5,
         year : "2011",
-        genre : ["Action RGP"],
+        genre : ["Action RPG"],
         imgSrc : "styles/assets/covers/tes600x900-170.jpg" ,
         srcSet : "styles/assets/covers/tes600x900-85.jpg 85w, styles/assets/covers/tes600x900-170.jpg 170w, styles/assets/covers/tes600x900-255.jpg 255w"
     },
@@ -105,7 +105,7 @@ const games = [
         id : 11,
         title : "Red Dead Redemption 2",
         alt : "Обложка игры Red Dead Redemption 2",
-        rating : "4",
+        rating : 4,
         year : "2019",
         genre : ["Action Adventure"],
         imgSrc : "styles/assets/covers/rdr600x900-170.jpg" ,
@@ -115,9 +115,9 @@ const games = [
         id : 12,
         title : "Assassin’s Creed Odyssey",
         alt : "Обложка игры Assassin’s Creed Odyssey",
-        rating : "4.5",
+        rating : 4.5,
         year : "2018",
-        genre : ["Action RGP"],
+        genre : ["Action RPG"],
         imgSrc : "styles/assets/covers/odesey600x900-170.jpg" ,
         srcSet : srcset="styles/assets/covers/odesey600x900-85.jpg 85w, styles/assets/covers/odesey600x900-170.jpg 170w, styles/assets/covers/odesey600x900-255.jpg 255w" 
     },
@@ -125,13 +125,22 @@ const games = [
         id : 13,
         title : "Elden Ring",
         alt : "Обложка игры Elden Ring",
-        rating : "4",
+        rating : 4,
         year : "2022",
-        genre : ["Action RGP"],
+        genre : ["Action RPG"],
         imgSrc : "styles/assets/covers/eldenring600x900-170.jpg" ,
-        srcSet : "styles/assets/covers/eldenring600x900-85.jpg 85w, styles/assets/covers/eldenring600x900-170.jpg 170w, styles/assets/covers/eldenring600x900-255.jpg 255w"
+    },
+    {
+        id : 14,
+        title : "Sam &amp; Max: &lt;Hit &quot;the&quot; Road&gt;",
+        alt : "Обложка игры Sam &amp; Max: &lt;Hit &quot;the&quot; Road&gt;",
+        rating : 4,
+        year : "2022",
+        genre : ["Graphic Adventure"],
+        imgSrc : "styles/assets/covers/eldenring600x900-170.jpg" ,
     },
 ];
+
 
 const titles = [];
 for (const game of games) {
@@ -140,10 +149,33 @@ for (const game of games) {
 const result = titles.join(', ');
 console.log(titles);
 
-
 const titles2 = games.map(function(game2) {
     return game2.title;
 });
 const result2 = titles2.join(', ')
 console.log(titles2);
 
+
+const smallImg = games[12].imgSrc.replace('170.jpg', '85.jpg')
+const largeImg = games[12].imgSrc.replace('170.jpg', '255.jpg')
+const srcSet = `${smallImg} 85w, ${games[12].imgSrc} 170w, ${largeImg} 255w`
+
+const card = `<article class="game-card game-card--catalog">
+                    <div class="game-card__cover">
+                        <img 
+                            src="${games[0].imgSrc}"
+                            srcset="${srcSet}"       
+                            sizes="85px"                     
+                            alt="${games[0].alt}" class="game-card__image"
+                            width="600"
+                            height="900">
+                        <span class="game-card__rating-badge">${games[0].rating.toFixed(1)}</span>
+                    </div>
+                    <div class="game-card__content">
+                        <h3 class="game-card__title">${games[0].title}</h3>
+                        <div class="game-card__meta">
+                            <span class="game-card__year">${games[0].year}</span>
+                           <span class="game-card__genre">${games[0].genre[0]}</span>
+                        </div>
+                    </div>
+                </article>`
