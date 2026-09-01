@@ -123,9 +123,9 @@ const games = [
         title : "Sam &amp; Max: &lt;Hit &quot;the&quot; Road&gt;",
         alt : "Обложка игры Sam &amp; Max: &lt;Hit &quot;the&quot; Road&gt;",
         rating : 4,
-        year : "2022",
+        year : "1993",
         genre : ["Graphic Adventure"],
-        imgSrc : "styles/assets/covers/eldenring600x900-170.jpg" ,
+        imgSrc : "styles/assets/covers/SamMax-255.jpg" ,
     },
 ];
 
