@@ -9,7 +9,6 @@ const games = [
         year : "2020",
         genre : ["RPG"],
         imgSrc : "styles/assets/covers/cyberpunk600x900-170.jpg" ,
-        srcSet : "styles/assets/covers/cyberpunk600x900-85.jpg 85w , styles/assets/covers/cyberpunk600x900-170.jpg 170w, styles/assets/covers/cyberpunk600x900-255.jpg 255w"
     },
     {
         id : 2,
@@ -19,7 +18,6 @@ const games = [
         year : "2015",
         genre : ["Action RPG"],
         imgSrc : "styles/assets/covers/witcher600x900-170.jpg" ,
-        srcSet : "styles/assets/covers/witcher600x900-85.jpg 85w, styles/assets/covers/witcher600x900-170.jpg 170w, styles/assets/covers/witcher600x900-255.jpg 255w"
     },
     {
         id : 3,
@@ -29,7 +27,6 @@ const games = [
         year : "2015",
         genre : ["Action"],
         imgSrc : "styles/assets/covers/hotlinemiami2600x900-170.jpg" ,
-        srcSet : "styles/assets/covers/hotlinemiami2600x900-85.jpg 85w, styles/assets/covers/hotlinemiami2600x900-170.jpg 170w, styles/assets/covers/hotlinemiami2600x900-255.jpg 255w"
     },
     {
         id : 4,
@@ -39,7 +36,6 @@ const games = [
         year : "2013",
         genre : ["Action Adventure"],
         imgSrc : "styles/assets/covers/blackflag600x900-170.jpg" ,
-        srcSet : "styles/assets/covers/blackflag600x900-85.jpg 85w, styles/assets/covers/blackflag600x900-170.jpg 170w, styles/assets/covers/blackflag600x900-255.jpg 255w"  
     },
     {
         id : 5,
@@ -49,7 +45,6 @@ const games = [
         year : "2012",
         genre : ["Action RPG"],
         imgSrc : "styles/assets/covers/borderlands-170.jpg" ,
-        srcSet : "styles/assets/covers/borderlands-85.jpg 85w, styles/assets/covers/borderlands-170.jpg 170w, styles/assets/covers/borderlands-255.jpg 255w" 
     },
     {
         id : 6,
@@ -59,7 +54,6 @@ const games = [
         year : "2015",
         genre : ["Action RPG"],
         imgSrc : "styles/assets/covers/fallout600x900-170.jpg" ,
-        srcSet : "styles/assets/covers/fallout600x900-85.jpg 85w, styles/assets/covers/fallout600x900-170.jpg 170w, styles/assets/covers/fallout600x900-255.jpg 255w"
     },
     {
         id : 7,
@@ -69,7 +63,6 @@ const games = [
         year : "2015",
         genre : ["Action Adventure"],
         imgSrc : "styles/assets/covers/dyinglight600x900-170.jpg" ,
-        srcSet : "styles/assets/covers/dyinglight600x900-85.jpg 85w, styles/assets/covers/dyinglight600x900-170.jpg 170w, styles/assets/covers/dyinglight600x900-255.jpg 255w" 
     },
     {
         id : 8,
@@ -79,7 +72,6 @@ const games = [
         year : "2013",
         genre : ["Action Adventure"],
         imgSrc : "styles/assets/covers/gta600x900-170.jpg" ,
-        srcSet : "styles/assets/covers/gta600x900-85.jpg 85w, styles/assets/covers/gta600x900-170.jpg 170w, styles/assets/covers/gta600x900-255.jpg 255w"
     },
     {
         id : 9,
@@ -89,7 +81,6 @@ const games = [
         year : "2017",
         genre : ["Action FPS"],
         imgSrc : "styles/assets/covers/wolfenstain600x900-170.jpg" ,
-        srcSet : "styles/assets/covers/wolfenstain600x900-85.jpg 85w, styles/assets/covers/wolfenstain600x900-170.jpg 170w, styles/assets/covers/wolfenstain600x900-255.jpg 255w"
     },
     {
         id : 10,
@@ -99,7 +90,6 @@ const games = [
         year : "2011",
         genre : ["Action RPG"],
         imgSrc : "styles/assets/covers/tes600x900-170.jpg" ,
-        srcSet : "styles/assets/covers/tes600x900-85.jpg 85w, styles/assets/covers/tes600x900-170.jpg 170w, styles/assets/covers/tes600x900-255.jpg 255w"
     },
     {
         id : 11,
@@ -109,7 +99,6 @@ const games = [
         year : "2019",
         genre : ["Action Adventure"],
         imgSrc : "styles/assets/covers/rdr600x900-170.jpg" ,
-        srcSet : "styles/assets/covers/rdr600x900-85.jpg 85w, styles/assets/covers/rdr600x900-170.jpg 170w, styles/assets/covers/rdr600x900-255.jpg 255w" 
     },
     {
         id : 12,
@@ -119,7 +108,6 @@ const games = [
         year : "2018",
         genre : ["Action RPG"],
         imgSrc : "styles/assets/covers/odesey600x900-170.jpg" ,
-        srcSet : srcset="styles/assets/covers/odesey600x900-85.jpg 85w, styles/assets/covers/odesey600x900-170.jpg 170w, styles/assets/covers/odesey600x900-255.jpg 255w" 
     },
     {
         id : 13,
@@ -155,27 +143,3 @@ const titles2 = games.map(function(game2) {
 const result2 = titles2.join(', ')
 console.log(titles2);
 
-
-const smallImg = games[12].imgSrc.replace('170.jpg', '85.jpg')
-const largeImg = games[12].imgSrc.replace('170.jpg', '255.jpg')
-const srcSet = `${smallImg} 85w, ${games[12].imgSrc} 170w, ${largeImg} 255w`
-
-const card = `<article class="game-card game-card--catalog">
-                    <div class="game-card__cover">
-                        <img 
-                            src="${games[0].imgSrc}"
-                            srcset="${srcSet}"       
-                            sizes="85px"                     
-                            alt="${games[0].alt}" class="game-card__image"
-                            width="600"
-                            height="900">
-                        <span class="game-card__rating-badge">${games[0].rating.toFixed(1)}</span>
-                    </div>
-                    <div class="game-card__content">
-                        <h3 class="game-card__title">${games[0].title}</h3>
-                        <div class="game-card__meta">
-                            <span class="game-card__year">${games[0].year}</span>
-                           <span class="game-card__genre">${games[0].genre[0]}</span>
-                        </div>
-                    </div>
-                </article>`
