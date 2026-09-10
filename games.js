@@ -138,7 +138,7 @@ const games = [
         rating : 4,
         year : "1993-02-11",
         genre : ["Graphic Adventure"],
-        background_image : "styles/assets/covers/SamMax-255.jpg" ,
+        background_image : "styles/assets/covers/SamMax-170.jpg" ,
         platforms : ["PC"],
 
     },
