@@ -24,28 +24,28 @@ function escapeHTML(text) {
 
 function renderCard(game) {
 
-    const smallImg = game.imgSrc.replace('170.jpg', '85.jpg')
-    const largeImg = game.imgSrc.replace('170.jpg', '255.jpg')
+    const smallImg = game.background_image.replace('170.jpg', '85.jpg')
+    const largeImg = game.background_image.replace('170.jpg', '255.jpg')
 
-    const srcSet = `${smallImg} 85w, ${game.imgSrc} 170w, ${largeImg} 255w`
+    const srcSet = `${smallImg} 85w, ${game.background_image} 170w, ${largeImg} 255w`
 
     return `
                 <article class="game-card game-card--catalog">
                     <div class="game-card__cover">
                         <img 
-                            src="${game.imgSrc}"
+                            src="${game.background_image}"
                             srcset="${srcSet}"       
                             sizes="85px"                     
-                            alt="${game.alt}" class="game-card__image"
+                            alt="${escapeHTML(game.alt)}" class="game-card__image"
                             width="600"
                             height="900">
-                        <span class="game-card__rating-badge">${game.rating.toFixed(1)}</span>
+                        <span class="game-card__rating-badge">${escapeHTML(game.rating.toFixed(1))}</span>
                     </div>
                     <div class="game-card__content">
-                        <h3 class="game-card__title">${game.title}</h3>
+                        <h3 class="game-card__title">${escapeHTML(game.title)}</h3>
                         <div class="game-card__meta">
-                            <span class="game-card__year">${game.year}</span>
-                           <span class="game-card__genre">${game.genre[0]}</span>
+                            <span class="game-card__year">${escapeHTML(formatYear(game.year))}</span>
+                           <span class="game-card__genre">${escapeHTML(game.genre[0])}</span>
                         </div>
                     </div>
                 </article>
