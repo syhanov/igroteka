@@ -55,7 +55,9 @@ function renderCard(game) {
 //плохо понял функции, поэтому оставил этот вариант, потому что он для меня более понятен.
 function renderCatalog(games) {
     if (games.length === 0) {
-       '<p>Пока пусто</p>';
+        return `
+           <p class="games__grid__empty">Пока пусто</p>
+        `;
     }
 
     let html = '';
