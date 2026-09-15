@@ -39,7 +39,7 @@ function renderCard(game) {
                             alt="${escapeHTML(game.alt)}" class="game-card__image"
                             width="600"
                             height="900">
-                        <span class="game-card__rating-badge">${escapeHTML(game.rating.toFixed(1))}</span>
+                        <span class="game-card__rating-badge">${escapeHTML(formatRating(game.rating))}</span>
                     </div>
                     <div class="game-card__content">
                         <h3 class="game-card__title">${escapeHTML(game.title)}</h3>

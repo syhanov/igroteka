@@ -58,7 +58,7 @@ const games = [
         rating : 3,
         year : "2015-01-27",
         genre : ["Action RPG"],
-        background_image : `"styles/assets/covers/fallout600x900-170.jpgonerror="alert(1)""` ,
+        background_image : "styles/assets/covers/fallout600x900-170.jpg" ,
         platforms : ["PC"],
     },
     {
