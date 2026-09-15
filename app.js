@@ -36,16 +36,16 @@ function renderCard(game) {
                             src="${escapeHTML(game.background_image)}"
                             srcset="${srcSet}"       
                             sizes="85px"                     
-                            alt="${escapeHTML(game.alt)}" class="game-card__image"
+                            alt="Обложка игры ${escapeHTML(game.name)}" class="game-card__image"
                             width="600"
                             height="900">
                         <span class="game-card__rating-badge">${escapeHTML(formatRating(game.rating))}</span>
                     </div>
                     <div class="game-card__content">
-                        <h3 class="game-card__title">${escapeHTML(game.title)}</h3>
+                        <h3 class="game-card__title">${escapeHTML(game.name)}</h3>
                         <div class="game-card__meta">
-                            <span class="game-card__year">${escapeHTML(formatYear(game.year))}</span>
-                           <span class="game-card__genre">${escapeHTML(game.genre[0])}</span>
+                            <span class="game-card__released">${escapeHTML(formatYear(game.released))}</span>
+                           <span class="game-card__genre">${escapeHTML(game.genres[0])}</span>
                         </div>
                     </div>
                 </article>
