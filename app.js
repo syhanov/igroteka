@@ -33,7 +33,7 @@ function renderCard(game) {
                 <article class="game-card game-card--catalog">
                     <div class="game-card__cover">
                         <img 
-                            src="${game.background_image}"
+                            src="${escapeHTML(game.background_image)}"
                             srcset="${srcSet}"       
                             sizes="85px"                     
                             alt="${escapeHTML(game.alt)}" class="game-card__image"
