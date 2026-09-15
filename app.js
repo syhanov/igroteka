@@ -62,11 +62,11 @@ function renderCatalog(games) {
 
     let html = '';
 
-    for (let i = 0; i < games.length; i++) {
-        html += renderCard(games[i]);
+    for (let i = 0; i < GAMES.length; i++) {
+        html += renderCard(GAMES[i]);
     }
 
     return html;
 }
 
-catalog.innerHTML = (renderCatalog(games));
+catalog.innerHTML = (renderCatalog(GAMES));

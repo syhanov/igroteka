@@ -1,6 +1,6 @@
-//console.log(games[99]) говорит о том что 99 ячейка масива пустая
-//console.log(games[99].name) выдает ошибку которая говорит что невозможно обратиться к name внутри пустой ячейки
-const games = [
+//console.log(GAMES[99]) говорит о том что 99 ячейка масива пустая
+//console.log(GAMES[99].name) выдает ошибку которая говорит что невозможно обратиться к name внутри пустой ячейки
+const GAMES = [
     {
         id : 1,
         name : "Cyberpunk 2077",
@@ -133,13 +133,13 @@ const games = [
 
 
 const names = [];
-for (const game of games) {
+for (const game of GAMES) {
     names.push(game.name);
 }
 const result = names.join(', ');
 console.log(names);
 
-const names2 = games.map(function(game2) {
+const names2 = GAMES.map(function(game2) {
     return game2.name;
 });
 const result2 = names2.join(', ')
