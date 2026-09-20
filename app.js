@@ -34,11 +34,7 @@ function renderCard(game) {
                     <div class="game-card__cover">
                         <img 
                             src="${escapeHTML(game.background_image)}"
-                            srcset="${srcSet}"       
-                            sizes="85px"                     
-                            alt="Обложка игры ${escapeHTML(game.name)}" class="game-card__image"
-                            width="600"
-                            height="900">
+                            alt="Обложка игры ${escapeHTML(game.name)}" class="game-card__image">
                         <span class="game-card__rating-badge">${escapeHTML(formatRating(game.rating))}</span>
                     </div>
                     <div class="game-card__content">
