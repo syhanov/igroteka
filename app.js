@@ -30,7 +30,7 @@ function renderCard(game) {
     const srcSet = `${smallImg} 85w, ${game.background_image} 170w, ${largeImg} 255w`
 
     return `
-                <article class="game-card game-card--catalog">
+                <article class="game-card game-card--catalog" data-id="${game.id}">
                     <div class="game-card__cover">
                         <img 
                             src="${escapeHTML(game.background_image)}"
