@@ -63,6 +63,7 @@ function renderCatalog(games) {
     let html = '';
 
     for (let i = 0; i < GAMES.length; i++) {
+        console.log(GAMES[i]);
         html += renderCard(GAMES[i]);
     }
 
