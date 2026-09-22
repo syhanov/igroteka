@@ -59,7 +59,6 @@ function renderCatalog(games) {
     let html = '';
 
     for (let i = 0; i < games.length; i++) {
-        console.log(games[i]);
         html += renderCard(games[i]);
     }
 
@@ -67,3 +66,46 @@ function renderCatalog(games) {
 }
 
 catalog.innerHTML = (renderCatalog(GAMES));
+
+
+
+const modal = document.querySelector('.modal__content')
+const overlay = document.querySelector('.modal-overlay')
+const overlayCloseButton = document.querySelector('.modal__close')
+
+catalog.addEventListener('click', function(event){
+    console.log('Клик')
+    const card = event.target.closest('.game-card')
+    if(!card){
+        return
+    }
+    const id = card.dataset.id
+    const game = GAMES.find(function(curentgame){
+        return curentgame.id === Number(id)
+    })
+    console.log(game)
+
+    const modalgame =  `
+                <article class="game-card game-card--featured" data-id="${game.id}">
+                    <div class="game-card__cover">
+                        <img 
+                            src="${escapeHTML(game.background_image)}"
+                            alt="Обложка игры ${escapeHTML(game.name)}" class="game-card__image">
+                        <span class="game-card__rating-badge">${escapeHTML(formatRating(game.rating))}</span>
+                    </div>
+                    <div class="game-card__content">
+                        <h3 class="game-card__title">${escapeHTML(game.name)}</h3>
+                        <div class="game-card__meta">
+                            <span class="game-card__released">${escapeHTML(formatYear(game.released))}</span>
+                           <span class="game-card__genre">${escapeHTML(game.genres[0])}</span>
+                        </div>
+                    </div>
+                </article>
+            `;
+    modal.innerHTML = modalgame;
+    overlay.classList.add('is-open')   
+    
+    overlayCloseButton.addEventListener('click', function(){
+        overlay.classList.remove('is-open')
+    })
+});
