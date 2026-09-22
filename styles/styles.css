@@ -550,8 +550,6 @@ main {
     font-weight: bold;
     color: #b9cacb;
     text-transform: uppercase;
-    margin-bottom: 3rem;
-    margin-left: 1.5rem;
 }
 .games__grid {
     display: grid;
@@ -577,6 +575,15 @@ main {
     gap: 0.5rem;
     padding: 0.625rem 10px;
     color: #b9cacb;
+}
+.games__filter {
+    display: flex;
+    justify-content: space-between;
+    padding: 16px;
+}
+.filter-form__label {
+    font-size: 14px;
+    color: #E5E2E1;
 }
 .modal-overlay {
     display: none;

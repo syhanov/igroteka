@@ -109,19 +109,6 @@
                     <h2 id="reviews" class="catalog__title">Отзывы</h2>
                     <h3 class="catalog__subtitle">выбор нашей редакции</h3>
                 </div>
-                <div class="catalog__filter">
-                    <form action="search" class="filter-form">
-                        <input type="search" placeholder="Поиск игры..." required class="filter-form__search">
-                        <select name="Жанр" class="filter-form__selector" id="zhanr">
-                            <option value="all" class="filter-form__option">Жанр</option>
-                            <option value="rpg" class="filter-form__option">RPG</option>
-                        </select>
-                        <select name="платформа" class="filter-form__selector" id="platforma">
-                            <option value="all" class="filter-form__option">Платформа</option>
-                            <option value="rpg" class="filter-form__option">ПК</option>
-                        </select>
-                    </form>
-                </div>
             </div>
             <div class="catalog__featured-games">
                 <article class="game-card game-card--featured">
@@ -233,7 +220,23 @@
             </div>
         </section>
         <section class="games" id="allgames">
-            <h2 class="games__title">Все игры</h2>
+            <div class="games__filter">
+                <h2 class="games__title">Все игры</h2>
+                    <div class="catalog__filter">
+                        <form class="filter-form">
+                            <label for="game-search" class="filter-form__label">Поиск игры</label>
+                            <input id="game-search" type="search" placeholder="Поиск игры..." class="filter-form__search">
+                            <select name="Жанр" class="filter-form__selector" id="zhanr">
+                                <option value="all" class="filter-form__option">Жанр</option>
+                                <option value="rpg" class="filter-form__option">RPG</option>
+                            </select>
+                            <select name="платформа" class="filter-form__selector" id="platforma">
+                                <option value="all" class="filter-form__option">Платформа</option>
+                                <option value="rpg" class="filter-form__option">ПК</option>
+                            </select>
+                        </form>
+                    </div>
+            </div>
             <div class="games__grid">
                 <noscript class="games__grid__noscript">Каталог не будет отображаться, потому что JavaScript отключён.</noscript>
             </div>
