@@ -75,6 +75,7 @@ const overlayCloseButton = document.querySelector('.modal__close')
 
 catalog.addEventListener('click', function(event){
     console.log('Клик')
+
     const card = event.target.closest('.game-card')
     if(!card){
         return
@@ -108,4 +109,14 @@ catalog.addEventListener('click', function(event){
     overlayCloseButton.addEventListener('click', function(){
         overlay.classList.remove('is-open')
     })
+    overlay.addEventListener('click', function(event){
+        if(event.target === overlay){
+            overlay.classList.remove('is-open')
+        }
+    })
 });
+document.addEventListener('keydown', function(event){
+    if(event.key === 'Escape' && overlay.classList.contains('is-open')){
+        overlay.classList.remove('is-open')
+    }
+})
