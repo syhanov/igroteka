@@ -74,7 +74,6 @@ const overlay = document.querySelector('.modal-overlay')
 const overlayCloseButton = document.querySelector('.modal__close')
 
 catalog.addEventListener('click', function(event){
-    console.log('Клик')
 
     const card = event.target.closest('.game-card')
     if(!card){
@@ -118,5 +117,25 @@ catalog.addEventListener('click', function(event){
 document.addEventListener('keydown', function(event){
     if(event.key === 'Escape' && overlay.classList.contains('is-open')){
         overlay.classList.remove('is-open')
+        return
     }
+    else if(event.key === 'Escape'){
+        input.value = ''
+        return
+    }
+})
+
+
+const input = document.querySelector('.filter-form__search');
+const form = document.querySelector('.filter-form')
+
+input.addEventListener('input', function(){
+    console.log('input')
+})
+input.addEventListener('change', function(){
+    console.log('change')
+})
+
+form.addEventListener('submit', function(event){
+    event.preventDefault()
 })
