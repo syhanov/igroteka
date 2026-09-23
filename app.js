@@ -52,7 +52,7 @@ function renderCard(game) {
 function renderCatalog(games) {
     if (games.length === 0) {
         return `
-           <p class="games__grid__empty">Пока пусто</p>
+           <p class="games__grid__empty">По запросу ${escapeHTML(input.value)} ничего не найдено</p>
         `;
     }
 
@@ -125,10 +125,12 @@ document.addEventListener('keydown', function(event){
     }
 })
 
-const cards = document.querySelectorAll('.game-card')
-const debouncedSearch = debounce( search , 300)
 const input = document.querySelector('.filter-form__search');
 const form = document.querySelector('.filter-form')
+const cards = document.querySelectorAll('.game-card')
+const debouncedSearch = debounce( search , 300)
+const gamesCount = document.querySelector('.games__count')
+
 
 input.addEventListener('input', function(){
     debouncedSearch()
@@ -152,4 +154,5 @@ function search() {
         return game.name.toLowerCase().includes(query)
     })
     catalog.innerHTML = renderCatalog(filteredGames)
+    gamesCount.textContent = filteredGames.length
 }

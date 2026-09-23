@@ -550,6 +550,12 @@ main {
     font-weight: bold;
     color: #b9cacb;
     text-transform: uppercase;
+    margin-top: 0;
+}
+.games__count {
+    margin: 0;
+    color: #B9CACB;
+    font-size: 1rem;
 }
 .games__grid {
     display: grid;
