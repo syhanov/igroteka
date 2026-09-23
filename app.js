@@ -133,7 +133,9 @@ const form = document.querySelector('.filter-form')
 input.addEventListener('input', function(){
     debouncedSearch()
 })
-
+form.addEventListener('submit', function(event){
+    event.preventDefault()
+})
 function debounce(fn, ms) {
     let timer
     return function(){
@@ -146,12 +148,8 @@ function debounce(fn, ms) {
 
 function search() {
     let query = input.value.toLowerCase().trim()
-    for(let i = 0; i<cards.length; i++){
-    if(cards[i].textContent.toLowerCase().includes(query)){
-        cards[i].style.display = ''
-    }
-    else{
-        cards[i].style.display = 'none'
-    }
-}
+    const filteredGames = GAMES.filter(function(game){
+        return game.name.toLowerCase().includes(query)
+    })
+    catalog.innerHTML = renderCatalog(filteredGames)
 }
