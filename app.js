@@ -125,31 +125,14 @@ document.addEventListener('keydown', function(event){
     }
 })
 
-
+const cards = document.querySelectorAll('.game-card')
+const debouncedSearch = debounce( search , 300)
 const input = document.querySelector('.filter-form__search');
 const form = document.querySelector('.filter-form')
 
 input.addEventListener('input', function(){
-    console.log('input')
+    debouncedSearch()
 })
-input.addEventListener('change', function(){
-    console.log('change')
-})
-
-form.addEventListener('submit', function(event){
-    event.preventDefault()
-})
-
-function makeCounter(){
-    let count = 0
-    return function(){
-        count += 1
-        return count
-    }
-}
-const counter1 = makeCounter()
-const counter2 = makeCounter()
-
 
 function debounce(fn, ms) {
     let timer
@@ -161,9 +144,14 @@ function debounce(fn, ms) {
     }
 }
 
-let calls = 0;
-function test() {
-    calls += 1
-    console.log('fn вызвана')
+function search() {
+    let query = input.value.toLowerCase().trim()
+    for(let i = 0; i<cards.length; i++){
+    if(cards[i].textContent.toLowerCase().includes(query)){
+        cards[i].style.display = ''
+    }
+    else{
+        cards[i].style.display = 'none'
+    }
 }
-const debouncedTest = debounce(test, 300)
+}
