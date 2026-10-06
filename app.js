@@ -2,32 +2,60 @@ const catalog = document.querySelector('.games__grid')
 
 // Ответственность вызывающего кода: в try написано какого формата строку ожидает функция.
 function formatYear(released) {
-    const pieces = released.split('-');
-    return pieces[0];
+    if(!released){
+        return '';
+    }
+    else {
+        const pieces = released.split('-');
+        return pieces[0];
+    }
 }
 
 function formatRating(rating) {
-    const number = rating.toFixed(1);
-    return number;
+    if(rating === undefined || rating === null){
+        return '';
+    }
+    else {
+        const number = rating.toFixed(1);
+        return number;
+    }
 }
 
 function escapeHTML(text) {
-    let result = text
-        .replaceAll('&', '&amp;')
-        .replaceAll('<', '&lt;')
-        .replaceAll('>', '&gt;')
-        .replaceAll('"', '&quot;');
+    if(text === undefined || text === null){
+        return '';
+    }
+    else {
+        let result = text
+            .replaceAll('&', '&amp;')
+            .replaceAll('<', '&lt;')
+            .replaceAll('>', '&gt;')
+            .replaceAll('"', '&quot;');
 
-    return result;
+        return result;
+    }
 }
 
+function getGenres(genre) {
+    if(genre === undefined || genre === null) {
+        return '';
+    }
+    else{
+        let genres = genre.join(' • ');
+        return genres;
+    }
+}
+function getPlatforms(platform) {
+    if(platform === undefined || platform === null) {
+        return '';
+    }
+    else{
+        let platforms = platform.join(' • ');
+        return platforms;
+    }
+}
 
 function renderCard(game) {
-
-    const smallImg = game.background_image.replace('170.jpg', '85.jpg')
-    const largeImg = game.background_image.replace('170.jpg', '255.jpg')
-
-    const srcSet = `${smallImg} 85w, ${game.background_image} 170w, ${largeImg} 255w`
 
     return `
                 <article class="game-card game-card--catalog" data-id="${game.id}">
@@ -41,14 +69,16 @@ function renderCard(game) {
                         <h3 class="game-card__title">${escapeHTML(game.name)}</h3>
                         <div class="game-card__meta">
                             <span class="game-card__released">${escapeHTML(formatYear(game.released))}</span>
-                           <span class="game-card__genre">${escapeHTML(game.genres[0])}</span>
+                            <span class="game-card__genre">${escapeHTML(getGenres(game.genres))}</span>
+                            <span class="game-card__platform">${escapeHTML(getPlatforms(game.platforms))}</span>
                         </div>
                     </div>
                 </article>
             `;
 };
 
-//плохо понял функции, поэтому оставил этот вариант, потому что он для меня более понятен.
+
+
 function renderCatalog(games) {
     if (games.length === 0) {
         return `
@@ -96,8 +126,9 @@ catalog.addEventListener('click', function(event){
                     <div class="game-card__content">
                         <h3 class="game-card__title">${escapeHTML(game.name)}</h3>
                         <div class="game-card__meta">
-                            <span class="game-card__released">${escapeHTML(formatYear(game.released))}</span>
-                           <span class="game-card__genre">${escapeHTML(game.genres[0])}</span>
+                            <span class="game-card__released">${escapeHTML(game.released)}</span>
+                            <span class="game-card__genre">${escapeHTML(getGenres(game.genres))}</span>
+                            <span class="game-card__platform">${escapeHTML(getPlatforms(game.platforms))}</span>
                         </div>
                     </div>
                 </article>

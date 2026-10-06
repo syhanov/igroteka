@@ -1,4 +1,3 @@
-//я не нашел поля с null, но исправил пустой genres потому что он вызывал ошибку рендера каталога
 const GAMES = [
   {
     "id": 3498,
@@ -11073,9 +11072,7 @@ const GAMES = [
     "released": "2016-04-05",
     "background_image": "https://media.rawg.io/media/screenshots/d33/d331d95adf10b44ee3678129020bc31f.jpg",
     "rating": 3.01,
-    "genres": [
-        "VR"
-    ],
+    "genres": [],
     "platforms": [
       "PC"
     ]

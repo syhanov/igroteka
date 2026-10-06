@@ -385,6 +385,8 @@ main {
 .game-card {
     display: flex;
     gap: 1rem;
+    overflow: hidden;
+    min-width: 0;
     background-color: #131315cc;
     border-radius: 10px;
     border: 1px solid #ffffff1a;
@@ -450,11 +452,6 @@ main {
 }
 .game-card--featured .game-card__meta {
     font-size: 1rem;
-}
-.game-card__genre::before {
-    content: "•";
-    margin-right: 3px;
-    color: #B9CACB;
 }
 .game-card--featured .game-card__description {
     margin: 1rem 0;
@@ -526,6 +523,7 @@ main {
     display: flex;
     justify-content: center;
     flex-direction: column;
+    min-width: 0;
 }
 .game-card__title{
     color: #E5E2E1;
@@ -535,10 +533,24 @@ main {
 }
 .game-card__meta {
     display: flex;
+    flex-direction: column;
     flex-wrap: wrap;
+    width: 100%;
+    min-width: 0;
     gap: 0.3125rem;
     color: #b9cacb;
-    font-size: 0.875rem;
+    font-size: 0.8125rem;
+}
+.game-card__meta > * {
+    min-width: 0;
+    width: 100%;
+}
+.game-card__platform {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    min-width: 0;
+    font-size: 0.6875rem;
 }
 .games {
     background-color: #13131599;
@@ -739,6 +751,7 @@ main {
         .catalog__filter {
         padding-left: 24px;
     }
+}
 /*Этот брейкпоинт специально подобран под адаптацию навигации и футера. Раньше я пробовал его сдвинуть, но при этом пункты меню сильно сжимались и буквально «налипали» друг на друга — из‑за этого страдала читаемость и удобство клика. Поэтому оставил текущее значение: оно даёт элементам достаточно пространства и сохраняет структуру.*/
 @media (min-width:927px) {
     main {
@@ -803,7 +816,10 @@ main {
         font-size: 1rem;
     }
     .game-card__meta {
-        font-size: 1rem;
+        font-size: 0.9375rem;
+    }
+    .game-card__platform {
+        font-size: 0.8125rem;
     }
     .game-card__title {
         font-size: 1.175rem;
