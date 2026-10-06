@@ -524,6 +524,7 @@ main {
     justify-content: center;
     flex-direction: column;
     min-width: 0;
+    gap: 0.3125rem;
 }
 .game-card__title{
     color: #E5E2E1;
@@ -537,7 +538,7 @@ main {
     flex-wrap: wrap;
     width: 100%;
     min-width: 0;
-    gap: 0.3125rem;
+    gap: 0.1875rem;
     color: #b9cacb;
     font-size: 0.8125rem;
 }
