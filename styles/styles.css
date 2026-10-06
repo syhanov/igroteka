@@ -335,7 +335,7 @@ main {
     text-transform: uppercase;
 }
 .catalog__filter {
-    padding-left: 24px;
+    padding-left: 0;
 }
 .filter-form {
     display: grid;
@@ -361,7 +361,7 @@ main {
     border-radius: 2px;
 }
 .filter-form__search {
-    padding: 0.625rem 17px 0.625rem 41px;
+    padding: 0.625rem 16px;
     grid-column: 1/3;
 }
 .filter-form__selector {
@@ -585,7 +585,12 @@ main {
 .games__filter {
     display: flex;
     justify-content: space-between;
+    flex-direction: column;
     padding: 16px;
+}
+.games__info {
+    display: flex;
+    justify-content: space-between;
 }
 .filter-form__label {
     font-size: 14px;
@@ -723,7 +728,17 @@ main {
         left: 32px;
         bottom: 32px;
     }
-}
+    .games__info {
+        display: block;
+    }
+    .games__filter {
+        display: flex;
+        justify-content: space-between;
+        flex-direction: row;
+    }
+        .catalog__filter {
+        padding-left: 24px;
+    }
 /*Этот брейкпоинт специально подобран под адаптацию навигации и футера. Раньше я пробовал его сдвинуть, но при этом пункты меню сильно сжимались и буквально «налипали» друг на друга — из‑за этого страдала читаемость и удобство клика. Поэтому оставил текущее значение: оно даёт элементам достаточно пространства и сохраняет структуру.*/
 @media (min-width:927px) {
     main {
