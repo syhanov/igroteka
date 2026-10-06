@@ -97,8 +97,6 @@ function renderCatalog(games) {
 
 catalog.innerHTML = (renderCatalog(GAMES));
 
-
-
 const modal = document.querySelector('.modal__content')
 const overlay = document.querySelector('.modal-overlay')
 const overlayCloseButton = document.querySelector('.modal__close')
@@ -187,3 +185,8 @@ function search() {
     catalog.innerHTML = renderCatalog(filteredGames)
     gamesCount.textContent = filteredGames.length
 }
+function updateGamesCount(games) {
+    gamesCount.textContent = games.length;
+}
+updateGamesCount(GAMES);
+
