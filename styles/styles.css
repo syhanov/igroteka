@@ -405,9 +405,11 @@ main {
     width: 100%;
     min-height: 0;
     object-fit: cover;
+    display: block;
 }
 .game-card--featured .game-card__cover {
     aspect-ratio: 16/9;
+    height: auto;
 }
 .game-card--featured .game-card__image {
     display: block;
@@ -511,7 +513,8 @@ main {
 .game-card__cover {
     position: relative;
     flex-shrink: 0;
-    aspect-ratio: 3/4;
+    aspect-ratio: 85 / 114;
+    height: 114px;
 }
 .game-card__rating-badge {
     top: 0;
