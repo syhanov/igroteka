@@ -713,8 +713,28 @@ main {
     color: #b9cacb;
     font-size: 0.75rem;
 }
+.game-card--modal .game-card__title {
+    font-size: 1.5rem;
+}
+.game-card--modal .game-card__meta {
+    font-size: 0.875rem;
+}
+.game-card--modal .game-card__platform {
+    white-space: wrap;
+    min-width: 0;
+    font-size: 0.6875rem;
+}
+.game-card--modal {
+    gap: 0;
+}
 /*Изначально брейкпоинт был запланирован на 680 px с учётом будущих возможностей. Позже я увеличил его значение  на 40 px, чтобы объединить несколько изменений в одном медиазапросе и избежать создания отдельного брейкпоинта для этого списка. Благодаря этому форма поиска и футер корректно отображаются при увеличенной ширине экрана.*/
 @media (min-width:720px) {
+    .game-card--modal .game-card__meta {
+    font-size: 1rem;
+    }
+    .game-card--modal .game-card__title {
+    font-size: 2rem;
+    }
     .features-list {
         flex-direction: row;
         grid-template-columns: 1fr 1fr;

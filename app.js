@@ -114,7 +114,7 @@ catalog.addEventListener('click', function(event){
     console.log(game)
 
     const modalgame =  `
-                <article class="game-card game-card--featured" data-id="${game.id}">
+                <article class="game-card game-card--featured game-card--modal" data-id="${game.id}">
                     <div class="game-card__cover">
                         <img 
                             src="${escapeHTML(game.background_image)}"
