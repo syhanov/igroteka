@@ -133,23 +133,20 @@ catalog.addEventListener('click', function(event){
             `;
     modal.innerHTML = modalgame;
     overlay.classList.add('is-open')   
-    
-    overlayCloseButton.addEventListener('click', function(){
-        overlay.classList.remove('is-open')
-    })
-    overlay.addEventListener('click', function(event){
-        if(event.target === overlay){
-            overlay.classList.remove('is-open')
-        }
-    })
 });
+
+overlayCloseButton.addEventListener('click', function(){
+    overlay.classList.remove('is-open')
+})
+overlay.addEventListener('click', function(event){
+    if(event.target === overlay){
+        overlay.classList.remove('is-open')
+    }
+})
+
 document.addEventListener('keydown', function(event){
     if(event.key === 'Escape' && overlay.classList.contains('is-open')){
         overlay.classList.remove('is-open')
-        return
-    }
-    else if(event.key === 'Escape'){
-        input.value = ''
         return
     }
 })
@@ -159,6 +156,13 @@ const form = document.querySelector('.filter-form')
 const cards = document.querySelectorAll('.game-card')
 const debouncedSearch = debounce( search , 300)
 const gamesCount = document.querySelector('.games__count')
+
+input.addEventListener('input', function(event){
+        if(event.key === 'Escape'){
+        input.value = ''
+        return
+}
+})
 
 
 input.addEventListener('input', function(){
