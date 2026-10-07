@@ -5,9 +5,7 @@ const GAMES = [
     "released": "2013-09-17",
     "background_image": "https://media.rawg.io/media/games/20a/20aa03a10cda45239fe22d035c0ebe64.jpg",
     "rating": 4.47,
-    "genres": [
-      "Action"
-    ],
+    "genres": [],
     "platforms": [
       "PlayStation 5",
       "Xbox Series S/X",
@@ -24,10 +22,7 @@ const GAMES = [
     "released": "2015-05-18",
     "background_image": "https://media.rawg.io/media/games/618/618c2031a07bbff6b4f611f10b6bcdbc.jpg",
     "rating": 4.64,
-    "genres": [
-      "Action",
-      "RPG"
-    ],
+    "genres": [null],
     "platforms": [
       "PlayStation 5",
       "Xbox Series S/X",
