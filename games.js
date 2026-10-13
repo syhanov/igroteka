@@ -1,3 +1,197 @@
+const GamesTry = [
+  {
+    "id": 4200,
+    "name": "Portal 2",
+    "released": "2011-04-18",
+    "background_image": "https://media.rawg.io/media/games/2ba/2bac0e87cf45e5b508f227d281c9252a.jpg",
+    "rating": 4.57,
+    "genres": [
+      "Shooter",
+      "Puzzle"
+    ],
+    "platforms": [
+      "PlayStation 3",
+      "PC",
+      "Xbox 360",
+      "Linux",
+      "macOS",
+      "Xbox One"
+    ]
+  },
+  {
+    "id": 4291,
+    "name": "Counter-Strike: Global Offensive",
+    "released": "2012-08-21",
+    "background_image": "https://media.rawg.io/media/games/736/73619bd336c894d6941d926bfd563946.jpg",
+    "rating": 3.57,
+    "genres": [
+      "Shooter"
+    ],
+    "platforms": [
+      "PC",
+      "Linux",
+      "Xbox 360",
+      "PlayStation 3"
+    ]
+  },
+  {
+    "id": 13536,
+    "name": "Portal",
+    "released": "2007-10-09",
+    "background_image": "https://media.rawg.io/media/games/7fa/7fa0b586293c5861ee32490e953a4996.jpg",
+    "rating": 4.49,
+    "genres": [
+      "Action",
+      "Puzzle"
+    ],
+    "platforms": [
+      "macOS",
+      "PC",
+      "Android",
+      "PlayStation 3",
+      "Xbox 360",
+      "Linux",
+      "Nintendo Switch"
+    ]
+  },
+  {
+    "id": 5286,
+    "name": "Tomb Raider",
+    "released": "2013-03-05",
+    "background_image": "https://media.rawg.io/media/games/021/021c4e21a1824d2526f925eff6324653.jpg",
+    "rating": 4.06,
+    "genres": [
+      "Action"
+    ],
+    "platforms": [
+      "PlayStation 3",
+      "Xbox 360",
+      "macOS",
+      "PC"
+    ]
+  },
+  {
+    "id": 12020,
+    "name": "Left 4 Dead 2",
+    "released": "2009-11-17",
+    "background_image": "https://media.rawg.io/media/games/d58/d588947d4286e7b5e0e12e1bea7d9844.jpg",
+    "rating": 4.1,
+    "genres": [
+      "Action",
+      "Shooter"
+    ],
+    "platforms": [
+      "Xbox 360",
+      "Linux",
+      "PC",
+      "macOS"
+    ]
+  },
+]
+
+const GamesTryName = GamesTry.map(function(game) {
+  return game.name
+});
+console.log(GamesTryName , Array.isArray(GamesTryName))
+
+const GamesTryForPC = GamesTry.filter(function(game) {
+  return game.platforms.join(', ').includes('PlayStation')
+})
+console.log(GamesTryForPC , Array.isArray(GamesTryForPC))
+
+const GamesTryGetByID = GamesTry.find(function(game) {
+  return game.id === 12020
+})
+console.log(GamesTryGetByID , Array.isArray(GamesTryGetByID))
+
+const GamesTryFlatGenres = GamesTry.flatMap(function(game) {
+  return game.genres
+})
+console.log(GamesTryFlatGenres, Array.isArray(GamesTryFlatGenres))
+
+const GamesTryMapGenres = GamesTry.map(function(game) {
+  return game.genres
+})
+console.log(GamesTryMapGenres, Array.isArray(GamesTryMapGenres))
+
+const GamesTrySome = GamesTry.some(function(game) {
+  return game.platforms.includes('PC')
+})
+console.log(GamesTrySome, Array.isArray(GamesTrySome))
+
+const GamesTryEvery = GamesTry.every(function(game) {
+  return game.platforms.includes('PC')
+})
+console.log(GamesTryEvery, Array.isArray(GamesTryEvery))
+
+const gameCount = GamesTry.reduce(function (accum, game) {
+  if(game.released === '' || game.released === undefined || game.released === null){
+    return accum
+  }
+  return accum + 1
+}, 0)
+console.log(gameCount)
+
+const genreCountsTry = [
+    { genres: ['Action', 'RPG'] },
+    { genres: ['Action'] },
+    { genres: [] }
+  ]
+
+const genreCountsReduce = genreCountsTry.reduce(function(accum,genreCount) {
+  for(let i = 0; i<genreCount.genres.length; i++){
+    const genre = genreCount.genres[i]
+    if(accum[genre] === undefined) {
+      accum[genre] = 0
+    }
+    accum[genre] = accum[genre] + 1
+  }
+  return accum;
+}, {})
+console.log(genreCountsReduce)
+
+
+const genreCounts = {};
+for (let i = 0; i < genreCountsTry.length; i++) {
+    const genres = genreCountsTry[i].genres;
+
+    for (let j = 0; j < genres.length; j++) {
+        const genre = genres[j];
+
+        if (genreCounts[genre] === undefined) {
+            genreCounts[genre] = 0;
+        }
+
+        genreCounts[genre] = genreCounts[genre] + 1;
+    }
+}
+console.log(genreCounts);
+
+const GamesTryReduceVsMap = GamesTry.reduce(function(accum, game) {
+    const name = game.name
+
+    if(accum[name] === undefined){
+      accum[name] = 0
+    }
+    accum[name] = accum[name] + 1 
+  return accum;
+}, {})
+console.log(GamesTryReduceVsMap)
+
+
+
+const GamesTryReduceVsFilter = GamesTry.reduce(function(accum, game) {
+
+    for(let i = 0; i<game.platforms.length; i++){
+      if(game.platforms[i].includes('PlayStation')){
+        accum.push(game)
+        return accum;
+      }
+  }
+    return accum;
+}, [])
+console.log(GamesTryReduceVsFilter)
+
 const GAMES = [
   {
     "id": 3498,
