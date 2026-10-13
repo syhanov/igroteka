@@ -194,3 +194,46 @@ function updateGamesCount(games) {
 }
 updateGamesCount(GAMES);
 
+const GamesGenres = GAMES.flatMap(function(game) {
+    return game.genres;
+}).filter(function(genre) {
+    return genre !== null;
+});
+const UneqieGamesGenres = new Set(GamesGenres)
+const GenresArray = [...UneqieGamesGenres]
+const SortedGenresArray = GenresArray.sort(function(a,b) {
+    return a.localeCompare(b);
+})
+console.log(GamesGenres)
+console.log(SortedGenresArray)
+
+let AllPlatformsArray = GAMES.flatMap(function(game) {
+    return game.platforms
+}).filter(function(platform) {
+    return platform !== null;
+});
+let SortedPlatformsArray = new Set(AllPlatformsArray)
+SortedPlatformsArray = [...SortedPlatformsArray]
+SortedPlatformsArray = SortedPlatformsArray.sort(function(a,b) {
+    return a.localeCompare(b);
+})
+console.log(SortedPlatformsArray)
+console.log(AllPlatformsArray)
+
+const platformsSelect = document.getElementById('platforma')
+const genresSelect = document.getElementById('zhanr')
+
+for(let i = 0; i<SortedPlatformsArray.length; i++){
+    const platformName = document.createElement('option')
+    platformName.value = SortedPlatformsArray[i]
+    platformName.classList.add('filter-form__option')
+    platformName.textContent = SortedPlatformsArray[i]
+    platformsSelect.append(platformName)
+}
+for(let i = 0; i<SortedGenresArray.length; i++){
+    const Genres = document.createElement('option')
+    Genres.value = SortedGenresArray[i]
+    Genres.classList.add('filter-form__option')
+    Genres.textContent = SortedGenresArray[i]
+    genresSelect.append(Genres)
+}

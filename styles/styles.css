@@ -338,9 +338,8 @@ main {
     padding-left: 0;
 }
 .filter-form {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr 1fr;
+    display: flex;
+    flex-direction: column;
     gap: 0.5rem;
 }
 .filter-form__search, 
@@ -362,7 +361,7 @@ main {
 }
 .filter-form__search {
     padding: 0.625rem 16px;
-    grid-column: 1/3;
+    text-align: center;
 }
 .filter-form__selector {
     text-align: center;
@@ -728,7 +727,7 @@ main {
     gap: 0;
 }
 /*Изначально брейкпоинт был запланирован на 680 px с учётом будущих возможностей. Позже я увеличил его значение  на 40 px, чтобы объединить несколько изменений в одном медиазапросе и избежать создания отдельного брейкпоинта для этого списка. Благодаря этому форма поиска и футер корректно отображаются при увеличенной ширине экрана.*/
-@media (min-width:720px) {
+@media (min-width:753px) {
     .game-card--modal .game-card__meta {
     font-size: 1rem;
     }

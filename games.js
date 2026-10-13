@@ -199,7 +199,7 @@ const GAMES = [
     "released": "2013-09-17",
     "background_image": "https://media.rawg.io/media/games/20a/20aa03a10cda45239fe22d035c0ebe64.jpg",
     "rating": 4.47,
-    "genres": [],
+    "genres": ['Rock & Roll'],
     "platforms": [
       "PlayStation 5",
       "Xbox Series S/X",
@@ -207,7 +207,8 @@ const GAMES = [
       "PC",
       "PlayStation 4",
       "Xbox 360",
-      "Xbox One"
+      "Xbox One",
+      'PlayStation "Classic"'
     ]
   },
   {
