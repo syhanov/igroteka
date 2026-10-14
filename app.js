@@ -151,10 +151,12 @@ document.addEventListener('keydown', function(event){
     }
 })
 
+const platformsSelect = document.getElementById('platforma')
+const genresSelect = document.getElementById('zhanr')
 const input = document.querySelector('.filter-form__search');
 const form = document.querySelector('.filter-form')
 const cards = document.querySelectorAll('.game-card')
-const debouncedSearch = debounce( search , 300)
+const debouncedSearch = debounce( applyFilter , 300)
 const gamesCount = document.querySelector('.games__count')
 
 input.addEventListener('input', function(event){
@@ -171,6 +173,9 @@ input.addEventListener('input', function(){
 form.addEventListener('submit', function(event){
     event.preventDefault()
 })
+genresSelect.addEventListener('change', applyFilter)
+platformsSelect.addEventListener('change', applyFilter)
+
 function debounce(fn, ms) {
     let timer
     return function(){
@@ -181,10 +186,14 @@ function debounce(fn, ms) {
     }
 }
 
-function search() {
-    let query = input.value.toLowerCase().trim()
-    const filteredGames = GAMES.filter(function(game){
-        return game.name.toLowerCase().includes(query)
+function applyFilter() {
+    let inputValue = input.value.toLowerCase().trim()
+    let genresValue = genresSelect.value
+    let platformValue = platformsSelect.value
+    const filteredGames = GAMES.filter(function(game) {
+        return (game.name.toLowerCase().includes(inputValue) &&
+        (genresValue === '' || game.genres.includes(genresValue)) &&
+        (platformValue === '' || game.platforms.includes(platformValue)))
     })
     catalog.innerHTML = renderCatalog(filteredGames)
     gamesCount.textContent = filteredGames.length
@@ -219,9 +228,6 @@ SortedPlatformsArray = SortedPlatformsArray.sort(function(a,b) {
 })
 console.log(SortedPlatformsArray)
 console.log(AllPlatformsArray)
-
-const platformsSelect = document.getElementById('platforma')
-const genresSelect = document.getElementById('zhanr')
 
 for(let i = 0; i<SortedPlatformsArray.length; i++){
     const platformName = document.createElement('option')
