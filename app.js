@@ -170,15 +170,25 @@ input.addEventListener('input', function(event){
 
 
 input.addEventListener('input', function(){
+    state.query = input.value
     debouncedSearch()
 })
 form.addEventListener('submit', function(event){
     event.preventDefault()
 })
 
-genresSelect.addEventListener('change', applyFilter)
-platformsSelect.addEventListener('change', applyFilter)
-sortFilteredGames.addEventListener('change', sortNewGamesArray)
+genresSelect.addEventListener('change', function() {
+    state.genre = genresSelect.value
+    applyFilter()
+})
+platformsSelect.addEventListener('change', function() {
+    state.platform = platformsSelect.value
+    applyFilter()
+})
+sortFilteredGames.addEventListener('change', function() {
+    state.sort = sortFilteredGames.value
+    sortNewGamesArray()
+})
 
 function debounce(fn, ms) {
     let timer
@@ -190,7 +200,29 @@ function debounce(fn, ms) {
     }
 }
 
+const state = {
+    query: '',
+    genre: '',
+    platform: '',
+    sort: 'default'
+};
+
+
+
 let filteredGames
+const selectedGames = selectGames(GAMES, state);
+
+function selectGames(games, state) {
+    let selectedGames = games.filter(function(game) {
+        return (
+            game.name.toLowerCase().includes(state.query.trim().toLowerCase()) &&
+            (state.genre === '' || game.genres.includes(state.genre)) &&
+            (state.platform === '' || game.platforms.includes(state.platform))
+        );
+
+    })
+    return sortNewGamesArray(selectedGames, state)
+} 
 
 function applyFilter() {
     let inputValue = input.value.toLowerCase().trim()
@@ -205,25 +237,26 @@ function applyFilter() {
     gamesCount.textContent = filteredGames.length
 }
 
-function sortNewGamesArray() {
-    if(sortFilteredGames.value === "rating-desc"){
-        filteredGames.sort(function(a, b) {
+function sortNewGamesArray(massive, state) {
+    if(state.sort === "rating-desc"){
+        massive.sort(function(a, b) {
             return b.rating - a.rating || a.id - b.id
         })
-        catalog.innerHTML = renderCatalog(filteredGames)
     }
-    else if(sortFilteredGames.value === "released-desc"){
-        filteredGames.sort(function(a, b) {
+    else if(state.sort === "released-desc"){
+        massive.sort(function(a, b) {
             return b.released.localeCompare(a.released) || a.id - b.id
-        })
-        catalog.innerHTML = renderCatalog(filteredGames)
+        })    
     }
-    else if(sortFilteredGames.value === "name-asc"){
-        filteredGames.sort(function(a, b) {
+    else if(state.sort === "name-asc"){
+        massive.sort(function(a, b) {
             return a.name.localeCompare(b.name) || a.id - b.id
-        })
-        catalog.innerHTML = renderCatalog(filteredGames)
+        })    
     }
+    else if(state.sort === "default") {
+        return massive 
+    }
+        return massive
 }
 
 function updateGamesCount(games) {
