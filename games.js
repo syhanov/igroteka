@@ -35,11 +35,11 @@ const GamesTry = [
     ]
   },
   {
-    "id": 13536,
-    "name": "Portal",
+    "id": 100,
+    "name": "portal 2",
     "released": "2007-10-09",
     "background_image": "https://media.rawg.io/media/games/7fa/7fa0b586293c5861ee32490e953a4996.jpg",
-    "rating": 4.49,
+    "rating": 4.1,
     "genres": [
       "Action",
       "Puzzle"
@@ -59,7 +59,7 @@ const GamesTry = [
     "name": "Tomb Raider",
     "released": "2013-03-05",
     "background_image": "https://media.rawg.io/media/games/021/021c4e21a1824d2526f925eff6324653.jpg",
-    "rating": 4.06,
+    "rating": 0,
     "genres": [
       "Action"
     ],
@@ -88,6 +88,16 @@ const GamesTry = [
     ]
   },
 ]
+  function sortGamesByName() {
+    GamesTry.sort(function (a,b) {
+      return a.name.localeCompare(b.name, 'en', {sensitivity:"base"}) || a.id - b.id
+    })
+  }
+  function sortGamesByRating() {  
+    GamesTry.sort(function (a,b) {
+      return b.rating - a.rating || a.id - b.id
+    })
+  }
 
 const GamesTryName = GamesTry.map(function(game) {
   return game.name

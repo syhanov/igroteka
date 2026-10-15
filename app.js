@@ -151,13 +151,15 @@ document.addEventListener('keydown', function(event){
     }
 })
 
-const platformsSelect = document.getElementById('platforma')
-const genresSelect = document.getElementById('zhanr')
+
 const input = document.querySelector('.filter-form__search');
 const form = document.querySelector('.filter-form')
 const cards = document.querySelectorAll('.game-card')
 const debouncedSearch = debounce( applyFilter , 300)
 const gamesCount = document.querySelector('.games__count')
+const platformsSelect = document.getElementById('platforma')
+const genresSelect = document.getElementById('zhanr')
+const sortFilteredGames = document.getElementById('sort')
 
 input.addEventListener('input', function(event){
         if(event.key === 'Escape'){
@@ -173,8 +175,10 @@ input.addEventListener('input', function(){
 form.addEventListener('submit', function(event){
     event.preventDefault()
 })
+
 genresSelect.addEventListener('change', applyFilter)
 platformsSelect.addEventListener('change', applyFilter)
+sortFilteredGames.addEventListener('change', sortNewGamesArray)
 
 function debounce(fn, ms) {
     let timer
@@ -186,11 +190,13 @@ function debounce(fn, ms) {
     }
 }
 
+let filteredGames
+
 function applyFilter() {
     let inputValue = input.value.toLowerCase().trim()
     let genresValue = genresSelect.value
     let platformValue = platformsSelect.value
-    const filteredGames = GAMES.filter(function(game) {
+    filteredGames = GAMES.filter(function(game) {
         return (game.name.toLowerCase().includes(inputValue) &&
         (genresValue === '' || game.genres.includes(genresValue)) &&
         (platformValue === '' || game.platforms.includes(platformValue)))
@@ -198,6 +204,28 @@ function applyFilter() {
     catalog.innerHTML = renderCatalog(filteredGames)
     gamesCount.textContent = filteredGames.length
 }
+
+function sortNewGamesArray() {
+    if(sortFilteredGames.value === "rating-desc"){
+        filteredGames.sort(function(a, b) {
+            return b.rating - a.rating || a.id - b.id
+        })
+        catalog.innerHTML = renderCatalog(filteredGames)
+    }
+    else if(sortFilteredGames.value === "released-desc"){
+        filteredGames.sort(function(a, b) {
+            return b.released.localeCompare(a.released) || a.id - b.id
+        })
+        catalog.innerHTML = renderCatalog(filteredGames)
+    }
+    else if(sortFilteredGames.value === "name-asc"){
+        filteredGames.sort(function(a, b) {
+            return a.name.localeCompare(b.name) || a.id - b.id
+        })
+        catalog.innerHTML = renderCatalog(filteredGames)
+    }
+}
+
 function updateGamesCount(games) {
     gamesCount.textContent = games.length;
 }
@@ -213,8 +241,6 @@ const GenresArray = [...UneqieGamesGenres]
 const SortedGenresArray = GenresArray.sort(function(a,b) {
     return a.localeCompare(b);
 })
-console.log(GamesGenres)
-console.log(SortedGenresArray)
 
 let AllPlatformsArray = GAMES.flatMap(function(game) {
     return game.platforms
@@ -226,8 +252,6 @@ SortedPlatformsArray = [...SortedPlatformsArray]
 SortedPlatformsArray = SortedPlatformsArray.sort(function(a,b) {
     return a.localeCompare(b);
 })
-console.log(SortedPlatformsArray)
-console.log(AllPlatformsArray)
 
 for(let i = 0; i<SortedPlatformsArray.length; i++){
     const platformName = document.createElement('option')
