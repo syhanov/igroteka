@@ -155,7 +155,7 @@ document.addEventListener('keydown', function(event){
 const input = document.querySelector('.filter-form__search');
 const form = document.querySelector('.filter-form')
 const cards = document.querySelectorAll('.game-card')
-const debouncedSearch = debounce(debounceQueryChange , 300)
+const debouncedSearch = debounce(debounceQueryChange , 3000)
 const gamesCount = document.querySelector('.games__count')
 const platformsSelect = document.getElementById('platforma')
 const genresSelect = document.getElementById('zhanr')
@@ -163,9 +163,11 @@ const sortFilteredGames = document.getElementById('sort')
 const resetButton = document.getElementById('catalog-reset-button')
 
 
-input.addEventListener('input', function(event){
+input.addEventListener('keydown', function(event){
         if(event.key === 'Escape'){
-        input.value = ''
+        input.value = '';
+        state.query = '';
+        stateApply()
         return
 }
 })
