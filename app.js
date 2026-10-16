@@ -155,11 +155,13 @@ document.addEventListener('keydown', function(event){
 const input = document.querySelector('.filter-form__search');
 const form = document.querySelector('.filter-form')
 const cards = document.querySelectorAll('.game-card')
-const debouncedSearch = debounce( applyFilter , 300)
+const debouncedSearch = debounce(debounceQueryChange , 300)
 const gamesCount = document.querySelector('.games__count')
 const platformsSelect = document.getElementById('platforma')
 const genresSelect = document.getElementById('zhanr')
 const sortFilteredGames = document.getElementById('sort')
+const resetButton = document.getElementById('catalog-reset-button')
+
 
 input.addEventListener('input', function(event){
         if(event.key === 'Escape'){
@@ -168,9 +170,12 @@ input.addEventListener('input', function(event){
 }
 })
 
+function debounceQueryChange() {
+    state.query = input.value
+    stateApply()
+}
 
 input.addEventListener('input', function(){
-    state.query = input.value
     debouncedSearch()
 })
 form.addEventListener('submit', function(event){
@@ -179,15 +184,22 @@ form.addEventListener('submit', function(event){
 
 genresSelect.addEventListener('change', function() {
     state.genre = genresSelect.value
-    applyFilter()
+    stateApply()
 })
 platformsSelect.addEventListener('change', function() {
     state.platform = platformsSelect.value
-    applyFilter()
+    stateApply()
 })
 sortFilteredGames.addEventListener('change', function() {
     state.sort = sortFilteredGames.value
-    sortNewGamesArray()
+    stateApply()
+})
+resetButton.addEventListener('click', function(event) {
+    state.query = '',
+    state.genre = '',
+    state.platform = '',
+    state.sort = 'default',
+    stateApply()
 })
 
 function debounce(fn, ms) {
@@ -209,8 +221,11 @@ const state = {
 
 
 
-let filteredGames
-const selectedGames = selectGames(GAMES, state);
+function stateApply() {
+    const selectedGames = selectGames(GAMES, state);
+    catalog.innerHTML = renderCatalog(selectedGames);
+    gamesCount.textContent = `показанно ${selectedGames.length} из ${GAMES.length}`
+}
 
 function selectGames(games, state) {
     let selectedGames = games.filter(function(game) {
@@ -219,23 +234,10 @@ function selectGames(games, state) {
             (state.genre === '' || game.genres.includes(state.genre)) &&
             (state.platform === '' || game.platforms.includes(state.platform))
         );
-
     })
     return sortNewGamesArray(selectedGames, state)
 } 
 
-function applyFilter() {
-    let inputValue = input.value.toLowerCase().trim()
-    let genresValue = genresSelect.value
-    let platformValue = platformsSelect.value
-    filteredGames = GAMES.filter(function(game) {
-        return (game.name.toLowerCase().includes(inputValue) &&
-        (genresValue === '' || game.genres.includes(genresValue)) &&
-        (platformValue === '' || game.platforms.includes(platformValue)))
-    })
-    catalog.innerHTML = renderCatalog(filteredGames)
-    gamesCount.textContent = filteredGames.length
-}
 
 function sortNewGamesArray(massive, state) {
     if(state.sort === "rating-desc"){
@@ -258,6 +260,7 @@ function sortNewGamesArray(massive, state) {
     }
         return massive
 }
+
 
 function updateGamesCount(games) {
     gamesCount.textContent = games.length;

@@ -1,7 +1,7 @@
 const GamesTry = [
   {
-    "id": 4200,
-    "name": "Portal 2",
+    "id": NaN,
+    "name": undefined,
     "released": "2011-04-18",
     "background_image": "https://media.rawg.io/media/games/2ba/2bac0e87cf45e5b508f227d281c9252a.jpg",
     "rating": 4.57,
@@ -9,6 +9,9 @@ const GamesTry = [
       "Shooter",
       "Puzzle"
     ],
+    sayHello: function() {
+        console.log('Привет!');
+    },
     "platforms": [
       "PlayStation 3",
       "PC",
@@ -88,6 +91,11 @@ const GamesTry = [
     ]
   },
 ]
+
+
+
+const copy = JSON.parse(JSON.stringify(GamesTry))
+copy[0].genres = 'new'
   function sortGamesByName() {
     GamesTry.sort(function (a,b) {
       return a.name.localeCompare(b.name, 'en', {sensitivity:"base"}) || a.id - b.id
