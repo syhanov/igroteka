@@ -95,7 +95,6 @@ function renderCatalog(games) {
     return html;
 }
 
-catalog.innerHTML = (renderCatalog(GAMES));
 
 const modal = document.querySelector('.modal__content')
 const overlay = document.querySelector('.modal-overlay')
@@ -168,6 +167,7 @@ input.addEventListener('keydown', function(event){
         input.value = '';
         state.query = '';
         stateApply()
+        stateToParams()
         return
 }
 })
@@ -175,6 +175,7 @@ input.addEventListener('keydown', function(event){
 function debounceQueryChange() {
     state.query = input.value
     stateApply()
+    stateToPorams()
 }
 
 input.addEventListener('input', function(){
@@ -187,14 +188,17 @@ form.addEventListener('submit', function(event){
 genresSelect.addEventListener('change', function() {
     state.genre = genresSelect.value
     stateApply()
+    stateToPorams()
 })
 platformsSelect.addEventListener('change', function() {
     state.platform = platformsSelect.value
     stateApply()
+    stateToPorams()
 })
 sortFilteredGames.addEventListener('change', function() {
     state.sort = sortFilteredGames.value
     stateApply()
+    stateToPorams()
 })
 resetButton.addEventListener('click', function(event) {
     state.query = '',
@@ -307,10 +311,11 @@ for(let i = 0; i<SortedGenresArray.length; i++){
 }
 
 
-const curentUrl = new URL(location.href);
-const params = curentUrl.searchParams
+
 
 function paramsToState() {
+    const currentUrl = new URL(location.href);
+    const params = currentUrl.searchParams
     let paramsGenre = params.get('genre')
     let paramsQuery = params.get('q')
     let paramsPlatform = params.get('platform')
@@ -346,4 +351,38 @@ function paramsToState() {
         sortFilteredGames.value = state.sort
     }
     stateApply()
+}
+
+paramsToState() // Отрисовывает каталог. Если ссылка открыта с фильтрами, то выдаёт нужные карточки, если нет — то все.
+stateToPorams()
+
+
+function stateToPorams() {
+    const currentUrl = new URL(location.href);
+    const params = currentUrl.searchParams
+    if(state.query !== '') {
+        params.set('q', state.query)
+    }
+    else {
+        params.delete('q')
+    }
+    if(state.genre !== '') {
+        params.set('genre', state.genre)
+    }
+    else {
+        params.delete('genre')
+    }
+    if(state.platform !== '') {
+        params.set('platform', state.platform)
+    }
+    else {
+        params.delete('platform')
+    }
+    if(state.sort !== 'default') {
+        params.set('sort', state.sort)
+    }
+    else {
+        params.delete('sort')
+    }
+    history.replaceState(null, '', currentUrl);
 }
