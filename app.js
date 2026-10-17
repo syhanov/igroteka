@@ -155,7 +155,7 @@ document.addEventListener('keydown', function(event){
 const input = document.querySelector('.filter-form__search');
 const form = document.querySelector('.filter-form')
 const cards = document.querySelectorAll('.game-card')
-const debouncedSearch = debounce(debounceQueryChange , 3000)
+const debouncedSearch = debounce(debounceQueryChange , 300)
 const gamesCount = document.querySelector('.games__count')
 const platformsSelect = document.getElementById('platforma')
 const genresSelect = document.getElementById('zhanr')
@@ -304,4 +304,46 @@ for(let i = 0; i<SortedGenresArray.length; i++){
     Genres.classList.add('filter-form__option')
     Genres.textContent = SortedGenresArray[i]
     genresSelect.append(Genres)
+}
+
+
+const curentUrl = new URL(location.href);
+const params = curentUrl.searchParams
+
+function paramsToState() {
+    let paramsGenre = params.get('genre')
+    let paramsQuery = params.get('q')
+    let paramsPlatform = params.get('platform')
+    let paramsSort = params.get('sort')
+    state.genre = ''
+    for(let i = 0; i<SortedGenresArray.length; i++){
+        if(paramsGenre === SortedGenresArray[i]) {
+            state.genre = SortedGenresArray[i]
+            genresSelect.value = state.genre 
+        }
+    }
+    state.platform = ''
+    for(let i = 0; i<SortedPlatformsArray.length; i++){
+        if(paramsPlatform === SortedPlatformsArray[i]) {
+            state.platform = SortedPlatformsArray[i]
+            platformsSelect.value = state.platform 
+        }
+    }
+    if(paramsQuery === '' || !paramsQuery){
+        state.query = ''
+        input.value = state.query
+    }
+    else{
+        state.query = paramsQuery 
+        input.value = state.query
+    }
+    if(paramsSort !== 'rating-desc' && paramsSort !== 'released-desc' && paramsSort !== 'name-asc') {
+        state.sort = 'default'
+        sortFilteredGames.value = state.sort
+    }
+    else {
+        state.sort = paramsSort
+        sortFilteredGames.value = state.sort
+    }
+    stateApply()
 }
