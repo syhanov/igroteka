@@ -343,7 +343,8 @@ main {
     gap: 0.5rem;
 }
 .filter-form__search, 
-.filter-form__selector {
+.filter-form__selector,
+.filter-form__button {
     font-family: "Manrope", sans-serif;
     font-size: 0.875rem;
     border-radius: 5px;
@@ -744,8 +745,44 @@ main {
         align-items: flex-end;
     }
     .filter-form {
-        display: inline-block;
-
+        display: grid;
+        grid-template-columns: 2fr 1fr 1fr;
+        grid-template-areas:
+            "search  search reset"
+            "sort genre platform";
+        gap: 8px;
+        align-items: center;
+    }
+    .filter-form__search {
+        grid-area: search;
+        width: 100%;
+        min-width: 0;
+    }
+    #zhanr {
+        grid-area: genre;
+    }
+    #platforma {
+        grid-area: platform;
+    }
+    #sort {
+        grid-area: sort;
+    }
+    .filter-form__button {
+        grid-area: reset;
+        justify-self: start;
+        white-space: nowrap;
+        width: 100%;
+    }
+    .filter-form__search,
+    .filter-form__selector,
+    .filter-form__button {
+        box-sizing: border-box;
+        min-width: 0;
+        height: 40px;
+        margin: 0;
+    }
+    .filter-form__selector {
+        width: 100%;
     }
     .game-card--featured .game-card__actions {
         gap: 0px;

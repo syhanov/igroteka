@@ -206,6 +206,7 @@ resetButton.addEventListener('click', function(event) {
     state.platform = '',
     state.sort = 'default',
     stateApply()
+    stateToPorams()
 })
 
 function debounce(fn, ms) {
