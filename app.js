@@ -24,14 +24,21 @@ const state = {
 };
 
 //Блок 2. Запуск
-init()
-
 function init() {
-    const appState = stateToParams(location.href);
-    const filteredGames = 
+    const sortedGenres = getSortedGamesGenres(GAMES)
+    const sortedPlatforms = getSortedGamesPlatforms(GAMES)
+    renderGenresOptions(sortedGenres)
+    renderPlatformsOptions(sortedPlatforms)
+    paramsToState(sortedGenres, sortedPlatforms) // Отрисовывает каталог. Если ссылка открыта с фильтрами, то выдаёт нужные карточки, если нет — то все.
+    stateToParams()
 }
 
+init()
+
+
 //Блок 3. Управление приложением
+
+
 catalog.addEventListener('click', function(event){
 
     const card = event.target.closest('.game-card')
@@ -87,7 +94,7 @@ input.addEventListener('keydown', function(event){
         if(event.key === 'Escape'){
         input.value = '';
         state.query = '';
-        stateApply()
+        applyState()
         stateToParams()
         return
 }
@@ -103,19 +110,19 @@ form.addEventListener('submit', function(event){
 
 genresSelect.addEventListener('change', function() {
     state.genre = genresSelect.value
-    stateApply()
+    applyState()
     stateToParams()
 })
 
 platformsSelect.addEventListener('change', function() {
     state.platform = platformsSelect.value
-    stateApply()
+    applyState()
     stateToParams()
 })
 
 sortFilteredGames.addEventListener('change', function() {
     state.sort = sortFilteredGames.value
-    stateApply()
+    applyState()
     stateToParams()
 })
 
@@ -124,20 +131,21 @@ resetButton.addEventListener('click', function(event) {
     state.genre = '',
     state.platform = '',
     state.sort = 'default',
-    stateApply()
+    applyState()
     stateToParams()
 })
 
 function debounceQueryChange() {
     state.query = input.value
-    stateApply()
+    applyState()
     stateToParams()
 }
 
-function stateApply() {
+function applyState() {
     const selectedGames = selectGames(GAMES, state);
     catalog.innerHTML = renderCatalog(selectedGames);
     gamesCount.textContent = `показанно ${selectedGames.length} из ${GAMES.length}`
+    stateToParams();
 }
 
 //Блок 4. Операции с интерфейсом и браузером
@@ -179,7 +187,26 @@ function renderCatalog(games) {
     return html;
 }
 
-function paramsToState() {
+function renderPlatformsOptions(platforms) {
+    for(let i = 0; i<platforms.length; i++){
+        const platformName = document.createElement('option')
+        platformName.value = platforms[i]
+        platformName.classList.add('filter-form__option')
+        platformName.textContent = platforms[i]
+        platformsSelect.append(platformName)
+    }
+}
+
+function renderGenresOptions(genres) {
+    for(let i = 0; i<genres.length; i++){
+        const Genres = document.createElement('option')
+        Genres.value = genres[i]
+        Genres.classList.add('filter-form__option')
+        Genres.textContent = genres[i]
+        genresSelect.append(Genres)
+    }
+}
+function paramsToState(genres, platforms) {
     const currentUrl = new URL(location.href);
     const params = currentUrl.searchParams
     let paramsGenre = params.get('genre')
@@ -187,16 +214,16 @@ function paramsToState() {
     let paramsPlatform = params.get('platform')
     let paramsSort = params.get('sort')
     state.genre = ''
-    for(let i = 0; i<SortedGenresArray.length; i++){
-        if(paramsGenre === SortedGenresArray[i]) {
-            state.genre = SortedGenresArray[i]
+    for(let i = 0; i<genres.length; i++){
+        if(paramsGenre === genres[i]) {
+            state.genre = genres[i]
             genresSelect.value = state.genre 
         }
     }
     state.platform = ''
-    for(let i = 0; i<SortedPlatformsArray.length; i++){
-        if(paramsPlatform === SortedPlatformsArray[i]) {
-            state.platform = SortedPlatformsArray[i]
+    for(let i = 0; i<platforms.length; i++){
+        if(paramsPlatform === platforms[i]) {
+            state.platform = platforms[i]
             platformsSelect.value = state.platform 
         }
     }
@@ -216,7 +243,7 @@ function paramsToState() {
         state.sort = paramsSort
         sortFilteredGames.value = state.sort
     }
-    stateApply()
+    applyState()
 }
 
 function stateToParams() {
@@ -249,22 +276,69 @@ function stateToParams() {
     history.replaceState(null, '', currentUrl);
 }
 
-for(let i = 0; i<SortedPlatformsArray.length; i++){
-    const platformName = document.createElement('option')
-    platformName.value = SortedPlatformsArray[i]
-    platformName.classList.add('filter-form__option')
-    platformName.textContent = SortedPlatformsArray[i]
-    platformsSelect.append(platformName)
-}
-for(let i = 0; i<SortedGenresArray.length; i++){
-    const Genres = document.createElement('option')
-    Genres.value = SortedGenresArray[i]
-    Genres.classList.add('filter-form__option')
-    Genres.textContent = SortedGenresArray[i]
-    genresSelect.append(Genres)
-}
 //Блок 5. Чистая прикладная логика
+function selectGames(games, state) {
+    let selectedGames = games.filter(function(game) {
+        return (
+            game.name.toLowerCase().includes(state.query.trim().toLowerCase()) &&
+            (state.genre === '' || game.genres.includes(state.genre)) &&
+            (state.platform === '' || game.platforms.includes(state.platform))
+        );
+    })
+    return sortNewGamesArray(selectedGames, state)
+} 
 
+function sortNewGamesArray(massive, state) {
+    if(state.sort === "rating-desc"){
+        massive.sort(function(a, b) {
+            return b.rating - a.rating || a.id - b.id
+        })
+    }
+    else if(state.sort === "released-desc"){
+        massive.sort(function(a, b) {
+            return b.released.localeCompare(a.released) || a.id - b.id
+        })    
+    }
+    else if(state.sort === "name-asc"){
+        massive.sort(function(a, b) {
+            return a.name.localeCompare(b.name) || a.id - b.id
+        })    
+    }
+    else if(state.sort === "default") {
+        return massive 
+    }
+        return massive
+}
+
+function getSortedGamesGenres(games) {
+    let GamesGenres = games.flatMap(function(game) {
+        return game.genres;
+    }).filter(function(genre) {
+        return genre !== null;
+    });
+    let SortedGenresArray = new Set(GamesGenres)
+    SortedGenresArray = [...SortedGenresArray]
+    SortedGenresArray = SortedGenresArray.sort(function(a,b) {
+        return a.localeCompare(b);
+    })
+    return SortedGenresArray
+}
+
+function getSortedGamesPlatforms(games) {
+    let AllPlatformsArray = games.flatMap(function(game) {
+        return game.platforms
+    }).filter(function(platform) {
+        return platform !== null;
+    });
+    let SortedPlatformsArray = new Set(AllPlatformsArray)
+    SortedPlatformsArray = [...SortedPlatformsArray]
+    SortedPlatformsArray = SortedPlatformsArray.sort(function(a,b) {
+        return a.localeCompare(b);
+    })
+    return SortedPlatformsArray
+}
+
+//Блок 6. Общие вспомогательные функции
 function formatYear(released) {
     if(!released){
         return '';
@@ -309,6 +383,7 @@ function getGenres(genre) {
         return genres;
     }
 }
+
 function getPlatforms(platform) {
     if(platform === undefined || platform === null) {
         return '';
@@ -329,69 +404,11 @@ function debounce(fn, ms) {
     }
 }
 
-
-
-function selectGames(games, state) {
-    let selectedGames = games.filter(function(game) {
-        return (
-            game.name.toLowerCase().includes(state.query.trim().toLowerCase()) &&
-            (state.genre === '' || game.genres.includes(state.genre)) &&
-            (state.platform === '' || game.platforms.includes(state.platform))
-        );
-    })
-    return sortNewGamesArray(selectedGames, state)
-} 
-
-
-function sortNewGamesArray(massive, state) {
-    if(state.sort === "rating-desc"){
-        massive.sort(function(a, b) {
-            return b.rating - a.rating || a.id - b.id
-        })
-    }
-    else if(state.sort === "released-desc"){
-        massive.sort(function(a, b) {
-            return b.released.localeCompare(a.released) || a.id - b.id
-        })    
-    }
-    else if(state.sort === "name-asc"){
-        massive.sort(function(a, b) {
-            return a.name.localeCompare(b.name) || a.id - b.id
-        })    
-    }
-    else if(state.sort === "default") {
-        return massive 
-    }
-        return massive
-}
-
-
 function updateGamesCount(games) {
     gamesCount.textContent = games.length;
 }
 updateGamesCount(GAMES);
 
-let GamesGenres = GAMES.flatMap(function(game) {
-    return game.genres;
-}).filter(function(genre) {
-    return genre !== null;
-});
-let SortedGenresArray = new Set(GamesGenres)
-SortedGenresArray = [...UneqieGamesGenres]
-SortedGenresArray = SortedGenresArray.sort(function(a,b) {
-    return a.localeCompare(b);
-})
 
-let AllPlatformsArray = GAMES.flatMap(function(game) {
-    return game.platforms
-}).filter(function(platform) {
-    return platform !== null;
-});
-let SortedPlatformsArray = new Set(AllPlatformsArray)
-SortedPlatformsArray = [...SortedPlatformsArray]
-SortedPlatformsArray = SortedPlatformsArray.sort(function(a,b) {
-    return a.localeCompare(b);
-})
 
-paramsToState() // Отрисовывает каталог. Если ссылка открыта с фильтрами, то выдаёт нужные карточки, если нет — то все.
-stateToParams()
+
