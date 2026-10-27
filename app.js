@@ -16,7 +16,7 @@ const genresSelect = document.getElementById('zhanr')
 const sortFilteredGames = document.getElementById('sort')
 const resetButton = document.getElementById('catalog-reset-button')
 
-const state = {
+let state = {
     query: '',
     genre: '',
     platform: '',
@@ -27,10 +27,14 @@ const state = {
 function init() {
     const sortedGenres = getSortedGamesGenres(GAMES)
     const sortedPlatforms = getSortedGamesPlatforms(GAMES)
+    const urlParams = getUrlParams()
+
     renderGenresOptions(sortedGenres)
     renderPlatformsOptions(sortedPlatforms)
-    paramsToState(sortedGenres, sortedPlatforms) // Отрисовывает каталог. Если ссылка открыта с фильтрами, то выдаёт нужные карточки, если нет — то все.
-    stateToParams()
+
+    state = paramsToState(sortedGenres, sortedPlatforms, urlParams) // Восстанавливаем состояние из URL
+    syncFormWithState(state) // Синхронизирует поля формы с состоянием приложения
+    applyState() // Обновляем каталог, счётчик и URL
 }
 
 init()
@@ -95,7 +99,6 @@ input.addEventListener('keydown', function(event){
         input.value = '';
         state.query = '';
         applyState()
-        stateToParams()
         return
 }
 })
@@ -111,41 +114,36 @@ form.addEventListener('submit', function(event){
 genresSelect.addEventListener('change', function() {
     state.genre = genresSelect.value
     applyState()
-    stateToParams()
 })
 
 platformsSelect.addEventListener('change', function() {
     state.platform = platformsSelect.value
     applyState()
-    stateToParams()
 })
 
 sortFilteredGames.addEventListener('change', function() {
     state.sort = sortFilteredGames.value
     applyState()
-    stateToParams()
 })
 
 resetButton.addEventListener('click', function(event) {
-    state.query = '',
-    state.genre = '',
-    state.platform = '',
-    state.sort = 'default',
+    state.query = '';
+    state.genre = '';
+    state.platform = '';
+    state.sort = 'default';
     applyState()
-    stateToParams()
 })
 
 function debounceQueryChange() {
     state.query = input.value
     applyState()
-    stateToParams()
 }
 
 function applyState() {
     const selectedGames = selectGames(GAMES, state);
     catalog.innerHTML = renderCatalog(selectedGames);
     gamesCount.textContent = `показанно ${selectedGames.length} из ${GAMES.length}`
-    stateToParams();
+    updateUrl(state);
 }
 
 //Блок 4. Операции с интерфейсом и браузером
@@ -206,75 +204,103 @@ function renderGenresOptions(genres) {
         genresSelect.append(Genres)
     }
 }
-function paramsToState(genres, platforms) {
+function getUrlParams() {
     const currentUrl = new URL(location.href);
-    const params = currentUrl.searchParams
-    let paramsGenre = params.get('genre')
-    let paramsQuery = params.get('q')
-    let paramsPlatform = params.get('platform')
-    let paramsSort = params.get('sort')
-    state.genre = ''
+    const params = currentUrl.searchParams;
+
+    return params
+}
+
+function syncFormWithState(state) {
+    platformsSelect.value = state.platform 
+    genresSelect.value = state.genre 
+    input.value = state.query
+    sortFilteredGames.value = state.sort
+}
+
+function paramsToState(genres, platforms, urlParams) {
+    let paramsGenre = urlParams.get('genre')
+    let paramsQuery = urlParams.get('q')
+    let paramsPlatform = urlParams.get('platform')
+    let paramsSort = urlParams.get('sort')
+    let newState = {
+        query: '',
+        genre: '',
+        platform: '',
+        sort: 'default'
+    }
     for(let i = 0; i<genres.length; i++){
         if(paramsGenre === genres[i]) {
-            state.genre = genres[i]
-            genresSelect.value = state.genre 
+            newState.genre = genres[i]
         }
     }
-    state.platform = ''
     for(let i = 0; i<platforms.length; i++){
         if(paramsPlatform === platforms[i]) {
-            state.platform = platforms[i]
-            platformsSelect.value = state.platform 
+            newState.platform = platforms[i]
         }
     }
     if(paramsQuery === '' || !paramsQuery){
-        state.query = ''
-        input.value = state.query
+        newState.query = ''
     }
     else{
-        state.query = paramsQuery 
-        input.value = state.query
+        newState.query = paramsQuery 
     }
     if(paramsSort !== 'rating-desc' && paramsSort !== 'released-desc' && paramsSort !== 'name-asc') {
-        state.sort = 'default'
-        sortFilteredGames.value = state.sort
+        newState.sort = 'default'
     }
     else {
-        state.sort = paramsSort
-        sortFilteredGames.value = state.sort
+        newState.sort = paramsSort
     }
-    applyState()
+    return newState
 }
 
-function stateToParams() {
-    const currentUrl = new URL(location.href);
-    const params = currentUrl.searchParams
+function stateToParams(state) {
+    let newUrl = {
+        q: '',
+        genre: '',
+        platform: '',
+        sort: ''
+    }
     if(state.query !== '') {
-        params.set('q', state.query)
+        newUrl.q = state.query
     }
-    else {
-        params.delete('q')
-    }
+
     if(state.genre !== '') {
-        params.set('genre', state.genre)
+        newUrl.genre = state.genre
     }
-    else {
-        params.delete('genre')
-    }
+
     if(state.platform !== '') {
-        params.set('platform', state.platform)
+        newUrl.platform = state.platform
     }
-    else {
-        params.delete('platform')
-    }
+
     if(state.sort !== 'default') {
-        params.set('sort', state.sort)
+        newUrl.sort = state.sort
     }
-    else {
-        params.delete('sort')
+
+    return newUrl
+}
+
+function updateUrl(state) {
+    const currentUrl = new URL(location.href);
+    const params = currentUrl.searchParams;
+
+    const paramsObject = stateToParams(state);
+    const keys = Object.keys(paramsObject);
+
+    for (let i = 0; i < keys.length; i++) {
+        const key = keys[i];
+        const value = paramsObject[key];
+
+        if (value === '') {
+            params.delete(key);
+        } else {
+            params.set(key, value);
+        }
     }
+
     history.replaceState(null, '', currentUrl);
 }
+
 
 //Блок 5. Чистая прикладная логика
 function selectGames(games, state) {
@@ -289,25 +315,26 @@ function selectGames(games, state) {
 } 
 
 function sortNewGamesArray(massive, state) {
+    let newMassive = [...massive]
     if(state.sort === "rating-desc"){
-        massive.sort(function(a, b) {
+        newMassive.sort(function(a, b) {
             return b.rating - a.rating || a.id - b.id
         })
     }
     else if(state.sort === "released-desc"){
-        massive.sort(function(a, b) {
+        newMassive.sort(function(a, b) {
             return b.released.localeCompare(a.released) || a.id - b.id
         })    
     }
     else if(state.sort === "name-asc"){
-        massive.sort(function(a, b) {
+        newMassive.sort(function(a, b) {
             return a.name.localeCompare(b.name) || a.id - b.id
         })    
     }
     else if(state.sort === "default") {
-        return massive 
+        return newMassive 
     }
-        return massive
+        return newMassive
 }
 
 function getSortedGamesGenres(games) {
@@ -403,12 +430,3 @@ function debounce(fn, ms) {
         }, ms)
     }
 }
-
-function updateGamesCount(games) {
-    gamesCount.textContent = games.length;
-}
-updateGamesCount(GAMES);
-
-
-
-
