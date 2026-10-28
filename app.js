@@ -25,12 +25,12 @@ let state = {
 
 //Блок 2. Запуск
 function init() {
-    const sortedGenres = getSortedGamesGenres(GAMES)
-    const sortedPlatforms = getSortedGamesPlatforms(GAMES)
+    const sortedGenres = getSortedGamesGenresOrPlatforms(GAMES, 'genres')
+    const sortedPlatforms = getSortedGamesGenresOrPlatforms(GAMES, 'platforms')
     const urlParams = getUrlParams()
 
-    renderGenresOptions(sortedGenres)
-    renderPlatformsOptions(sortedPlatforms)
+    renderPlatformsOrGenresOptions(sortedGenres, genresSelect)
+    renderPlatformsOrGenresOptions(sortedPlatforms, platformsSelect)
 
     state = paramsToState(sortedGenres, sortedPlatforms, urlParams) // Восстанавливаем состояние из URL
     syncFormWithState(state) // Синхронизирует поля формы с состоянием приложения
@@ -67,8 +67,8 @@ catalog.addEventListener('click', function(event){
                         <h3 class="game-card__title">${escapeHTML(game.name)}</h3>
                         <div class="game-card__meta">
                             <span class="game-card__released">${escapeHTML(game.released)}</span>
-                            <span class="game-card__genre">${escapeHTML(getGenres(game.genres))}</span>
-                            <span class="game-card__platform">${escapeHTML(getPlatforms(game.platforms))}</span>
+                            <span class="game-card__genre">${escapeHTML(getGenresOrPlatforms(game.genres))}</span>
+                            <span class="game-card__platform">${escapeHTML(getGenresOrPlatforms(game.platforms))}</span>
                         </div>
                     </div>
                 </article>
@@ -161,8 +161,8 @@ function renderCard(game) {
                         <h3 class="game-card__title">${escapeHTML(game.name)}</h3>
                         <div class="game-card__meta">
                             <span class="game-card__released">${escapeHTML(formatYear(game.released))}</span>
-                            <span class="game-card__genre">${escapeHTML(getGenres(game.genres))}</span>
-                            <span class="game-card__platform">${escapeHTML(getPlatforms(game.platforms))}</span>
+                            <span class="game-card__genre">${escapeHTML(getGenresOrPlatforms(game.genres))}</span>
+                            <span class="game-card__platform">${escapeHTML(getGenresOrPlatforms(game.platforms))}</span>
                         </div>
                     </div>
                 </article>
@@ -185,25 +185,16 @@ function renderCatalog(games) {
     return html;
 }
 
-function renderPlatformsOptions(platforms) {
-    for(let i = 0; i<platforms.length; i++){
+function renderPlatformsOrGenresOptions(property, select) {
+    for(let i = 0; i<property.length; i++){
         const platformName = document.createElement('option')
-        platformName.value = platforms[i]
+        platformName.value = property[i]
         platformName.classList.add('filter-form__option')
-        platformName.textContent = platforms[i]
-        platformsSelect.append(platformName)
+        platformName.textContent = property[i]
+        select.append(platformName)
     }
 }
 
-function renderGenresOptions(genres) {
-    for(let i = 0; i<genres.length; i++){
-        const Genres = document.createElement('option')
-        Genres.value = genres[i]
-        Genres.classList.add('filter-form__option')
-        Genres.textContent = genres[i]
-        genresSelect.append(Genres)
-    }
-}
 function getUrlParams() {
     const currentUrl = new URL(location.href);
     const params = currentUrl.searchParams;
@@ -255,47 +246,39 @@ function paramsToState(genres, platforms, urlParams) {
 }
 
 function stateToParams(state) {
-    let newUrl = {
-        q: '',
-        genre: '',
-        platform: '',
-        sort: ''
-    }
-    if(state.query !== '') {
-        newUrl.q = state.query
-    }
-
-    if(state.genre !== '') {
-        newUrl.genre = state.genre
-    }
-
-    if(state.platform !== '') {
-        newUrl.platform = state.platform
-    }
-
-    if(state.sort !== 'default') {
-        newUrl.sort = state.sort
-    }
-
+    let newUrl = {}
+        if(state.query !== '') {
+            newUrl.q = state.query
+        }
+        if(state.genre !== '') {
+            newUrl.genre = state.genre
+        }
+        if(state.platform !== '') {
+            newUrl.platform = state.platform
+        }
+        if(state.sort !== 'default') {
+            newUrl.sort = state.sort
+        }
     return newUrl
 }
 
 function updateUrl(state) {
     const currentUrl = new URL(location.href);
     const params = currentUrl.searchParams;
-
     const paramsObject = stateToParams(state);
     const keys = Object.keys(paramsObject);
+
+    const catalogParams = ['q', 'genre', 'platform', 'sort'];
+
+    for (let i = 0; i < catalogParams.length; i++) {
+        params.delete(catalogParams[i]);
+    }
 
     for (let i = 0; i < keys.length; i++) {
         const key = keys[i];
         const value = paramsObject[key];
 
-        if (value === '') {
-            params.delete(key);
-        } else {
-            params.set(key, value);
-        }
+        params.set(key, value);
     }
 
     history.replaceState(null, '', currentUrl);
@@ -305,17 +288,20 @@ function updateUrl(state) {
 //Блок 5. Чистая прикладная логика
 function selectGames(games, state) {
     let selectedGames = games.filter(function(game) {
+    let isNameMatch = game.name.toLowerCase().includes(state.query.trim().toLowerCase())
+    let isGenreMatch = state.genre === '' || game.genres.includes(state.genre)
+    let isPlatformMatch = state.platform === '' || game.platforms.includes(state.platform)
         return (
-            game.name.toLowerCase().includes(state.query.trim().toLowerCase()) &&
-            (state.genre === '' || game.genres.includes(state.genre)) &&
-            (state.platform === '' || game.platforms.includes(state.platform))
+            isNameMatch &&
+            isGenreMatch &&
+            isPlatformMatch
         );
     })
     return sortNewGamesArray(selectedGames, state)
 } 
 
-function sortNewGamesArray(massive, state) {
-    let newMassive = [...massive]
+function sortNewGamesArray(array, state) {
+    let newMassive = [...array]
     if(state.sort === "rating-desc"){
         newMassive.sort(function(a, b) {
             return b.rating - a.rating || a.id - b.id
@@ -337,32 +323,18 @@ function sortNewGamesArray(massive, state) {
         return newMassive
 }
 
-function getSortedGamesGenres(games) {
-    let GamesGenres = games.flatMap(function(game) {
-        return game.genres;
-    }).filter(function(genre) {
-        return genre !== null;
+function getSortedGamesGenresOrPlatforms(games, property) {
+    let GamesOptionArray = games.flatMap(function(game) {
+        return game[property];
+    }).filter(function(option) {
+        return option !== null;
     });
-    let SortedGenresArray = new Set(GamesGenres)
-    SortedGenresArray = [...SortedGenresArray]
-    SortedGenresArray = SortedGenresArray.sort(function(a,b) {
+    let uniqueOptions  = new Set(GamesOptionArray)
+    let SortedOptionArray = [...uniqueOptions ]
+    SortedOptionArray.sort(function(a,b) {
         return a.localeCompare(b);
     })
-    return SortedGenresArray
-}
-
-function getSortedGamesPlatforms(games) {
-    let AllPlatformsArray = games.flatMap(function(game) {
-        return game.platforms
-    }).filter(function(platform) {
-        return platform !== null;
-    });
-    let SortedPlatformsArray = new Set(AllPlatformsArray)
-    SortedPlatformsArray = [...SortedPlatformsArray]
-    SortedPlatformsArray = SortedPlatformsArray.sort(function(a,b) {
-        return a.localeCompare(b);
-    })
-    return SortedPlatformsArray
+    return SortedOptionArray
 }
 
 //Блок 6. Общие вспомогательные функции
@@ -401,23 +373,12 @@ function escapeHTML(text) {
     }
 }
 
-function getGenres(genre) {
-    if(genre === undefined || genre === null) {
+function getGenresOrPlatforms(array) {
+    if(array === undefined || array === null) {
         return '';
     }
     else{
-        let genres = genre.join(' • ');
-        return genres;
-    }
-}
-
-function getPlatforms(platform) {
-    if(platform === undefined || platform === null) {
-        return '';
-    }
-    else{
-        let platforms = platform.join(' • ');
-        return platforms;
+        return array.join(' • ');
     }
 }
 
