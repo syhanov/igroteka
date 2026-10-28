@@ -54,27 +54,9 @@ catalog.addEventListener('click', function(event){
         return currentGame.id === Number(id)
     })
     console.log(game)
-
-    const modalGame =  `
-                <article class="game-card game-card--featured game-card--modal" data-id="${game.id}">
-                    <div class="game-card__cover">
-                        <img 
-                            src="${escapeHTML(game.background_image)}"
-                            alt="Обложка игры ${escapeHTML(game.name)}" class="game-card__image">
-                        <span class="game-card__rating-badge">${escapeHTML(formatRating(game.rating))}</span>
-                    </div>
-                    <div class="game-card__content">
-                        <h3 class="game-card__title">${escapeHTML(game.name)}</h3>
-                        <div class="game-card__meta">
-                            <span class="game-card__released">${escapeHTML(game.released)}</span>
-                            <span class="game-card__genre">${escapeHTML(getGenresOrPlatforms(game.genres))}</span>
-                            <span class="game-card__platform">${escapeHTML(getGenresOrPlatforms(game.platforms))}</span>
-                        </div>
-                    </div>
-                </article>
-            `;
+    let modalGame = renderModalCard(game)
     modal.innerHTML = modalGame;
-    overlay.classList.add('is-open')   
+    overlay.classList.add('is-open')    
 });
 
 overlayCloseButton.addEventListener('click', function(){
@@ -147,6 +129,23 @@ function applyState() {
 }
 
 //Блок 4. Операции с интерфейсом и браузером
+
+function renderCatalog(games) {
+    if (games.length === 0) {
+        return `
+           <p class="games__grid__empty">По запросу ${escapeHTML(input.value)} ничего не найдено</p>
+        `;
+    }
+
+    let html = '';
+
+    for (let i = 0; i < games.length; i++) {
+        html += renderCard(games[i]);
+    }
+
+    return html;
+}
+
 function renderCard(game) {
 
     return `
@@ -169,20 +168,27 @@ function renderCard(game) {
             `;
 };
 
-function renderCatalog(games) {
-    if (games.length === 0) {
-        return `
-           <p class="games__grid__empty">По запросу ${escapeHTML(input.value)} ничего не найдено</p>
-        `;
-    }
+function renderModalCard(game) {
+        const modalGame =  `
+                <article class="game-card game-card--featured game-card--modal" data-id="${game.id}">
+                    <div class="game-card__cover">
+                        <img 
+                            src="${escapeHTML(game.background_image)}"
+                            alt="Обложка игры ${escapeHTML(game.name)}" class="game-card__image">
+                        <span class="game-card__rating-badge">${escapeHTML(formatRating(game.rating))}</span>
+                    </div>
+                    <div class="game-card__content">
+                        <h3 class="game-card__title">${escapeHTML(game.name)}</h3>
+                        <div class="game-card__meta">
+                            <span class="game-card__released">${escapeHTML(game.released)}</span>
+                            <span class="game-card__genre">${escapeHTML(getGenresOrPlatforms(game.genres))}</span>
+                            <span class="game-card__platform">${escapeHTML(getGenresOrPlatforms(game.platforms))}</span>
+                        </div>
+                    </div>
+                </article>
+            `;
+        return modalGame
 
-    let html = '';
-
-    for (let i = 0; i < games.length; i++) {
-        html += renderCard(games[i]);
-    }
-
-    return html;
 }
 
 function renderPlatformsOrGenresOptions(property, select) {
