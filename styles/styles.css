@@ -727,6 +727,15 @@ main {
 .game-card--modal {
     gap: 0;
 }
+.game-card--slider .game-card__description {
+    display: none;
+}
+.game-card--slider .game-card__actions {
+    display: none;
+}
+.slider__btn {
+    display: none;
+}
 /*Изначально брейкпоинт был запланирован на 680 px с учётом будущих возможностей. Позже я увеличил его значение  на 40 px, чтобы объединить несколько изменений в одном медиазапросе и избежать создания отдельного брейкпоинта для этого списка. Благодаря этому форма поиска и футер корректно отображаются при увеличенной ширине экрана.*/
 @media (min-width:753px) {
     .game-card--modal .game-card__meta {
@@ -973,6 +982,84 @@ main {
     .site-footer__link--button {
         display: flex;
         min-height: 36px;
+    }
+}
+@media (min-width:1920px) {
+    .slider__btn {
+        display: block;
+    }
+    .game-card--slider .game-card__description {
+        display: block;
+    }
+    .game-card--slider .game-card__actions {
+        display: flex;
+    }
+    .catalog__featured-games.is-jumping .game-card--slider {
+        transition: none;
+    }
+    .catalog__featured-games.is-jumping {
+        transition: none;
+    }
+    .catalog__featured-games {
+        display: flex;
+        transition: transform 0.4s ease;   /* 0.4s = DURATION 400 в JS */
+        will-change: transform;
+    }
+    .catalog__slider {
+        width: 100%;
+        overflow: hidden;
+        border-radius: 5px;
+        padding: 5px;
+    }
+    .game-card--slider {
+        flex: 0 0 33%;
+         opacity: 0.5;
+        transform: scale(0.92);
+        transition: opacity 0.4s ease, transform 0.4s ease;
+    }
+    .game-card--slider.is-active {
+        opacity: 1;
+        transform: scale(1)  
+    }
+    .catalog__slider--wrap {
+        position: relative;
+        border-radius: 5px;
+    }
+    .slider__btn {
+        position: absolute;
+        top: 50%;
+        z-index: 1000;
+        width: 48px;
+        height: 48px;
+        border: 1px solid #DBFCFF;
+        border-radius: 50%;
+        background: rgba(19, 20, 24, 0.9);
+        color: #DBFCFF;
+        font-size: 28px;
+        cursor: pointer;
+        transition: background 0.2s ease,
+                    box-shadow 0.2s ease,
+                    transform 0.2s ease,
+                    opacity 0.2s ease;
+    }
+    .slider__btn:hover {
+        background: #DBFCFF;
+        color: #131418;
+        box-shadow: 0 0 14px rgba(219, 252, 255, 0.35);
+        transform: scale(1.08);
+    }
+    .slider__btn:active {
+        transform: scale(0.95);
+    }
+    .slider__btn:focus-visible {
+        outline: 2px solid #DBFCFF;
+        outline-offset: 4px;
+    }
+    .slider__btn--next {
+        right: -10px;
+    }
+    .slider__btn--prev {
+        left: -10px;
     }
 }
 @media(hover:hover) {

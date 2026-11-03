@@ -111,113 +111,188 @@
                     <h3 class="catalog__subtitle">выбор нашей редакции</h3>
                 </div>
             </div>
-            <div class="catalog__featured-games">
-                <article class="game-card game-card--featured">
-                    <div class="game-card__cover">
-                        <img
-                        src="styles/assets/covers/src/eldenring.jpg"
-                        srcset="styles/assets/covers/cover-300.jpg 300w,
-                                styles/assets/covers/cover-450.jpg 450w,
-                                styles/assets/covers/cover-640.jpg 640w,
-                                styles/assets/covers/cover-830.jpg 830w,
-                                styles/assets/covers/cover-1000.jpg 1000w,
-                                styles/assets/covers/cover-1280.jpg 1280w"
-                        sizes="(min-width: 1920px) 1029px,
-                                (min-width: 1070px) calc(58.33vw - 91px),
-                                (min-width: 927px) calc(60vw - 70px),
-                                calc(100vw - 34px)"
-                        alt="Кадр из игры где главный герой стоит на фоне Древа Эрд" class="game-card__image"
-                        width="1280"
-                        height="720">
-                        <span class="game-card__rating-badge">8/10</span>
-                        <span class="game-card__text-badge">выбор редакции</span>
+            <div class="catalog__slider--wrap">
+                <button class="slider__btn slider__btn--prev" aria-label="Назад">‹</button>
+                <div class="catalog__slider"> 
+                    <div class="catalog__featured-games">
+                        <article class="game-card game-card--featured">
+                            <div class="game-card__cover">
+                                <img
+                                src="styles/assets/covers/src/eldenring.jpg"
+                                srcset="styles/assets/covers/cover-300.jpg 300w,
+                                        styles/assets/covers/cover-450.jpg 450w,
+                                        styles/assets/covers/cover-640.jpg 640w,
+                                        styles/assets/covers/cover-830.jpg 830w,
+                                        styles/assets/covers/cover-1000.jpg 1000w,
+                                        styles/assets/covers/cover-1280.jpg 1280w"
+                                sizes="(min-width: 1920px) 1029px,
+                                        (min-width: 1070px) calc(58.33vw - 91px),
+                                        (min-width: 927px) calc(60vw - 70px),
+                                        calc(100vw - 34px)"
+                                alt="Кадр из игры где главный герой стоит на фоне Древа Эрд" class="game-card__image"
+                                width="1280"
+                                height="720">
+                                <span class="game-card__rating-badge">8/10</span>
+                                <span class="game-card__text-badge">выбор редакции</span>
+                            </div>
+                            <div class="game-card__content">
+                                <h4 class="game-card__title">Elden Ring</h4>
+                                <div class="game-card__meta">
+                                    <span class="game-card__year">2022</span>
+                                <span class="game-card__genre">Action RPG</span>
+                                </div>
+                                <p class="game-card__description">Погрузитесь в захватывающее приключение в Междуземье, новом фэнтезийном мире, созданном Хидэтакой Миядзаки и Джорджем Р. Р. Мартином.</p>
+                                <div class="game-card__actions">
+                                    <button class="game-card__button game-card__button--readmore">
+                                        <span class="game-card__button-text">читать обзор</span>
+                                        <img src="styles/assets/ulicons/chitatobzor.png" alt="" width="10" height="10">
+                                    </button>
+                                    <button class="game-card__button game-card__button--bookmark">
+                                        <img src="styles/assets/ulicons/zakladkiicon.png" alt="" width="11" height="14">
+                                        <span class="game-card__button-text">в закладки</span>
+                                    </button>
+                                    <button class="game-card__button game-card__button--video">
+                                        <img src="styles/assets/ulicons/videoicon.png" alt="" width="15" height="15">
+                                        <span class="game-card__button-text">видео</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </article>
+                        <article class="game-card game-card--slider">
+                            <div class="game-card__cover">
+                                <picture>
+                                    <source
+                                        media="(min-width: 1920px)"
+                                        srcset="styles/assets/covers/src/Cyberpunk_hero.jpg"
+                                    >
+                                    <img
+                                        src="styles/assets/covers/cyberpunk600x900-170.jpg"
+                                        srcset="styles/assets/covers/cyberpunk600x900-85.jpg 85w,
+                                                styles/assets/covers/cyberpunk600x900-170.jpg 170w,
+                                                styles/assets/covers/cyberpunk600x900-255.jpg 255w"
+                                        sizes="85px"
+                                        alt="Обложка игры Cyberpunk 2077"
+                                        class="game-card__image"
+                                        width="600"
+                                        height="900"
+                                    >
+                                </picture>
+                                <span class="game-card__rating-badge">9/10</span>
+                            </div>
+                            <div class="game-card__content">
+                                <h4 class="game-card__title">Cyberpunk 2077</h4>
+                                <div class="game-card__meta">
+                                    <span class="game-card__year">2020</span>
+                                <span class="game-card__genre">RPG</span>                  
+                                </div>
+                                <p class="game-card__description">Отправляйтесь в Найт-Сити — огромный мегаполис будущего, где технологии переплетаются с преступностью, а жажда власти и бессмертия определяет судьбы тех, кто осмеливается бросить вызов системе..</p>
+                                <div class="game-card__actions">
+                                    <button class="game-card__button game-card__button--readmore">
+                                        <span class="game-card__button-text">читать обзор</span>
+                                        <img src="styles/assets/ulicons/chitatobzor.png" alt="" width="10" height="10">
+                                    </button>
+                                    <button class="game-card__button game-card__button--bookmark">
+                                        <img src="styles/assets/ulicons/zakladkiicon.png" alt="" width="11" height="14">
+                                        <span class="game-card__button-text">в закладки</span>
+                                    </button>
+                                    <button class="game-card__button game-card__button--video">
+                                        <img src="styles/assets/ulicons/videoicon.png" alt="" width="15" height="15">
+                                        <span class="game-card__button-text">видео</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </article>
+                        <article class="game-card game-card--slider">
+                            <div class="game-card__cover">
+                                <picture>
+                                    <source
+                                        media="(min-width: 1921px)"
+                                        srcset="styles/assets/covers/src/witcher_hero.jpg"
+                                    >
+                                    <img
+                                        src="styles/assets/covers/witcher600x900-170.jpg"
+                                        srcset="styles/assets/covers/witcher600x900-85.jpg 85w,
+                                                styles/assets/covers/witcher600x900-170.jpg 170w,
+                                                styles/assets/covers/witcher600x900-255.jpg 255w"
+                                        sizes="85px"
+                                        alt="Обложка игры Ведьмак 3"
+                                        class="game-card__image"
+                                        width="600"
+                                        height="900"
+                                    >
+                                </picture>
+                                <span class="game-card__rating-badge">10/10</span>
+                            </div>
+                            <div class="game-card__content">
+                                <h4 class="game-card__title">Ведьмак 3</h4>
+                                <div class="game-card__meta">
+                                    <span class="game-card__year">2015</span>
+                                <span class="game-card__genre">Action RPG</span>
+                                </div>
+                                <p class="game-card__description">Отправьтесь в масштабное фэнтезийное приключение по охваченному войной миру, где Геральту из Ривии предстоит столкнуться с чудовищами, древними тайнами и непростыми решениями, способными изменить судьбы целых королевств.</p>
+                                <div class="game-card__actions">
+                                    <button class="game-card__button game-card__button--readmore">
+                                        <span class="game-card__button-text">читать обзор</span>
+                                        <img src="styles/assets/ulicons/chitatobzor.png" alt="" width="10" height="10">
+                                    </button>
+                                    <button class="game-card__button game-card__button--bookmark">
+                                        <img src="styles/assets/ulicons/zakladkiicon.png" alt="" width="11" height="14">
+                                        <span class="game-card__button-text">в закладки</span>
+                                    </button>
+                                    <button class="game-card__button game-card__button--video">
+                                        <img src="styles/assets/ulicons/videoicon.png" alt="" width="15" height="15">
+                                        <span class="game-card__button-text">видео</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </article>
+                        <article class="game-card game-card--slider">
+                            <div class="game-card__cover">
+                                <picture>
+                                    <source
+                                        media="(min-width: 1921px)"
+                                        srcset="styles/assets/covers/src/hotlinemiami_hero.jpg"
+                                    >
+                                    <img
+                                        src="styles/assets/covers/hotlinemiami2600x900-170.jpg"
+                                        srcset="styles/assets/covers/hotlinemiami2600x900-85.jpg 85w,
+                                                styles/assets/covers/hotlinemiami2600x900-170.jpg 170w,
+                                                styles/assets/covers/hotlinemiami2600x900-255.jpg 255w"
+                                        sizes="85px"
+                                        alt="Обложка игры Hotline Miami 2"
+                                        class="game-card__image"
+                                        width="600"
+                                        height="900"
+                                    >
+                                </picture>
+                                <span class="game-card__rating-badge">9/10</span>
+                            </div>
+                            <div class="game-card__content">
+                                <h4 class="game-card__title">Hotline Miami 2</h4>
+                                <div class="game-card__meta">
+                                    <span class="game-card__year">2015</span>
+                                <span class="game-card__genre">Action</span>
+                                </div>
+                                <p class="game-card__description">Погрузитесь в жестокий и безумный мир Майами 1980-х, где каждый шаг сопровождается кровавыми столкновениями, неоновыми огнями и стремлением докопаться до истины.</p>
+                                <div class="game-card__actions">
+                                    <button class="game-card__button game-card__button--readmore">
+                                        <span class="game-card__button-text">читать обзор</span>
+                                        <img src="styles/assets/ulicons/chitatobzor.png" alt="" width="10" height="10">
+                                    </button>
+                                    <button class="game-card__button game-card__button--bookmark">
+                                        <img src="styles/assets/ulicons/zakladkiicon.png" alt="" width="11" height="14">
+                                        <span class="game-card__button-text">в закладки</span>
+                                    </button>
+                                    <button class="game-card__button game-card__button--video">
+                                        <img src="styles/assets/ulicons/videoicon.png" alt="" width="15" height="15">
+                                        <span class="game-card__button-text">видео</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </article>
                     </div>
-                    <div class="game-card__content">
-                        <h4 class="game-card__title">Elden Ring</h4>
-                        <div class="game-card__meta">
-                            <span class="game-card__year">2022</span>
-                           <span class="game-card__genre">Action RPG</span>
-                        </div>
-                        <p class="game-card__description">Погрузитесь в захватывающее приключение в Междуземье, новом фэнтезийном мире, созданном Хидэтакой Миядзаки и Джорджем Р. Р. Мартином.</p>
-                        <div class="game-card__actions">
-                            <button class="game-card__button game-card__button--readmore">
-                                <span class="game-card__button-text">читать обзор</span>
-                                <img src="styles/assets/ulicons/chitatobzor.png" alt="" width="10" height="10">
-                            </button>
-                            <button class="game-card__button game-card__button--bookmark">
-                                <img src="styles/assets/ulicons/zakladkiicon.png" alt="" width="11" height="14">
-                                <span class="game-card__button-text">в закладки</span>
-                            </button>
-                            <button class="game-card__button game-card__button--video">
-                                <img src="styles/assets/ulicons/videoicon.png" alt="" width="15" height="15">
-                                <span class="game-card__button-text">видео</span>
-                            </button>
-                        </div>
-                    </div>
-                </article>
-                <article class="game-card">
-                    <div class="game-card__cover">
-                        <img 
-                            src="styles/assets/covers/cyberpunk600x900-170.jpg"
-                            srcset="styles/assets/covers/cyberpunk600x900-85.jpg 85w,
-                            styles/assets/covers/cyberpunk600x900-170.jpg 170w,
-                            styles/assets/covers/cyberpunk600x900-255.jpg 255w"  
-                            sizes="85px"
-                            alt="Обложка игры Cyberpunk 2077" class="game-card__image"
-                            width="600"
-                            height="900">
-                        <span class="game-card__rating-badge">9/10</span>
-                    </div>
-                    <div class="game-card__content">
-                        <h4 class="game-card__title">Cyberpunk 2077</h4>
-                        <div class="game-card__meta">
-                            <span class="game-card__year">2020</span>
-                           <span class="game-card__genre">RPG</span>                  
-                        </div>
-                    </div>
-                </article>
-                <article class="game-card">
-                    <div class="game-card__cover">
-                        <img
-                            src="styles/assets/covers/witcher600x900-170.jpg"
-                            srcset="styles/assets/covers/witcher600x900-85.jpg 85w,
-                            styles/assets/covers/witcher600x900-170.jpg 170w,
-                            styles/assets/covers/witcher600x900-255.jpg 255w"  
-                            sizes="85px"
-                            alt="Обложка игры Ведьмак 3" class="game-card__image"
-                            width="600"
-                            height="900">
-                        <span class="game-card__rating-badge">10/10</span>
-                    </div>
-                    <div class="game-card__content">
-                        <h4 class="game-card__title">Ведьмак 3</h4>
-                        <div class="game-card__meta">
-                            <span class="game-card__year">2015</span>
-                           <span class="game-card__genre">Action RPG</span>
-                        </div>
-                    </div>
-                </article>
-                <article class="game-card">
-                    <div class="game-card__cover">
-                        <img
-                            src="styles/assets/covers/hotlinemiami2600x900-170.jpg"
-                            srcset="styles/assets/covers/hotlinemiami2600x900-85.jpg 85w,
-                            styles/assets/covers/hotlinemiami2600x900-170.jpg 170w,
-                            styles/assets/covers/hotlinemiami2600x900-255.jpg 255w"  
-                            sizes="85px"
-                            alt="Обложка игры Hotline Miami 2" class="game-card__image"
-                            width="600"
-                            height="900">
-                        <span class="game-card__rating-badge">9/10</span>
-                    </div>
-                    <div class="game-card__content">
-                        <h4 class="game-card__title">Hotline Miami 2</h4>
-                        <div class="game-card__meta">
-                            <span class="game-card__year">2015</span>
-                           <span class="game-card__genre">Action</span>
-                        </div>
-                    </div>
-                </article>
+                    <button class="slider__btn slider__btn--next" aria-label="Вперед">›</button>
+                </div>
             </div>
         </section>
         <section class="games" id="allgames">

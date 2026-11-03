@@ -16,6 +16,17 @@ const genresSelect = document.getElementById('zhanr')
 const sortFilteredGames = document.getElementById('sort')
 const resetButton = document.getElementById('catalog-reset-button')
 
+const slider = document.querySelector('.catalog__slider');
+const track = document.querySelector('.catalog__featured-games');
+const trackCards = document.querySelectorAll('.game-card');
+
+const next = document.querySelector('.slider__btn--next');
+const prev = document.querySelector('.slider__btn--prev');
+let allCards
+let index = 2
+
+const sliderMedia = window.matchMedia('(min-width: 1920px)');
+
 let state = {
     query: '',
     genre: '',
@@ -35,6 +46,20 @@ function init() {
     state = paramsToState(sortedGenres, sortedPlatforms, urlParams) // Восстанавливаем состояние из URL
     syncFormWithState(state) // Синхронизирует поля формы с состоянием приложения
     applyState() // Обновляем каталог, счётчик и URL
+
+    sliderInit()
+}
+
+function sliderInit() {
+    if(!sliderMedia.matches){
+        return;
+    }
+
+    giveClassForSliderCards()
+    createSliderClones();
+    allCards = track.querySelectorAll('.game-card');
+    updateSlider();
+
 }
 
 init()
@@ -42,6 +67,30 @@ init()
 
 //Блок 3. Управление приложением
 
+track.addEventListener('transitionend', function(event) {
+    if(event.target !== track || event.propertyName !== 'transform') {
+        return;
+    }
+
+    if(index === 6) {
+        index = 2;
+        updateSlider(false);
+    }
+
+    if(index === 1) {
+        index = 5;
+        updateSlider(false);
+    }
+});
+
+next.addEventListener('click', function() {
+    index ++
+    updateSlider();
+})
+prev.addEventListener('click', function() {
+    index --    
+    updateSlider();
+})
 
 catalog.addEventListener('click', function(event){
 
@@ -129,6 +178,66 @@ function applyState() {
 }
 
 //Блок 4. Операции с интерфейсом и браузером
+
+function updateSlider(animate) {
+    const cardWidth = trackCards[0].offsetWidth;
+    const gap = parseFloat(getComputedStyle(track).gap)
+    let offset = index * (cardWidth + gap)
+    const sliderCenter = slider.clientWidth / 2;
+    const cardCenter = offset + cardWidth / 2;
+    let position = sliderCenter - cardCenter
+
+    if(animate === false) {
+        track.classList.add('is-jumping')
+    }
+
+    for (let i = 0; i < allCards.length; i++) {
+        allCards[i].classList.remove('is-active');
+    }
+    
+    allCards[index].classList.add('is-active')
+
+    track.style.transform = `translateX(${position}px)`;
+
+    if (animate === false) {
+        track.offsetWidth;
+        track.classList.remove('is-jumping');
+    }  
+    
+    console.log({
+    index: index,
+    position: position,
+    trackWidth: track.scrollWidth,
+    sliderWidth: slider.clientWidth
+});
+}
+
+function createSliderClones() {
+    const cloneMiami = trackCards[trackCards.length - 1].cloneNode(true);
+    const cloneRing = trackCards[0].cloneNode(true);
+    const cloneWitcher = trackCards[2].cloneNode(true);
+    const cloneCyberPunk = trackCards[1].cloneNode(true);
+    track.prepend(cloneMiami)
+    track.appendChild(cloneRing)
+    track.prepend(cloneWitcher)
+    track.appendChild(cloneCyberPunk)
+    cloneMiami.setAttribute('aria-hidden', 'true')
+    cloneRing.setAttribute('aria-hidden', 'true')
+    cloneWitcher.setAttribute('aria-hidden', 'true')
+    cloneCyberPunk.setAttribute('aria-hidden', 'true')
+}
+
+function giveClassForSliderCards() {
+    if(!sliderMedia.matches){
+        return;
+    }
+    else {
+        for(let i = 0; i < trackCards.length; i++) {
+            trackCards[i].classList.add('game-card--featured')
+            trackCards[i].classList.add('game-card--slider')
+        }
+    }
+}
 
 function renderCatalog(games) {
     if (games.length === 0) {
