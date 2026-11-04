@@ -373,9 +373,9 @@ function stateToParams(state) {
     return newUrl
 }
 
-function updateUrl(state) {
-    const currentUrl = new URL(location.href);
-    const params = currentUrl.searchParams;
+function createUrlFromState(state, url) {
+    const newUrl = new URL(url);
+    const params = newUrl.searchParams;
     const paramsObject = stateToParams(state);
     const keys = Object.keys(paramsObject);
 
@@ -392,7 +392,13 @@ function updateUrl(state) {
         params.set(key, value);
     }
 
-    history.replaceState(null, '', currentUrl);
+    return newUrl;
+}
+
+function updateUrl(state) {
+    const newUrl = createUrlFromState(state, location.href);
+
+    history.replaceState(null, '', newUrl);
 }
 
 
