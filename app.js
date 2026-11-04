@@ -135,6 +135,7 @@ input.addEventListener('keydown', function(event){
 })
 
 input.addEventListener('input', function(){
+    state.query = input.value
     debouncedSearch()
 })
 
@@ -144,17 +145,17 @@ form.addEventListener('submit', function(event){
 
 genresSelect.addEventListener('change', function() {
     state.genre = genresSelect.value
-    applyState()
+    debouncedSearch()
 })
 
 platformsSelect.addEventListener('change', function() {
     state.platform = platformsSelect.value
-    applyState()
+    debouncedSearch()
 })
 
 sortFilteredGames.addEventListener('change', function() {
     state.sort = sortFilteredGames.value
-    applyState()
+    debouncedSearch()
 })
 
 resetButton.addEventListener('click', function(event) {
@@ -166,7 +167,6 @@ resetButton.addEventListener('click', function(event) {
 })
 
 function debounceQueryChange() {
-    state.query = input.value
     applyState()
 }
 
