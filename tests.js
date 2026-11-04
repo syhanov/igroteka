@@ -637,6 +637,52 @@ function assertCreateUrlFromState() {
     );
 }
 
+function assertSortNewGamesArrayWithNullDates() {
+    const games = [
+        { id: 30, released: '2020-01-01' },
+        { id: 9, released: null },
+        { id: 3, released: null },
+        { id: 20, released: '2022-01-01' }
+    ];
+
+    const state = {
+        query: '',
+        genre: '',
+        platform: '',
+        sort: 'released-desc'
+    };
+
+    assert(
+        [
+            games[3],
+            games[0],
+            games[2],
+            games[1]
+        ],
+        sortNewGamesArray(games, state),
+        'Проверка сортировки дат: null в конце, между собой по id'
+    );
+}
+
+function assertSortNewGamesArrayNameSortingById() {
+    const games = [
+        { id: 2, name: 'alpha' },
+        { id: 1, name: 'Alpha' }
+    ];
+
+    const state = {
+        query: '',
+        genre: '',
+        platform: '',
+        sort: 'name-asc'
+    };
+
+    assert(
+        [games[1], games[0]],
+        sortNewGamesArray(games, state),
+        'Проверка сортировки одинаковых названий по id'
+    );
+}
 
 function runChecks() {
     assertFormatYear();
@@ -653,6 +699,8 @@ function runChecks() {
     assertSortNewGamesArrayReturnsNewArray();
     assertSortNewGamesArrayDoesNotMutateOriginal();
     assertSortNewGamesArraySotrtingById();
+    assertSortNewGamesArrayWithNullDates();
+    assertSortNewGamesArrayNameSortingById();
     console.log('Все проверки успешно пройдены')
 }
 

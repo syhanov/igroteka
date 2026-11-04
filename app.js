@@ -467,7 +467,7 @@ function sortNewGamesArray(array, state) {
                 return -1;
             }
 
-            return a.name.localeCompare(b.name) || a.id - b.id;
+            return a.name.localeCompare(b.name, 'en', { sensitivity: 'base' }) || a.id - b.id;
         });
     }
     else if (state.sort === "default") {
