@@ -203,13 +203,6 @@ function updateSlider(animate) {
         track.offsetWidth;
         track.classList.remove('is-jumping');
     }  
-    
-    console.log({
-    index: index,
-    position: position,
-    trackWidth: track.scrollWidth,
-    sliderWidth: slider.clientWidth
-});
 }
 
 function createSliderClones() {
@@ -217,10 +210,12 @@ function createSliderClones() {
     const cloneRing = trackCards[0].cloneNode(true);
     const cloneWitcher = trackCards[2].cloneNode(true);
     const cloneCyberPunk = trackCards[1].cloneNode(true);
+
     track.prepend(cloneMiami)
     track.appendChild(cloneRing)
     track.prepend(cloneWitcher)
     track.appendChild(cloneCyberPunk)
+    
     cloneMiami.setAttribute('aria-hidden', 'true')
     cloneRing.setAttribute('aria-hidden', 'true')
     cloneWitcher.setAttribute('aria-hidden', 'true')
@@ -237,22 +232,6 @@ function giveClassForSliderCards() {
             trackCards[i].classList.add('game-card--slider')
         }
     }
-}
-
-function renderCatalog(games) {
-    if (games.length === 0) {
-        return `
-           <p class="games__grid__empty">По запросу ${escapeHTML(input.value)} ничего не найдено</p>
-        `;
-    }
-
-    let html = '';
-
-    for (let i = 0; i < games.length; i++) {
-        html += renderCard(games[i]);
-    }
-
-    return html;
 }
 
 function renderCard(game) {
@@ -276,6 +255,23 @@ function renderCard(game) {
                 </article>
             `;
 };
+
+function renderCatalog(games) {
+    if (games.length === 0) {
+        return `
+           <p class="games__grid__empty">По запросу ${escapeHTML(input.value)} ничего не найдено</p>
+        `;
+    }
+
+    let html = '';
+
+    for (let i = 0; i < games.length; i++) {
+        html += renderCard(games[i]);
+    }
+
+    return html;
+}
+
 
 function renderModalCard(game) {
         const modalGame =  `
@@ -416,40 +412,40 @@ function selectGames(games, state) {
 } 
 
 function sortNewGamesArray(array, state) {
-    let newMassive = [...array]
+    let newArray = [...array]
     if(state.sort === "rating-desc"){
-        newMassive.sort(function(a, b) {
+        newArray.sort(function(a, b) {
             return b.rating - a.rating || a.id - b.id
         })
     }
     else if(state.sort === "released-desc"){
-        newMassive.sort(function(a, b) {
+        newArray.sort(function(a, b) {
             return b.released.localeCompare(a.released) || a.id - b.id
         })    
     }
     else if(state.sort === "name-asc"){
-        newMassive.sort(function(a, b) {
+        newArray.sort(function(a, b) {
             return a.name.localeCompare(b.name) || a.id - b.id
         })    
     }
     else if(state.sort === "default") {
-        return newMassive 
+        return newArray 
     }
-        return newMassive
+        return newArray
 }
 
 function getSortedGamesGenresOrPlatforms(games, property) {
-    let GamesOptionArray = games.flatMap(function(game) {
+    let gamesOptionArray = games.flatMap(function(game) {
         return game[property];
     }).filter(function(option) {
         return option !== null;
     });
-    let uniqueOptions  = new Set(GamesOptionArray)
-    let SortedOptionArray = [...uniqueOptions ]
-    SortedOptionArray.sort(function(a,b) {
+    let uniqueOptions  = new Set(gamesOptionArray)
+    let sortedOptionArray = [...uniqueOptions ]
+    sortedOptionArray.sort(function(a,b) {
         return a.localeCompare(b);
     })
-    return SortedOptionArray
+    return sortedOptionArray
 }
 
 //Блок 6. Общие вспомогательные функции
