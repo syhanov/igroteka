@@ -542,6 +542,102 @@ function assertSortNewGamesArraySotrtingById() {
     'Проверка sortNewGamesArray на коректность сортировки по id')
 }
 
+
+// createUrlFromState(state, url)
+//
+// Преобразует состояние каталога в новый URL.
+// Принимает:
+//   state — объект состояния каталога;
+//   url — исходный URL в виде строки.
+//
+// Возвращает:
+//   новый объект URL с актуальными параметрами каталога.
+//
+// Правила:
+//   - старые параметры каталога удаляются;
+//   - новые параметры добавляются из state;
+//   - посторонние параметры URL сохраняются;
+//   - исходный URL не изменяется.
+
+function assertCreateUrlFromState() {
+
+    // Проверка полностью заполненного состояния
+    const state1 = {
+        query: 'Portal',
+        genre: 'Puzzle',
+        platform: 'PC',
+        sort: 'name-asc'
+    };
+
+    const url1 = 'https://example.com/games?old=value&q=old';
+
+    const expectedUrl1 = 'https://example.com/games?old=value&q=Portal&genre=Puzzle&platform=PC&sort=name-asc';
+
+    assert(
+        expectedUrl1,
+        createUrlFromState(state1, url1).href,
+        'Проверка createUrlFromState с полностью заполненным состоянием'
+    );
+
+
+    // Проверка частично заполненного состояния
+    const state2 = {
+        query: '',
+        genre: 'Simulation',
+        platform: '',
+        sort: 'rating-desc'
+    };
+
+    const url2 = 'https://example.com/games?q=old&genre=Action&platform=PC&sort=name-asc&campaign=spring';
+
+    const expectedUrl2 = 'https://example.com/games?campaign=spring&genre=Simulation&sort=rating-desc';
+
+    assert(
+        expectedUrl2,
+        createUrlFromState(state2, url2).href,
+        'Проверка createUrlFromState с частично заполненным состоянием'
+    );
+
+
+    // Проверка пустого состояния
+    const state3 = {
+        query: '',
+        genre: '',
+        platform: '',
+        sort: 'default'
+    };
+
+    const url3 = 'https://example.com/games?q=Portal&genre=Puzzle&platform=PC&sort=name-asc&campaign=spring';
+
+    const expectedUrl3 = 'https://example.com/games?campaign=spring';
+
+    assert(
+        expectedUrl3,
+        createUrlFromState(state3, url3).href,
+        'Проверка createUrlFromState с пустым состоянием'
+    );
+
+
+    // Проверка, что исходный URL не изменяется
+    const originalUrl = 'https://example.com/games?q=old&campaign=spring';
+
+    const state4 = {
+        query: 'Portal',
+        genre: '',
+        platform: '',
+        sort: 'default'
+    };
+
+    createUrlFromState(state4, originalUrl);
+
+    assert(
+        'https://example.com/games?q=old&campaign=spring',
+        originalUrl,
+        'Проверка createUrlFromState на отсутствие изменения исходного URL'
+    );
+}
+
+
 function runChecks() {
     assertFormatYear();
     assertFormatRating();
