@@ -419,25 +419,62 @@ function selectGames(games, state) {
 
 function sortNewGamesArray(array, state) {
     let newArray = [...array]
-    if(state.sort === "rating-desc"){
+    if (state.sort === "rating-desc") {
         newArray.sort(function(a, b) {
-            return b.rating - a.rating || a.id - b.id
-        })
+            if (a.rating === null && b.rating === null) {
+                return a.id - b.id;
+            }
+
+            if (a.rating === null) {
+                return 1;
+            }
+
+            if (b.rating === null) {
+                return -1;
+            }
+
+            return b.rating - a.rating || a.id - b.id;
+        });
     }
-    else if(state.sort === "released-desc"){
+    else if (state.sort === "released-desc") {
         newArray.sort(function(a, b) {
-            return b.released.localeCompare(a.released) || a.id - b.id
-        })    
+            if (a.released === null && b.released === null) {
+                return a.id - b.id;
+            }
+
+            if (a.released === null) {
+                return 1;
+            }
+
+            if (b.released === null) {
+                return -1;
+            }
+
+            return b.released.localeCompare(a.released) || a.id - b.id;
+        });
     }
-    else if(state.sort === "name-asc"){
+    else if (state.sort === "name-asc") {
         newArray.sort(function(a, b) {
-            return a.name.localeCompare(b.name) || a.id - b.id
-        })    
+            if (a.name === null && b.name === null) {
+                return a.id - b.id;
+            }
+
+            if (a.name === null) {
+                return 1;
+            }
+
+            if (b.name === null) {
+                return -1;
+            }
+
+            return a.name.localeCompare(b.name) || a.id - b.id;
+        });
     }
-    else if(state.sort === "default") {
-        return newArray 
+    else if (state.sort === "default") {
+        return newArray;
     }
-        return newArray
+
+    return newArray;
 }
 
 function getSortedGamesGenresOrPlatforms(games, property) {
