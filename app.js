@@ -18,12 +18,14 @@ const resetButton = document.getElementById('catalog-reset-button')
 
 const slider = document.querySelector('.catalog__slider');
 const track = document.querySelector('.catalog__featured-games');
-const trackCards = document.querySelectorAll('.game-card');
-
 const next = document.querySelector('.slider__btn--next');
 const prev = document.querySelector('.slider__btn--prev');
-let allCards
-let index = 2
+const trackCards = track.querySelectorAll('.game-card');
+
+let allCards;
+let index = 2;
+let isAnimating = false;
+let isSliderInitialized = false;
 
 const sliderMedia = window.matchMedia('(min-width: 1920px)');
 
@@ -46,20 +48,27 @@ function init() {
     state = paramsToState(sortedGenres, sortedPlatforms, urlParams) // Восстанавливаем состояние из URL
     syncFormWithState(state) // Синхронизирует поля формы с состоянием приложения
     applyState() // Обновляем каталог, счётчик и URL
-
-    sliderInit()
 }
 
 function sliderInit() {
-    if(!sliderMedia.matches){
+    if (isSliderInitialized) {
         return;
     }
 
-    giveClassForSliderCards()
     createSliderClones();
-    allCards = track.querySelectorAll('.game-card');
-    updateSlider();
 
+    allCards = track.querySelectorAll('.game-card');
+
+    index = 2;
+    isAnimating = false;
+
+    updateSlider(false);
+
+    track.addEventListener('transitionend', handleSliderTransitionEnd);
+    next.addEventListener('click', handleNextClick);
+    prev.addEventListener('click', handlePrevClick);
+
+    isSliderInitialized = true;
 }
 
 init()
@@ -67,30 +76,85 @@ init()
 
 //Блок 3. Управление приложением
 
-track.addEventListener('transitionend', function(event) {
-    if(event.target !== track || event.propertyName !== 'transform') {
+function handleSliderMediaChange() {
+    updateSliderCardClasses();
+
+    if (sliderMedia.matches) {
+        sliderInit();
+    } else {
+        sliderDestroy();
+    }
+}
+
+handleSliderMediaChange();
+
+sliderMedia.addEventListener('change', handleSliderMediaChange);
+
+function sliderDestroy() {
+    if (!isSliderInitialized) {
         return;
     }
 
-    if(index === 6) {
+    track.removeEventListener('transitionend', handleSliderTransitionEnd);
+    next.removeEventListener('click', handleNextClick);
+    prev.removeEventListener('click', handlePrevClick);
+
+    const clones = track.querySelectorAll('.game-card--clone');
+
+    for (let i = 0; i < clones.length; i++) {
+        clones[i].remove();
+    }
+
+    for (let i = 0; i < trackCards.length; i++) {
+        trackCards[i].classList.remove('is-active');
+    }
+
+    track.style.removeProperty('transform');
+    track.classList.remove('is-jumping');
+
+    allCards = null;
+    index = 2;
+    isAnimating = false;
+    isSliderInitialized = false;
+}
+
+function handleSliderTransitionEnd(event) {
+    if (event.target !== track || event.propertyName !== 'transform') {
+        return;
+    }
+
+    if (index === 6) {
         index = 2;
         updateSlider(false);
     }
 
-    if(index === 1) {
+    if (index === 1) {
         index = 5;
         updateSlider(false);
     }
-});
 
-next.addEventListener('click', function() {
-    index ++
+    isAnimating = false;
+}
+
+function handleNextClick() {
+    if (isAnimating) {
+        return;
+    }
+
+    isAnimating = true;
+    index++;
     updateSlider();
-})
-prev.addEventListener('click', function() {
-    index --    
+}
+
+function handlePrevClick() {
+    if (isAnimating) {
+        return;
+    }
+
+    isAnimating = true;
+    index--;
     updateSlider();
-})
+}
 
 catalog.addEventListener('click', function(event){
 
@@ -211,6 +275,11 @@ function createSliderClones() {
     const cloneWitcher = trackCards[2].cloneNode(true);
     const cloneCyberPunk = trackCards[1].cloneNode(true);
 
+    cloneMiami.classList.add('game-card--clone');
+    cloneRing.classList.add('game-card--clone');
+    cloneWitcher.classList.add('game-card--clone');
+    cloneCyberPunk.classList.add('game-card--clone');
+
     track.prepend(cloneMiami)
     track.appendChild(cloneRing)
     track.prepend(cloneWitcher)
@@ -222,14 +291,22 @@ function createSliderClones() {
     cloneCyberPunk.setAttribute('aria-hidden', 'true')
 }
 
-function giveClassForSliderCards() {
-    if(!sliderMedia.matches){
-        return;
-    }
-    else {
-        for(let i = 0; i < trackCards.length; i++) {
-            trackCards[i].classList.add('game-card--featured')
-            trackCards[i].classList.add('game-card--slider')
+function updateSliderCardClasses() {
+    for (let i = 0; i < trackCards.length; i++) {
+        const card = trackCards[i];
+
+        if (sliderMedia.matches) {
+            card.classList.add('game-card--featured');
+            card.classList.add('game-card--slider');
+        } else {
+            card.classList.remove('game-card--featured');
+            card.classList.remove('game-card--slider');
+
+            if (i === 0) {
+                card.classList.add('game-card--featured');
+            } else {
+                card.classList.add('game-card--slider');
+            }
         }
     }
 }
