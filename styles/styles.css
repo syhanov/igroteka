@@ -3,7 +3,7 @@
 }
 a:focus-visible,
 button:focus-visible {
-    outline: 2px solid #DBFCFF;
+    outline: 1px solid #DBFCFF;
     outline-offset: 2px;
     border-radius: 2px;
 }
@@ -356,7 +356,7 @@ main {
 }
 .filter-form__search:focus-visible, 
 .filter-form__selector:focus-visible {
-    outline: 2px solid #DBFCFF;
+    outline: 1px solid #DBFCFF;
     outline-offset: 2px;
     border-radius: 2px;
 }
@@ -736,6 +736,171 @@ main {
 .slider__btn {
     display: none;
 }
+.api__login {
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 13px;
+    background-color: #1C1B1B;
+    border: 1px solid #3B494B;;
+    border-radius: 5px;
+}
+.login__text {
+    display: flex;
+    justify-content: space-between;
+}
+.login__text-main {
+    font-size: 0.9375rem;
+    font-weight: 600;
+    color: #E5E2E1;
+    display: flex;
+    align-items: center;
+    gap: 3px;
+    margin: 0;
+}
+.login__link {
+    text-decoration: none;
+    font-size: 0.75rem;
+    font-weight: normal;
+    color: #00F0FF;
+    display: flex;
+    align-items: center;
+    gap: 3px;
+    letter-spacing: 2px;
+}
+.login__form {
+    display: flex;
+    flex-direction: column;
+    gap: 13px;
+}
+.login__password,
+.login__button--connect,
+.login__button--delete {
+    border: none;       
+    outline: none;      
+    box-shadow: none;
+    height: 42px;
+    width: 50%;
+}
+.login__password:focus-visible,
+.login__button--connect:focus-visible,
+.login__button--delete:focus-visible{
+    outline: 1px solid #DBFCFF;
+    outline-offset: 2px;
+    border-radius: 2px;
+}
+.login__password-label {
+    display: flex;
+    align-items: center;
+    font-size: 0.6875rem ;
+    color: #B9CACB;
+    margin-bottom: 4px;
+}
+.login__password {
+    width: 100%;
+    height: 47px;
+    padding: 10px;
+    font-size: 0.8125rem;
+    color: #E5E2E1;
+    border: 1px solid #3B494B;
+    border-radius: 5px;
+    background-color: #201F1F;
+}
+.form__buttons {
+    display: flex;
+    gap: 8px;
+}
+.login__button {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    justify-content: center;
+}
+.login__button--connect {
+    font-weight: bold;
+    font-size: 0.8125rem;
+    background-color: #00F0FF;
+    color: #002022;
+    font-family: "Manrope", sans-serif;
+    border-radius: 5px;
+}
+.login__button--delete {
+    font-weight: bold;
+    font-size: 0.8125rem;
+    background-color: #201F1F;
+    color: #B9CACB;
+    border: 1px solid #3B494B;
+    font-family: "Manrope", sans-serif;
+    border-radius: 5px;
+}
+.login__text-description {
+    font-size: 0.75rem;
+    font-weight: normal;
+    color: #849495;
+    margin: 0;
+}
+.catalog__progress {
+    width: 100%;
+    height: 6px;
+    overflow: hidden;
+    border-radius: 10px;
+    background-color: #303238;
+}
+
+.catalog__progress-bar {
+    display: block;
+    width: 0%;
+    height: 100%;
+    border-radius: inherit;
+    background-color: #DBFCFF;
+    transition: width 0.3s ease;
+}
+.catalog__loading {
+    padding: 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    background-color: #1C1B1B;
+    border: 1px solid #00F0FF66;
+    border-radius: 5px;
+    box-shadow: 0 0 15px 0 rgba(0, 240, 255, 0.07);
+}
+.catalog__label {
+    display: flex;
+    justify-content: space-between;
+
+}
+.catalog__label-text {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: #00F0FF;
+    margin: 0;
+}
+.catalog__label-bage {
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: #00F0FF;
+    background-color: #00F0FF1A;
+    border: 1px solid #00F0FF4D;
+    border-radius: 2px;
+    padding: 0 8px;
+}
+.catalog__description {
+    font-size: 0.75rem;
+    font-weight: normal;
+    color: #849495;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+.catalog__dot {
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: #00F0FF;
+}
 /*Изначально брейкпоинт был запланирован на 680 px с учётом будущих возможностей. Позже я увеличил его значение  на 40 px, чтобы объединить несколько изменений в одном медиазапросе и избежать создания отдельного брейкпоинта для этого списка. Благодаря этому форма поиска и футер корректно отображаются при увеличенной ширине экрана.*/
 @media (min-width:753px) {
     .game-card--modal .game-card__meta {
@@ -1052,7 +1217,7 @@ main {
         transform: scale(0.95);
     }
     .slider__btn:focus-visible {
-        outline: 2px solid #DBFCFF;
+        outline: 1px solid #DBFCFF;
         outline-offset: 4px;
     }
     .slider__btn--next {

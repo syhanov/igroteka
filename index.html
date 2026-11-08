@@ -296,29 +296,56 @@
             </div>
         </section>
         <section class="games" id="allgames">
+            <div class="api__login">
+                <div class="login__text">
+                    <p class="login__text-main"><img src="styles/assets/ulicons/Api_logo.png" alt="">API-ключ RAWG</p>
+                    <a href="" class="login__link">Получить ключ<img src="styles/assets/ulicons/Api_link_icon.png" alt=""></a>
+                </div>
+                <div class="login__form">
+                    <div class="login__password-wrapper">
+                        <label for="password" class="login__password-label">КЛЮЧ ДОСТУПА (API KEY)</label>
+                        <input type="password" class="login__password" name="password">
+                    </div>
+                    <div class="form__buttons">
+                        <button class="login__button login__button--connect"><img src="styles/assets/ulicons/Api_connect_Icon.png" alt="">Подключить</button>
+                        <button class="login__button login__button--delete"><img src="styles/assets/ulicons/Api_treas_Icon.png" alt="">Удалить ключ</button>
+                    </div>
+                </div>
+                <p class="login__text-description">Ключ сохраняется в этом браузере и виден JavaScript приложения и в сетевых запросах.</p>
+            </div>
             <div class="games__filter">
                 <div class="games__info">
                 <h2 class="games__title">Все игры</h2>
                 <p class="games__count"></p>
                 </div>
-                    <div class="catalog__filter">
-                        <form class="filter-form">
-                            <input id="game-search" type="search" placeholder="Поиск игры..." class="filter-form__search">
-                            <select name="Жанр" class="filter-form__selector" id="zhanr">
-                                <option value="" class="filter-form__option">Все жанры</option>
-                            </select>
-                            <select name="платформа" class="filter-form__selector" id="platforma">
-                                <option value="" class="filter-form__option">Все платформы</option>
-                            </select>
-                            <select name="сортировка" class="filter-form__selector" id="sort">
-                                <option value="default" class="filter-form__option">По умолчанию</option>
-                                <option value="rating-desc" class="filter-form__option">Сначала с высоким рейтингом</option>
-                                <option value="released-desc" class="filter-form__option">Сначала новые</option>
-                                <option value="name-asc" class="filter-form__option">По названию (А–Я)</option>
-                            </select>
-                            <button id="catalog-reset-button" type="reset" class="filter-form__button">Сброс</button>
-                        </form>
-                    </div>
+                <div class="catalog__filter">
+                    <form class="filter-form">
+                        <input id="game-search" type="search" placeholder="Поиск игры..." class="filter-form__search">
+                        <select name="Жанр" class="filter-form__selector" id="zhanr">
+                            <option value="" class="filter-form__option">Все жанры</option>
+                        </select>
+                        <select name="платформа" class="filter-form__selector" id="platforma">
+                            <option value="" class="filter-form__option">Все платформы</option>
+                        </select>
+                        <select name="сортировка" class="filter-form__selector" id="sort">
+                            <option value="default" class="filter-form__option">По умолчанию</option>
+                            <option value="rating-desc" class="filter-form__option">Сначала с высоким рейтингом</option>
+                            <option value="released-desc" class="filter-form__option">Сначала новые</option>
+                            <option value="name-asc" class="filter-form__option">По названию (А–Я)</option>
+                        </select>
+                        <button id="catalog-reset-button" type="reset" class="filter-form__button">Сброс</button>
+                    </form>
+                </div>
+            </div>
+            <div class="catalog__loading">
+                <div class="catalog__label">
+                    <p class="catalog__label-text"><span class="catalog__spiner"></span>Загружаем игры...</p>
+                    <span class="catalog__label-bage">RAWG /games</span>
+                </div>
+                <div class="catalog__progress">
+                    <span class="catalog__progress-bar"></span>
+                </div>
+                <p class="catalog__description"><span class="catalog__dot"></span>Выполняется сетевой запрос к эндпоинту RAWG API</p>
             </div>
             <div class="games__grid">
                 <noscript class="games__grid__noscript">Каталог не будет отображаться, потому что JavaScript отключён.</noscript>
