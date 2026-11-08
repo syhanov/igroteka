@@ -42,6 +42,7 @@ main {
 .logo {
     display: flex;
     align-items: center;
+    justify-content: center;
 }
 .site-nav__list {
     list-style-type: none;
@@ -578,7 +579,6 @@ main {
     grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
     gap: 0.5rem;
     margin-bottom: 1rem;
-    padding: 0 16px;
 }
 .game-card--catalog {
     background-color: #201F1F66;
@@ -839,6 +839,71 @@ main {
     color: #849495;
     margin: 0;
 }
+.api__login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+.api__login-info-wrapper {
+    padding: 20px;
+    background-color: #201F1F;
+    border: 1px solid #3B494B66;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+.login__title {
+    color: #FFE179;
+    font-size: 0.75rem;
+    display: flex;
+    align-items: center;
+    font-weight: 500;
+    gap: 5px;
+    letter-spacing: 1px;
+    margin: 0;
+    margin-bottom: 8px;
+}
+.login__info-description {
+    font-size: 0.75rem;
+    color: #C8C6C5;
+    letter-spacing: 2px;
+    margin: 0;
+}
+.api__approw,
+.api__decline {
+    background-color: #0E0E0E;
+    padding: 12px;
+    max-width: fit-content;
+}
+.api__approw {
+    border-left: 2px solid #00F0FF;
+}
+.api__decline {
+    border-left: 2px solid #FFB4AB;
+}
+.approw__title,
+.decline__title {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    margin: 0;
+}
+.approw__title {
+    color: #00F0FF;
+}
+.decline__title {
+    color: #FFB4AB;
+}
+.approw__description,
+.decline__description {
+    font-size: 0.75rem;
+    color: #E5E2E1;
+    margin: 0;
+    margin-left: 28px;
+    max-width: 32ch;
+}
 .catalog__progress {
     width: 100%;
     height: 6px;
@@ -901,8 +966,168 @@ main {
     border-radius: 50%;
     background-color: #00F0FF;
 }
+.catalog__timeout,
+.catalog__wrong-key,
+.catalog__no-matches {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 24px 24px 30px;
+    gap: 24px;
+    border-radius: 5px;
+}
+.catalog__timeout-wrapper,
+.catalog__wrong-key-wrapper {
+    background:
+        radial-gradient(
+            ellipse at top right,
+            rgba(255, 180, 171, 0.09),
+            transparent 35%
+        ),
+        radial-gradient(
+            ellipse at bottom left,
+            rgba(255, 180, 171, 0.09),
+            transparent 35%
+        ),
+        #17191D;
+    border: 1px solid #FFB4AB66;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.catalog__no-matches-wrapper {
+    background:
+        radial-gradient(
+            ellipse at top right,
+            rgba(0, 240, 255, 0.09),
+            transparent 35%
+        ),
+        radial-gradient(
+            ellipse at bottom left,
+            rgba(0, 240, 255, 0.09),
+            transparent 35%
+        ),
+        #17191D;
+        border: 1px solid #00F0FF66;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+}
+.catalog__no-matches-icon-wrapper,
+.catalog__timeout-icon-wrapper,
+.catalog__wrong-key-icon-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 64px;
+    height: 64px;
+    background-color: #201F1F;
+}
+.catalog__timeout-icon-wrapper,
+.catalog__wrong-key-icon-wrapper {
+    border: 1px solid #FFB4AB66;
+    filter: drop-shadow(0 0 20px #FFB4AB1A);
+}
+.catalog__no-matches-icon-wrapper {
+    border: 1px solid #00F0FF66;
+    filter: drop-shadow(0 0 20px #00F0FF1A);
+}
+.catalog__timeout-buttons,
+.catalog__no-matches-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+}
+.catalog__timeout-text-wrapper,
+.catalog__wrong-key-text-wrapper,
+.catalog__no-matches-text-wrapper {
+    text-align: center;
+}
+.catalog__timeout-text-label,
+.catalog__wrong-key-text-label,
+.catalog__no-matches-text-label {
+    font-size: 1.25rem;
+    font-weight: bold;
+    color: #E5E2E1;
+    margin: 0;
+    margin-bottom: 12px;
+}
+.catalog__timeout-text-description,
+.catalog__wrong-key-text-description,
+.catalog__no-matches-text-description {
+    font-size: 0.875rem;
+    font-weight: 400;
+    color: #B9CACB;
+    margin: 0;
+}
+.catalog__timeout-reconnect-button,
+.catalog__timeout-check-key-button,
+.catalog__fix-key-button,
+.catalog__no-matches-drop-filtrs-button,
+.catalog__no-matches-show-all-games-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    border-radius: 5px;
+}
+.catalog__timeout-reconnect-button,
+.catalog__no-matches-drop-filtrs-button {
+    font-size: 0.875rem;
+    font-weight: bold;
+    color: #002022;
+    background-color: #00F0FF;
+    width: 100%;
+    height: 48px;
+    border: none;
+}
+.catalog__timeout-check-key-button,
+.catalog__no-matches-show-all-games-button {
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: #E5E2E1;
+    background-color: #1C1B1B;
+    border: 1px solid #3B494B;
+    height: 48px;
+}
+.catalog__fix-key-button {
+    font-size: 0.875rem;
+    font-weight: 700;
+    color: #00F0FF;
+    border: 1px solid #00F0FF;
+    background-color: #13131399;
+    width: 100%;
+    height: 48px;
+}
 /*Изначально брейкпоинт был запланирован на 680 px с учётом будущих возможностей. Позже я увеличил его значение  на 40 px, чтобы объединить несколько изменений в одном медиазапросе и избежать создания отдельного брейкпоинта для этого списка. Благодаря этому форма поиска и футер корректно отображаются при увеличенной ширине экрана.*/
 @media (min-width:753px) {
+    .catalog__timeout-reconnect-button,
+    .catalog__no-matches-drop-filtrs-button,
+    .catalog__timeout-check-key-button,
+    .catalog__no-matches-show-all-games-button {
+        width: 50%;
+    }
+    .catalog__timeout-buttons,
+    .catalog__no-matches-buttons {
+        flex-direction: row;
+        gap: 16px;
+    }
+    .catalog__timeout,
+    .catalog__no-matches {
+        max-width: 576px;
+    }
+    .catalog__wrong-key {
+        max-width: 670px;
+    }
+    .catalog__timeout-wrapper,
+    .catalog__no-matches-wrapper {
+        padding: 48px 0 72px;
+    }
+    .catalog__wrong-key-wrapper {
+        padding: 64px 0 88px;
+    }
     .game-card--modal .game-card__meta {
     font-size: 1rem;
     }
@@ -988,6 +1213,10 @@ main {
 }
 /*Этот брейкпоинт специально подобран под адаптацию навигации и футера. Раньше я пробовал его сдвинуть, но при этом пункты меню сильно сжимались и буквально «налипали» друг на друга — из‑за этого страдала читаемость и удобство клика. Поэтому оставил текущее значение: оно даёт элементам достаточно пространства и сохраняет структуру.*/
 @media (min-width:927px) {
+.login__button--connect,
+.login__button--delete {
+    max-width: 200px;
+}
     main {
         padding: 0 32px;
         gap: 3rem;
@@ -1064,6 +1293,20 @@ main {
 }
 /* Верстка возвращена к десктоп-версии. Брейкпоинт выбран так, чтобы картинка в хедере встала на своё место: при меньших значениях либо текст сильно сжимается, либо картинка искажается (становится вытянутой) — оба варианта выглядят плохо. */
 @media (min-width:1070px) {
+    .api__login-form {
+        width: 70%;
+    }
+    .api__login-info-wrapper {
+        width: 30%;
+    }
+    .api__login {
+        display: flex;
+        flex-direction: row;
+        gap: 32px;
+    }
+    .api__login {
+        padding: 48px 32px;
+    }
     main {
         padding: 0 64px;
         gap: 4rem;

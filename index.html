@@ -8,7 +8,6 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles/styles.css">
-    <script src="games.js" defer></script>
     <script src="app.js" defer></script>
     <script src="tests.js" defer></script>
 </head>
@@ -297,21 +296,39 @@
         </section>
         <section class="games" id="allgames">
             <div class="api__login">
-                <div class="login__text">
-                    <p class="login__text-main"><img src="styles/assets/ulicons/Api_logo.png" alt="">API-ключ RAWG</p>
-                    <a href="" class="login__link">Получить ключ<img src="styles/assets/ulicons/Api_link_icon.png" alt=""></a>
-                </div>
-                <div class="login__form">
-                    <div class="login__password-wrapper">
-                        <label for="password" class="login__password-label">КЛЮЧ ДОСТУПА (API KEY)</label>
-                        <input type="password" class="login__password" name="password">
+                <div class="api__login-form">
+                    <div class="login__text">
+                        <p class="login__text-main"><img src="styles/assets/ulicons/Api_logo.png" alt="">API-ключ RAWG</p>
+                        <a href="" class="login__link">Получить ключ<img src="styles/assets/ulicons/Api_link_icon.png" alt=""></a>
                     </div>
-                    <div class="form__buttons">
-                        <button class="login__button login__button--connect"><img src="styles/assets/ulicons/Api_connect_Icon.png" alt="">Подключить</button>
-                        <button class="login__button login__button--delete"><img src="styles/assets/ulicons/Api_treas_Icon.png" alt="">Удалить ключ</button>
+                    <div class="login__form">
+                        <div class="login__password-wrapper">
+                            <label for="password" class="login__password-label">КЛЮЧ ДОСТУПА (API KEY)</label>
+                            <input type="password" class="login__password" name="password">
+                        </div>
+                        <div class="form__buttons">
+                            <button class="login__button login__button--connect"><img src="styles/assets/ulicons/Api_connect_Icon.png" alt="">Подключить</button>
+                            <button class="login__button login__button--delete"><img src="styles/assets/ulicons/Api_treas_Icon.png" alt="">Удалить ключ</button>
+                        </div>
+                    </div>
+                    <p class="login__text-description">Ключ сохраняется в этом браузере и виден JavaScript приложения и в сетевых запросах.</p>
+                </div>
+                <div class="api__login-info-wrapper">
+                    <div class="api__login-info">
+                        <p class="login__title"><img src="styles/assets/ulicons/Yelow-i_icon.png" alt="" class="login__info">БЕЗОПАСНОСТЬ ХРАНЕНИЯ</p>
+                        <p class="login__info-description">Ключ сохраняется в этом браузере и виден JavaScript приложения и в сетевых запросах. Рекомендуется использовать персональный Read-Only токен </p>
+                    </div>
+                    <div class="api__login-messages">
+                        <div class="api__approw">
+                            <p class="approw__title"><img src="styles/assets/ulicons/aprow_Icon.png" alt="" class="approw__icon">СИНХРОНИЗАЦИЯ АКТИВНА</p>
+                            <p class="approw__description">Подключено успешно, ключ сохранён в LocalStorage</p>
+                        </div>
+                        <div class="api__decline">
+                            <p class="decline__title"><img src="styles/assets/ulicons/decline__Icon.png" alt="" class="decline__icon">СИНХРОНИЗАЦИЯ ПРЕРВАНА</p>
+                            <p class="decline__description">Ключ отклонён удалённым сервером. Введите корректный ключ и повторите попытку.</p>
+                        </div>
                     </div>
                 </div>
-                <p class="login__text-description">Ключ сохраняется в этом браузере и виден JavaScript приложения и в сетевых запросах.</p>
             </div>
             <div class="games__filter">
                 <div class="games__info">
@@ -348,6 +365,50 @@
                 <p class="catalog__description"><span class="catalog__dot"></span>Выполняется сетевой запрос к эндпоинту RAWG API</p>
             </div>
             <div class="games__grid">
+                <div class="catalog__state">
+                    <div class="catalog__timeout-wrapper">
+                        <div class="catalog__timeout">
+                            <div class="catalog__timeout-icon-wrapper">
+                                <img src="styles/assets/ulicons/Api_time-out_icon.png" alt="" class="catalog__timeout-icon">
+                            </div>
+                            <div class="catalog__timeout-text-wrapper">
+                                <p class="catalog__timeout-text-label">Не удалось получить список игр</p>
+                                <p class="catalog__timeout-text-description">Таймаут соединения с RAWG API или исчерпан месячный лимит запросов ключа. Проверьте валидность токена или повторите попытку через несколько секунд.</p>
+                            </div>
+                            <div class="catalog__timeout-buttons">
+                                <button class="catalog__timeout-reconnect-button"><img src="styles/assets/ulicons/Api_reconnect-button_iconpng.png" alt="" class="catalog__temiout-reconnect-image">Повторить попытку</button>
+                                <button class="catalog__timeout-check-key-button">Проверить ключ API</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="catalog__wrong-key-wrapper">
+                        <div class="catalog__wrong-key">
+                            <div class="catalog__wrong-key-icon-wrapper">
+                                <img src="styles/assets/ulicons/Api_wrong-key_icon.png" alt="" class="catalog__timeout-icon">
+                            </div>
+                            <div class="catalog__wrong-key-text-wrapper">
+                                <p class="catalog__wrong-key-text-label">Для загрузки каталога требуется активный API-ключ RAWG</p>
+                                <p class="catalog__wrong-key-text-description">Текущий ключ отклонён. Предоставьте действующий токен в форме подключения выше, чтобы разблокировать доступ к каталогу игр.</p>
+                            </div>
+                            <button class="catalog__fix-key-button"><img src="styles/assets/ulicons/Api_wrong-key_button_Icon.png" alt="" class="catalog__timeout-check-key-image">Исправить ключ в форме</button>
+                        </div>
+                    </div>
+                    <div class="catalog__no-matches-wrapper">
+                        <div class="catalog__no-matches">
+                            <div class="catalog__no-matches-icon-wrapper">
+                                <img src="styles/assets/ulicons/Api_no-matches_Icon.png" alt="" class="catalog__no-matches-icon">
+                            </div>
+                            <div class="catalog__no-matches-text-wrapper">
+                                <p class="catalog__no-matches-text-label">Ничего не найдено</p>
+                                <p class="catalog__no-matches-text-description">По запросу «Half-Life 3» ничего не найдено по текущим условиям фильтрации. Попробуйте изменить формулировку или сбросить фильтры.</p>
+                            </div>
+                            <div class="catalog__no-matches-buttons">
+                                <button class="catalog__no-matches-drop-filtrs-button">Сбросить фильтры</button>
+                                <button class="catalog__no-matches-show-all-games-button">Показать все игры</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>    
                 <noscript class="games__grid__noscript">Каталог не будет отображаться, потому что JavaScript отключён.</noscript>
             </div>
             <div class="games__more">
