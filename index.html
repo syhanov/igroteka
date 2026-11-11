@@ -8,6 +8,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles/styles.css">
+    <script src="games.js" defer></script>
     <script src="app.js" defer></script>
     <script src="tests.js" defer></script>
 </head>
@@ -296,7 +297,7 @@
         </section>
         <section class="games" id="allgames">
             <div class="api__login">
-                <div class="api__login-form">
+                <form class="api__login-form" id="api__form">
                     <div class="login__text">
                         <p class="login__text-main"><img src="styles/assets/ulicons/Api_logo.png" alt="">API-ключ RAWG</p>
                         <a href="" class="login__link">Получить ключ<img src="styles/assets/ulicons/Api_link_icon.png" alt=""></a>
@@ -304,15 +305,15 @@
                     <div class="login__form">
                         <div class="login__password-wrapper">
                             <label for="password" class="login__password-label">КЛЮЧ ДОСТУПА (API KEY)</label>
-                            <input type="password" class="login__password" name="password">
+                            <input type="password" class="login__password" id="password">
                         </div>
                         <div class="form__buttons">
-                            <button class="login__button login__button--connect"><img src="styles/assets/ulicons/Api_connect_Icon.png" alt="">Подключить</button>
-                            <button class="login__button login__button--delete"><img src="styles/assets/ulicons/Api_treas_Icon.png" alt="">Удалить ключ</button>
+                            <button class="login__button login__button--connect" type="submit"><img src="styles/assets/ulicons/Api_connect_Icon.png" alt="">Подключить</button>
+                            <button class="login__button login__button--delete" type="button"><img src="styles/assets/ulicons/Api_treas_Icon.png" alt="">Удалить ключ</button>
                         </div>
                     </div>
                     <p class="login__text-description">Ключ сохраняется в этом браузере и виден JavaScript приложения и в сетевых запросах.</p>
-                </div>
+                </form>
                 <div class="api__login-info-wrapper">
                     <div class="api__login-info">
                         <p class="login__title"><img src="styles/assets/ulicons/Yelow-i_icon.png" alt="" class="login__info">БЕЗОПАСНОСТЬ ХРАНЕНИЯ</p>

@@ -29,6 +29,15 @@ let isSliderInitialized = false;
 
 const sliderMedia = window.matchMedia('(min-width: 1920px)');
 
+const apiForm = document.getElementById('api__form');
+const apiPassword = document.getElementById('password');
+const apiConnectButton = document.querySelector('.login__button--connect')
+const apiDeteleButton = document.querySelector('.login__button--delete')
+const apiApprowMessage = document.querySelector('.api__approw')
+const apiDeclineMessage = document.querySelector('.api__decline')
+let isConnecting = false
+let currentApiKey = ''
+
 let state = {
     query: '',
     genre: '',
@@ -41,6 +50,9 @@ function init() {
     const sortedGenres = getSortedGamesGenresOrPlatforms(GAMES, 'genres')
     const sortedPlatforms = getSortedGamesGenresOrPlatforms(GAMES, 'platforms')
     const urlParams = getUrlParams()
+
+
+    apiAutoConnect()
 
     renderPlatformsOrGenresOptions(sortedGenres, genresSelect)
     renderPlatformsOrGenresOptions(sortedPlatforms, platformsSelect)
@@ -155,6 +167,23 @@ function handlePrevClick() {
     index--;
     updateSlider();
 }
+
+apiForm.addEventListener("submit", function(event) {
+    event.preventDefault();
+
+    if(isConnecting === true) {
+        return
+    }
+
+    currentApiKey = getAndSaveApiKey()
+
+    if(!currentApiKey) {
+        return
+    }
+    
+    isConnecting = true
+    connectToApi(currentApiKey);
+})
 
 catalog.addEventListener('click', function(event){
 
@@ -311,6 +340,64 @@ function updateSliderCardClasses() {
     }
 }
 
+function getAndSaveApiKey() {
+    currentApiKey = apiPassword.value.trim()
+    if(!currentApiKey){
+        return
+    }
+    localStorage.setItem('igroteka:rawg-key', currentApiKey)
+    return currentApiKey
+}
+
+function connectToApi(apiKey) {
+    showApiMessage('hide');
+    apiPassword.classList.remove('wrong__password');
+
+    let url = new URL('http://127.0.0.1:3000/api/games');
+    url.searchParams.set('key', apiKey)
+
+    return fetch(url)
+    .then(function(response) {
+        if(!response.ok) {
+            throw new Error('HTTP error: ' + response.status );
+        }
+        showApiMessage('approw')
+        apiPassword.value = ''
+    })
+    .catch(function(error) {
+        console.error(error);
+        apiPassword.classList.add('wrong__password');
+        showApiMessage('decline');
+    })
+    .finally(function() {
+        isConnecting = false
+    })
+}
+
+function showApiMessage(type) {
+    if(type === 'hide') {
+        apiApprowMessage.classList.remove('is-visible')
+        apiDeclineMessage.classList.remove('is-visible')
+    }
+    else if(type === 'approw') {
+        apiDeclineMessage.classList.remove('is-visible')
+        apiApprowMessage.classList.add('is-visible')
+    }
+    else if(type === 'decline') {
+        apiApprowMessage.classList.remove('is-visible')
+        apiDeclineMessage.classList.add('is-visible')
+    }
+}
+
+function apiAutoConnect() {
+    currentApiKey = localStorage.getItem('igroteka:rawg-key')
+    if(currentApiKey) {
+        connectToApi(currentApiKey)
+    }
+    else {
+        return
+    }
+}
 function renderCard(game) {
 
     return `
