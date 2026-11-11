@@ -35,8 +35,9 @@ const apiConnectButton = document.querySelector('.login__button--connect')
 const apiDeteleButton = document.querySelector('.login__button--delete')
 const apiApprowMessage = document.querySelector('.api__approw')
 const apiDeclineMessage = document.querySelector('.api__decline')
-let isConnecting = false
 let currentApiKey = ''
+
+let apiController = null;
 
 let state = {
     query: '',
@@ -171,18 +172,17 @@ function handlePrevClick() {
 apiForm.addEventListener("submit", function(event) {
     event.preventDefault();
 
-    if(isConnecting === true) {
-        return
-    }
-
     currentApiKey = getAndSaveApiKey()
 
     if(!currentApiKey) {
         return
     }
     
-    isConnecting = true
     connectToApi(currentApiKey);
+})
+
+apiDeteleButton.addEventListener('click', function() {
+    deleteApiKey()
 })
 
 catalog.addEventListener('click', function(event){
@@ -356,7 +356,11 @@ function connectToApi(apiKey) {
     let url = new URL('http://127.0.0.1:3000/api/games');
     url.searchParams.set('key', apiKey)
 
-    return fetch(url)
+    if(apiController) {
+        apiController.abort()
+    }
+    apiController = new AbortController();
+    return fetch(url, { signal: apiController.signal })
     .then(function(response) {
         if(!response.ok) {
             throw new Error('HTTP error: ' + response.status );
@@ -365,12 +369,14 @@ function connectToApi(apiKey) {
         apiPassword.value = ''
     })
     .catch(function(error) {
+        if(error.name === 'AbortError') {
+            return
+        }
         console.error(error);
         apiPassword.classList.add('wrong__password');
         showApiMessage('decline');
     })
     .finally(function() {
-        isConnecting = false
     })
 }
 
@@ -397,6 +403,20 @@ function apiAutoConnect() {
     else {
         return
     }
+}
+
+function deleteApiKey() {
+    localStorage.removeItem('igroteka:rawg-key');
+    currentApiKey = null;
+    clearTimeout(debouncedSearch);
+    if(apiController) {
+        apiController.abort();
+        apiController = null;
+    }
+    //catalog.innerHTML = '';
+    apiPassword.value = '';
+    showApiMessage('hide');
+    apiPassword.classList.remove('wrong__password')
 }
 function renderCard(game) {
 
