@@ -45,22 +45,11 @@ let state = {
     platform: '',
     sort: 'default'
 };
+let currentGames = [];
 
 //Блок 2. Запуск
-function init() {
-    const sortedGenres = getSortedGamesGenresOrPlatforms(GAMES, 'genres')
-    const sortedPlatforms = getSortedGamesGenresOrPlatforms(GAMES, 'platforms')
-    const urlParams = getUrlParams()
-
-
-    apiAutoConnect()
-
-    renderPlatformsOrGenresOptions(sortedGenres, genresSelect)
-    renderPlatformsOrGenresOptions(sortedPlatforms, platformsSelect)
-
-    state = paramsToState(sortedGenres, sortedPlatforms, urlParams) // Восстанавливаем состояние из URL
-    syncFormWithState(state) // Синхронизирует поля формы с состоянием приложения
-    applyState() // Обновляем каталог, счётчик и URL
+async function init() {
+    await apiAutoConnect()
 }
 
 function sliderInit() {
@@ -192,7 +181,7 @@ catalog.addEventListener('click', function(event){
         return
     }
     const id = card.dataset.id
-    const game = GAMES.find(function(currentGame){
+    const game = currentGames.find(function(currentGame){
         return currentGame.id === Number(id)
     })
     console.log(game)
@@ -264,9 +253,9 @@ function debounceQueryChange() {
 }
 
 function applyState() {
-    const selectedGames = selectGames(GAMES, state);
+    const selectedGames = selectGames(currentGames, state);
     catalog.innerHTML = renderCatalog(selectedGames);
-    gamesCount.textContent = `показанно ${selectedGames.length} из ${GAMES.length}`
+    gamesCount.textContent = `показанно ${selectedGames.length} из ${currentGames.length}`
     updateUrl(state);
 }
 
@@ -349,7 +338,21 @@ function getAndSaveApiKey() {
     return currentApiKey
 }
 
-function connectToApi(apiKey) {
+function initializeCatalog() {
+    const urlParams = getUrlParams()
+    let sortedGenres = getSortedGamesGenresOrPlatforms(currentGames, 'genres');
+    let sortedPlatforms = getSortedGamesGenresOrPlatforms(currentGames, 'platforms');
+
+    renderPlatformsOrGenresOptions(sortedGenres, genresSelect);
+    renderPlatformsOrGenresOptions(sortedPlatforms, platformsSelect);
+
+    state = paramsToState(sortedGenres, sortedPlatforms, urlParams) // Восстанавливаем состояние из URL
+    syncFormWithState(state) // Синхронизирует поля формы с состоянием приложения
+    
+    applyState()
+}
+
+async function connectToApi(apiKey) {
     showApiMessage('hide');
     apiPassword.classList.remove('wrong__password');
 
@@ -360,24 +363,84 @@ function connectToApi(apiKey) {
         apiController.abort()
     }
     apiController = new AbortController();
-    return fetch(url, { signal: apiController.signal })
-    .then(function(response) {
-        if(!response.ok) {
-            throw new Error('HTTP error: ' + response.status );
-        }
+    
+    try {
+        let data = await fetchData(url, apiController.signal)
+        currentGames = data.results.map(function(rawGame) {
+            return normalizeGame(rawGame);
+        });
+
+        initializeCatalog()
+
         showApiMessage('approw')
         apiPassword.value = ''
-    })
-    .catch(function(error) {
+    }
+    catch(error) {
         if(error.name === 'AbortError') {
             return
         }
         console.error(error);
         apiPassword.classList.add('wrong__password');
         showApiMessage('decline');
-    })
-    .finally(function() {
-    })
+    }
+    finally {
+    }
+}
+
+async function fetchData(url, signal) {
+    let response = await fetch(url, { signal: signal });
+
+    if(!response.ok) {
+        throw new Error('HTTP error: ' + response.status)
+    }
+    
+    let data = await response.json()
+    return validateGamesResponse(data)
+}
+
+
+function validateGamesResponse(data) {
+    if(!data || typeof data !== 'object') {
+        throw new Error('Некорректный формат данных')
+    }
+    
+    let validDataResult = Array.isArray(data.results)
+    let validDataCount = Number.isInteger(data.count) && data.count >= 0
+    let validDataNext = typeof data.next === 'string' || data.next === null
+    let validDataPrevious = typeof data.previous === 'string' || data.previous === null
+    
+    if(validDataResult && validDataCount && validDataNext && validDataPrevious) {
+        return data
+    }
+    else {
+        throw new Error('Структура полученных данных поврежденна')
+    }
+}
+
+function normalizeGame(rawGame) {
+    let normalizedGame = {
+
+    }
+    normalizedGame.id = rawGame.id
+    normalizedGame.name = rawGame.name
+    normalizedGame.released = rawGame.released
+    normalizedGame.background_image = rawGame.background_image
+    normalizedGame.rating = rawGame.rating
+
+    let rawGameGenres = rawGame.genres ?? []
+        normalizedGame.genres = rawGameGenres.map(function(genre) {
+            return genre.name
+        })
+    
+    let rawGamePlatforms = rawGame.platforms ?? []
+        normalizedGame.platforms = rawGamePlatforms.map(function(platform) {
+            if (!platform.platform) {
+                throw new Error('Некорректная платформа');
+            }
+            return platform.platform.name
+        })
+
+    return normalizedGame
 }
 
 function showApiMessage(type) {
@@ -398,7 +461,7 @@ function showApiMessage(type) {
 function apiAutoConnect() {
     currentApiKey = localStorage.getItem('igroteka:rawg-key')
     if(currentApiKey) {
-        connectToApi(currentApiKey)
+        return connectToApi(currentApiKey)
     }
     else {
         return
@@ -727,5 +790,97 @@ function debounce(fn, ms) {
         timer = setTimeout(function (){
             fn()
         }, ms)
+    }
+}
+
+
+let promise = new Promise(function(resolve, reject) {
+    setTimeout(function() {
+        resolve(10);
+    },2000);
+});
+promise
+    .then(function(value) {
+    return value + 1
+})
+    .then(function(value) {
+        console.log(value)
+})
+
+let promise2 = new Promise(function(resolve, reject) {
+    setTimeout(function() {
+        reject(new Error('Failed'))
+        resolve(10);
+    },2000);
+});
+promise2
+    .then(function(value) {
+    value + 1
+})
+    .then(function(value) {
+        console.log(value)
+})
+    .catch(function(error) {
+        console.log(error)
+})
+    .finally(function() {
+        console.log('выполнен finaly')
+    })
+
+    let promise3 = new Promise(function(resolve, reject) {
+    setTimeout(function() {
+        resolve(10);
+    },2000);
+});
+    promise3
+        .then(function(value) {
+        value + 1
+            throw new Error('Failed')
+        })
+        .then(function(value) {
+            console.log(value)
+        })
+        .catch(function(error) {
+            console.log(error)
+        })
+        .finally(function() {
+            console.log('выполнен finaly')
+        })
+
+let promise4 = new Promise(function(resolve) {
+    setTimeout(function() {
+        resolve('Первый промис');
+    }, 1000);
+});
+
+let promise5 = new Promise(function(resolve, reject) {
+    setTimeout(function() {
+        reject(new Error("Второй промис завершился ошибкой"));
+    }, 3000);
+});
+
+Promise.all([promise4, promise5])
+    .then(function(results) {
+        console.log(results);
+    })
+    .catch(function(error) {
+        console.log(error)
+    })
+
+async function getNumber() {
+    return Promise.resolve(5);
+}
+async function showNumber() {
+    try {
+        let result = await getNumber()
+
+        throw new Error('Failed');
+        
+        result = result * 3
+        result = result + 10
+        console.log(result)
+    }
+    catch(error) {
+        console.log(error)
     }
 }
