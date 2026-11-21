@@ -345,16 +345,19 @@ function initializeCatalog(genres, platforms) {
     let sortedGenres = getSortedGenresOrPlatforms(genres)
     let sortedPlatforms = getSortedGenresOrPlatforms(platforms)
 
-    renderPlatformsOrGenresOptions(sortedGenres, genresSelect);
-    renderPlatformsOrGenresOptions(sortedPlatforms, platformsSelect);
-
     let genreNames = sortedGenres.map(function(genre) {
         return genre.name
     });
-
+    
     let platformNames = sortedPlatforms.map(function(platform) {
         return platform.name
     });
+    
+    renderPlatformsOrGenresOptions(sortedGenres, genresSelect);
+    renderPlatformsOrGenresOptions(sortedPlatforms, platformsSelect);
+
+    saveDictionaries()
+
     state = paramsToState(genreNames, platformNames, urlParams) // Восстанавливаем состояние из URL
     syncFormWithState(state) // Синхронизирует поля формы с состоянием приложения
     
@@ -375,13 +378,13 @@ async function connectToApi(apiKey) {
     
     try {
         let results = await Promise.all([
-            fetchGenres(),
-            fetchPlatforms(),
+            loadDictionaries(),
             fetchData(url, apiController.signal)
         ])
-        rawgGenres = results[0]
-        rawgPlatforms = results[1]
-        let data = results[2] 
+        let dictionaries = results[0]
+        let data = results[1]
+        rawgGenres = dictionaries.genres
+        rawgPlatforms = dictionaries.platforms
         console.log(data.next)
         currentGames = data.results.map(function(rawGame) {
             return normalizeGame(rawGame);
@@ -401,6 +404,105 @@ async function connectToApi(apiKey) {
         showApiMessage('decline');
     }
     finally {
+    }
+}
+
+function saveDictionaries() {
+    let platforms = rawgPlatforms.map(function(platform) {
+        return {
+            id: platform.id,
+            name: platform.name
+        }
+    })
+
+    let genres = rawgGenres.map(function(genre) {
+        return {
+            id: genre.id,
+            name: genre.name
+        }
+    })
+
+    let dictionaries = {
+        platforms,
+        genres,
+        savedAt: Date.now()
+    }
+    try {
+        localStorage.setItem('igroteka:rawg-dictionaries' ,JSON.stringify(dictionaries))
+    }
+    catch {
+        console.warn('Ошибка сохранения справочников')
+        showApiMessage('decline')
+    }
+}
+
+function getLocalDictionaries() {
+    let dictionaries = localStorage.getItem('igroteka:rawg-dictionaries')
+
+    if(!dictionaries) {
+        return null
+    }
+
+    try {
+        dictionaries = JSON.parse(dictionaries)
+    }
+    catch {
+        return null
+    }
+
+    if(isValidateDictionaries(dictionaries)) {
+        return dictionaries
+    }
+    else {
+        return null
+    }
+}
+
+function isValidateDictionaries(dictionaries) {
+    if(!dictionaries || typeof dictionaries !== 'object') {
+        return null
+    }
+        let genresValidate = Array.isArray(dictionaries.genres) && dictionaries.genres.every(function(genre) {
+            return typeof genre.name === 'string' && genre.name.trim() !== '' && Number.isFinite(genre.id)
+        })
+        let platformsValidate = Array.isArray(dictionaries.platforms) && dictionaries.platforms.every(function(platform) {
+            return typeof platform.name === 'string' && platform.name.trim() !== '' && Number.isFinite(platform.id)
+        })
+        let savedAt = dictionaries.savedAt
+        let cacheAge = Date.now() - savedAt
+        let timeValidate = Number.isFinite(savedAt) && Number.isFinite(cacheAge) && cacheAge >= 0 && cacheAge <= 24*60*60*1000
+
+        if(!genresValidate || !platformsValidate || !timeValidate) {
+            return null 
+        }
+        else {
+            return true
+        }
+}
+
+async function loadDictionaries() {
+    let dictionaries = getLocalDictionaries();
+    if(dictionaries) {
+        let rawgGenres = dictionaries.genres
+        let rawgPlatforms = dictionaries.platforms
+
+        return {
+            genres: rawgGenres,
+            platforms: rawgPlatforms
+        }
+    }
+
+    let results = await Promise.all([
+        fetchGenres(),
+        fetchPlatforms(),
+    ])
+    rawgGenres = results[0]
+    rawgPlatforms = results[1]
+    saveDictionaries()
+
+    return {
+        genres: rawgGenres,
+        platforms: rawgPlatforms
     }
 }
 
