@@ -584,20 +584,6 @@ main {
     background-color: #201F1F66;
     border: 0;
 }
-.games__more-button {
-    background: none;
-    border: none;
-    box-sizing: border-box;
-    min-width: 142px;
-    min-height: 39px;
-    cursor: pointer;
-    font-size: 0.875rem;
-    font-weight: bold;
-    text-transform: uppercase;
-    gap: 0.5rem;
-    padding: 0.625rem 10px;
-    color: #b9cacb;
-}
 .games__filter {
     display: flex;
     justify-content: space-between;
@@ -644,21 +630,10 @@ main {
     cursor: pointer;
     z-index: 2000;
 }
-.site-footer__link--button,
-.games__more-button {
+.site-footer__link--button{
     display: flex;
     align-items: center;
     justify-content: center;
-}
-.games__more {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-top: 1px dotted #3B494B66;
-    min-height: 66px;
-}
-.games__more .games__more-button{
-    margin: 0;
 }
 .site-footer {
     background-color: #0E0E0E66;
@@ -1114,6 +1089,62 @@ main {
 .wrong__password {
     border-color: #FFB4AB;
 }
+.games__pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    padding: 16px;
+    border-top: 1px dotted #3B494B66;
+    min-height: 66px;
+}
+
+.pagination__pages {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.pagination__button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    min-width: 36px;
+    min-height: 36px;
+    padding: 0 10px;
+
+    font-family: "Manrope", sans-serif;
+    font-size: 0.875rem;
+    font-weight: bold;
+
+    color: #B9CACB;
+    background-color: #201F1F;
+    border: 1px solid #3B494B;
+    border-radius: 5px;
+
+    cursor: pointer;
+    transition: background-color 0.2s ease,
+                color 0.2s ease;
+}
+
+.pagination__button--active {
+    color: #00363A;
+    background-color: #00F0FF;
+    border-color: #00F0FF;
+}
+
+.pagination__button:disabled {
+    opacity: 0.35;
+    cursor: not-allowed;
+}
+
+.pagination__dots {
+    color: #B9CACB;
+    padding: 0 4px;
+}
+
+
 /*Изначально брейкпоинт был запланирован на 680 px с учётом будущих возможностей. Позже я увеличил его значение  на 40 px, чтобы объединить несколько изменений в одном медиазапросе и избежать создания отдельного брейкпоинта для этого списка. Благодаря этому форма поиска и футер корректно отображаются при увеличенной ширине экрана.*/
 @media (min-width:753px) {
     .catalog__timeout-reconnect-button,
@@ -1497,5 +1528,9 @@ main {
     .site-footer__link--button:hover {
         background-color: #3A3A3A;
         transform: translateY(-2px);
+    }
+    .pagination__button:not(:disabled):not(.pagination__button--active):hover {
+        color: #00F0FF;
+        border-color: #00F0FF;
     }
 }

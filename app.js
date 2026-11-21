@@ -46,6 +46,8 @@ let state = {
     sort: 'default'
 };
 let currentGames = [];
+let rawgGenres = []
+let rawgPlatforms = []
 
 //Блок 2. Запуск
 async function init() {
@@ -338,15 +340,22 @@ function getAndSaveApiKey() {
     return currentApiKey
 }
 
-function initializeCatalog() {
+function initializeCatalog(genres, platforms) {
     const urlParams = getUrlParams()
-    let sortedGenres = getSortedGamesGenresOrPlatforms(currentGames, 'genres');
-    let sortedPlatforms = getSortedGamesGenresOrPlatforms(currentGames, 'platforms');
+    let sortedGenres = getSortedGenresOrPlatforms(genres)
+    let sortedPlatforms = getSortedGenresOrPlatforms(platforms)
 
     renderPlatformsOrGenresOptions(sortedGenres, genresSelect);
     renderPlatformsOrGenresOptions(sortedPlatforms, platformsSelect);
 
-    state = paramsToState(sortedGenres, sortedPlatforms, urlParams) // Восстанавливаем состояние из URL
+    let genreNames = sortedGenres.map(function(genre) {
+        return genre.name
+    });
+
+    let platformNames = sortedPlatforms.map(function(platform) {
+        return platform.name
+    });
+    state = paramsToState(genreNames, platformNames, urlParams) // Восстанавливаем состояние из URL
     syncFormWithState(state) // Синхронизирует поля формы с состоянием приложения
     
     applyState()
@@ -365,12 +374,20 @@ async function connectToApi(apiKey) {
     apiController = new AbortController();
     
     try {
-        let data = await fetchData(url, apiController.signal)
+        let results = await Promise.all([
+            fetchGenres(),
+            fetchPlatforms(),
+            fetchData(url, apiController.signal)
+        ])
+        rawgGenres = results[0]
+        rawgPlatforms = results[1]
+        let data = results[2] 
+        console.log(data.next)
         currentGames = data.results.map(function(rawGame) {
             return normalizeGame(rawGame);
         });
 
-        initializeCatalog()
+        initializeCatalog(rawgGenres, rawgPlatforms)
 
         showApiMessage('approw')
         apiPassword.value = ''
@@ -395,11 +412,59 @@ async function fetchData(url, signal) {
     }
     
     let data = await response.json()
-    return validateGamesResponse(data)
+    return data
 }
 
+async function fetchGenres() {
+    let url = new URL('http://127.0.0.1:3000/api/genres');
+    url.searchParams.set('key', currentApiKey)
 
-function validateGamesResponse(data) {
+    let rawgGenres = [];
+    let page = 1
+    let next = true 
+
+    while(next) {
+        url.searchParams.set('page', page)
+        let data = await fetchData(url, apiController.signal)
+        data = validatePaginatedResponse(data)
+        page++
+
+        rawgGenres.push(...data.results)
+
+        if(data.next === null) {
+            next = false
+        }
+    }
+
+    return rawgGenres 
+}
+
+async function fetchPlatforms() {
+    let url = new URL('http://127.0.0.1:3000/api/platforms');
+    url.searchParams.set('key', currentApiKey)
+
+    let rawgPlatforms = [];
+    let page = 1
+    let next = true 
+
+    while(next) {
+        url.searchParams.set('page', page)
+        let data = await fetchData(url, apiController.signal)
+        data = validatePaginatedResponse(data)
+        page++
+
+        rawgPlatforms.push(...data.results)
+
+        if(data.next === null) {
+            next = false
+        }
+    }
+
+    console.log(rawgPlatforms)
+    return rawgPlatforms
+}
+
+function validatePaginatedResponse(data) {
     if(!data || typeof data !== 'object') {
         throw new Error('Некорректный формат данных')
     }
@@ -546,9 +611,9 @@ function renderModalCard(game) {
 function renderPlatformsOrGenresOptions(property, select) {
     for(let i = 0; i<property.length; i++){
         const platformName = document.createElement('option')
-        platformName.value = property[i]
+        platformName.value = property[i].name
         platformName.classList.add('filter-form__option')
-        platformName.textContent = property[i]
+        platformName.textContent = property[i].name
         select.append(platformName)
     }
 }
@@ -724,16 +789,18 @@ function sortNewGamesArray(array, state) {
     return newArray;
 }
 
-function getSortedGamesGenresOrPlatforms(games, property) {
-    let gamesOptionArray = games.flatMap(function(game) {
-        return game[property];
-    }).filter(function(option) {
-        return option !== null;
-    });
-    let uniqueOptions  = new Set(gamesOptionArray)
+function getSortedGenresOrPlatforms(options) {
+    let seenIds = new Set()
+    let uniqueOptions = options.filter(function(option) {
+        if(!seenIds.has(option.id)) {
+            seenIds.add(option.id)
+            return true;
+        }
+        return false
+    })
     let sortedOptionArray = [...uniqueOptions ]
     sortedOptionArray.sort(function(a,b) {
-        return a.localeCompare(b);
+        return a.name.localeCompare(b.name);
     })
     return sortedOptionArray
 }

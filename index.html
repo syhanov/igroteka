@@ -411,9 +411,32 @@
                 </div>    
                 <noscript class="games__grid__noscript">Каталог не будет отображаться, потому что JavaScript отключён.</noscript>
             </div>
-            <div class="games__more">
-                <button class="games__more-button"><span>показать еще</span><img src="styles/assets/ulicons/pokazateshe.png" alt="" width="7" height="5"></button>
-            </div>
+            <nav class="games__pagination" aria-label="Страницы каталога">
+                <button class="pagination__button pagination__button--prev"
+                        type="button"
+                        aria-label="Предыдущая страница"
+                        disabled>
+                    ‹
+                </button>
+                <div class="pagination__pages">
+                    <button class="pagination__button pagination__button--active"
+                            type="button"
+                            aria-current="page">1</button>
+
+                    <button class="pagination__button" type="button">2</button>
+                    <button class="pagination__button" type="button">3</button>
+
+                    <span class="pagination__dots">...</span>
+
+                    <button class="pagination__button" type="button">50</button>
+                </div>
+
+                <button class="pagination__button pagination__button--next"
+                        type="button"
+                        aria-label="Следующая страница">
+                    ›
+                </button>
+            </nav>
         </section>
         <div class="modal-overlay">
             <div class="modal">
