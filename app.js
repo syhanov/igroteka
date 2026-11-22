@@ -38,17 +38,20 @@ const apiDeclineMessage = document.querySelector('.api__decline')
 let currentApiKey = ''
 
 let apiController = null;
+let searchController = null;
 
 let state = {
     query: '',
     genre: '',
     platform: '',
-    sort: 'default'
+    sort: 'default',
+    page: 1
 };
 let currentGames = [];
 let rawgGenres = []
 let rawgPlatforms = []
 
+let totalGames = 0
 //Блок 2. Запуск
 async function init() {
     await apiAutoConnect()
@@ -213,7 +216,7 @@ input.addEventListener('keydown', function(event){
         if(event.key === 'Escape'){
         input.value = '';
         state.query = '';
-        applyState()
+        searchGames();
         return
 }
 })
@@ -229,17 +232,17 @@ form.addEventListener('submit', function(event){
 
 genresSelect.addEventListener('change', function() {
     state.genre = genresSelect.value
-    debouncedSearch()
+    searchGames();
 })
 
 platformsSelect.addEventListener('change', function() {
     state.platform = platformsSelect.value
-    debouncedSearch()
+    searchGames();
 })
 
 sortFilteredGames.addEventListener('change', function() {
     state.sort = sortFilteredGames.value
-    debouncedSearch()
+    searchGames();
 })
 
 resetButton.addEventListener('click', function(event) {
@@ -247,18 +250,21 @@ resetButton.addEventListener('click', function(event) {
     state.genre = '';
     state.platform = '';
     state.sort = 'default';
-    applyState()
+    searchGames();
 })
 
 function debounceQueryChange() {
-    applyState()
+    searchGames()
 }
 
 function applyState() {
     const selectedGames = selectGames(currentGames, state);
-    catalog.innerHTML = renderCatalog(selectedGames);
-    gamesCount.textContent = `показанно ${selectedGames.length} из ${currentGames.length}`
+
     updateUrl(state);
+}
+function renderGames() {
+    catalog.innerHTML = renderCatalog(currentGames);
+    gamesCount.textContent = `показанно ${currentGames.length} из ${totalGames}`
 }
 
 //Блок 4. Операции с интерфейсом и браузером
@@ -341,35 +347,20 @@ function getAndSaveApiKey() {
 }
 
 function initializeCatalog(genres, platforms) {
-    const urlParams = getUrlParams()
     let sortedGenres = getSortedGenresOrPlatforms(genres)
     let sortedPlatforms = getSortedGenresOrPlatforms(platforms)
 
-    let genreNames = sortedGenres.map(function(genre) {
-        return genre.name
-    });
-    
-    let platformNames = sortedPlatforms.map(function(platform) {
-        return platform.name
-    });
-    
     renderPlatformsOrGenresOptions(sortedGenres, genresSelect);
     renderPlatformsOrGenresOptions(sortedPlatforms, platformsSelect);
 
     saveDictionaries()
 
-    state = paramsToState(genreNames, platformNames, urlParams) // Восстанавливаем состояние из URL
-    syncFormWithState(state) // Синхронизирует поля формы с состоянием приложения
-    
-    applyState()
+    renderGames()
 }
 
 async function connectToApi(apiKey) {
     showApiMessage('hide');
     apiPassword.classList.remove('wrong__password');
-
-    let url = new URL('http://127.0.0.1:3000/api/games');
-    url.searchParams.set('key', apiKey)
 
     if(apiController) {
         apiController.abort()
@@ -377,15 +368,34 @@ async function connectToApi(apiKey) {
     apiController = new AbortController();
     
     try {
-        let results = await Promise.all([
-            loadDictionaries(),
-            fetchData(url, apiController.signal)
-        ])
-        let dictionaries = results[0]
-        let data = results[1]
+        let results = await loadDictionaries()
+        let dictionaries = results
         rawgGenres = dictionaries.genres
         rawgPlatforms = dictionaries.platforms
-        console.log(data.next)
+
+
+        let sortedGenres = getSortedGenresOrPlatforms(rawgGenres)
+        let sortedPlatforms = getSortedGenresOrPlatforms(rawgPlatforms)
+
+        let genreNames = sortedGenres.map(function(genre) {
+            return genre.name
+        });
+        
+        let platformNames = sortedPlatforms.map(function(platform) {
+            return platform.name
+        });
+
+        const urlParams = getUrlParams()
+        state = paramsToState(genreNames, platformNames, urlParams) // Восстанавливаем состояние из URL
+        syncFormWithState(state) // Синхронизирует поля формы с состоянием приложения
+
+
+        let url = createGameUrl(state, apiKey, rawgGenres, rawgPlatforms)
+      
+        let data = await fetchData(url, apiController.signal)
+
+        totalGames = data.count
+
         currentGames = data.results.map(function(rawGame) {
             return normalizeGame(rawGame);
         });
@@ -406,6 +416,33 @@ async function connectToApi(apiKey) {
     finally {
     }
 }
+
+async function searchGames() {
+    state.page = 1;
+    updateUrl(state);
+
+    if(searchController) {
+        searchController.abort()
+    }
+    searchController = new AbortController();
+    try {
+        let url = createGameUrl(state, currentApiKey, rawgGenres, rawgPlatforms)
+        let data = await fetchData(url, searchController.signal)
+            currentGames = data.results.map(function(rawGame) {
+                return normalizeGame(rawGame);
+            });
+        totalGames = data.count
+        renderGames()
+        }
+    catch(error) {
+        if(error.name === 'AbortError') {
+            return
+        }
+        console.error(error);
+        apiPassword.classList.add('wrong__password');
+        showApiMessage('decline');
+        }
+    }
 
 function saveDictionaries() {
     let platforms = rawgPlatforms.map(function(platform) {
@@ -648,6 +685,49 @@ function deleteApiKey() {
     showApiMessage('hide');
     apiPassword.classList.remove('wrong__password')
 }
+
+function createGameUrl(state, apiKey, genres, platforms) {
+    let url = new URL('http://127.0.0.1:3000/api/games')
+    url.searchParams.set('key', apiKey)
+
+    if(state.query.trim() !== '') {
+        url.searchParams.set('search', state.query.trim())
+    }
+    if(state.genre !== '') {
+        let currentGenresObject = genres.find(function(genre) {
+            return genre.name === state.genre
+        })
+        if(currentGenresObject) {
+            url.searchParams.set('genres', currentGenresObject.id)
+        }
+    }
+    if(state.platform !== '') {
+        let currentPlatformsObject = platforms.find(function(platform) {
+            return platform.name === state.platform
+        })
+        if(currentPlatformsObject) {
+            url.searchParams.set('platforms', currentPlatformsObject.id)
+        }
+    }
+    if(state.sort === 'default') {
+        url.searchParams.set('ordering', '-added')
+    }
+    else if(state.sort === 'rating-desc') {
+        url.searchParams.set('ordering', '-rating')
+    }
+    else if(state.sort === 'released-desc') {
+        url.searchParams.set('ordering', '-released')
+    }
+    else if(state.sort === 'name-asc') {
+        url.searchParams.set('ordering', 'name')
+    }
+    if(state.page !== 1) {
+        url.searchParams.set('page', state.page)
+    }
+    url.searchParams.set('page_size', '20')
+    return url
+}
+
 function renderCard(game) {
 
     return `
@@ -739,11 +819,13 @@ function paramsToState(genres, platforms, urlParams) {
     let paramsQuery = urlParams.get('q')
     let paramsPlatform = urlParams.get('platform')
     let paramsSort = urlParams.get('sort')
+    let paramsPage = +urlParams.get('page')
     let newState = {
         query: '',
         genre: '',
         platform: '',
-        sort: 'default'
+        sort: 'default',
+        page: 1
     }
     for(let i = 0; i<genres.length; i++){
         if(paramsGenre === genres[i]) {
@@ -767,6 +849,12 @@ function paramsToState(genres, platforms, urlParams) {
     else {
         newState.sort = paramsSort
     }
+    if(!Number.isInteger(paramsPage) || paramsPage < 1) {
+        newState.page = 1
+    }
+    else {
+        newState.page = paramsPage
+    }
     return newState
 }
 
@@ -783,6 +871,9 @@ function stateToParams(state) {
         }
         if(state.sort !== 'default') {
             newUrl.sort = state.sort
+        }
+        if(state.page !== 1) {
+            newUrl.page = state.page
         }
     return newUrl
 }
