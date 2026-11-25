@@ -1,5 +1,5 @@
 //Блок 1. Селекторы и исходные значения
-const catalog = document.querySelector('.games__grid')
+const catalog = document.querySelector('.games__cards')
 
 const modal = document.querySelector('.modal__content')
 const overlay = document.querySelector('.modal-overlay')
@@ -31,14 +31,22 @@ const sliderMedia = window.matchMedia('(min-width: 1920px)');
 
 const apiForm = document.getElementById('api__form');
 const apiPassword = document.getElementById('password');
+const seePasswordButton = document.querySelector('.login__password-toggle')
 const apiConnectButton = document.querySelector('.login__button--connect')
-const apiDeteleButton = document.querySelector('.login__button--delete')
+const apiDeleteButton = document.querySelector('.login__button--delete')
 const apiApprowMessage = document.querySelector('.api__approw')
 const apiDeclineMessage = document.querySelector('.api__decline')
+const apiDisconnectedMessage = document.querySelector('.api__disconnected')
+const apiStorageErrorMessage = document.querySelector('.api__storage-error')
 let currentApiKey = ''
 
 let apiController = null;
 let searchController = null;
+
+let currentGames = [];
+let rawgGenres = []
+let rawgPlatforms = []
+let totalGames = 0
 
 let state = {
     query: '',
@@ -47,14 +55,45 @@ let state = {
     sort: 'default',
     page: 1
 };
-let currentGames = [];
-let rawgGenres = []
-let rawgPlatforms = []
 
-let totalGames = 0
+let gamesState = {
+    status: 'disconnected',
+    games: [],
+    count: 0,
+    next: null,
+    previous: null,
+    error: null,
+    errorType: null
+};
+
+let catalogLoading = document.querySelector('.catalog__loading');
+let catalogState = document.querySelector('.catalog__state');
+
+let timeoutWrapper = document.querySelector('.catalog__timeout-wrapper');
+let wrongKeyWrapper = document.querySelector('.catalog__wrong-key-wrapper');
+let noMatchesWrapper = document.querySelector('.catalog__no-matches-wrapper');
+let apiDisconnectedWrapper = document.querySelector('.catalog__disconnected-wrapper')
+
+let timeoutReconnectButton = document.querySelector('.catalog__timeout-reconnect-button')
+let timeoutCheckKeyButton = document.querySelector('.catalog__timeout-check-key-button')
+let noMatchesDropFiltrsButton = document.querySelector('.catalog__no-matches-drop-filtrs-button')
+let noMatchesShowAllGamesButton = document.querySelector('.catalog__no-matches-show-all-games-button')
+let DisconnectedConnectButton = document.querySelector('.catalog__disconnected-connect-button')
+let fixKeyButton = document.querySelector('.catalog__fix-key-button')
+
+let wrongKeyHttpStatus = document.querySelector('.catalog__wrong-key-http-status')
+let wrongKeyTextLabel = document.querySelector('.catalog__wrong-key-text-label')
+let wrongKeyTextDescription = document.querySelector('.catalog__wrong-key-text-description')
+let timeoutTextLabel = document.querySelector('.catalog__timeout-text-label')
+let timeoutTextDescription = document.querySelector('.catalog__timeout-text-description')
+let timeoutHttpStatus = document.querySelector('.catalog__timeout-http-status')
+let noMatchesText = document.getElementById('nomatchestext')
+
 //Блок 2. Запуск
+
 async function init() {
     await apiAutoConnect()
+    renderGamesState()
 }
 
 function sliderInit() {
@@ -174,9 +213,48 @@ apiForm.addEventListener("submit", function(event) {
     
     connectToApi(currentApiKey);
 })
-
-apiDeteleButton.addEventListener('click', function() {
+seePasswordButton.addEventListener('pointerdown', function() {
+    apiPassword.type = 'text'
+})
+document.addEventListener('pointerup', function() {
+    apiPassword.type = 'password'
+})
+document.addEventListener('pointercancel', function() {
+    apiPassword.type = 'password'
+})
+window.addEventListener('blur', function() {
+    apiPassword.type = 'password'
+})
+apiDeleteButton.addEventListener('click', function() {
     deleteApiKey()
+})
+
+timeoutReconnectButton.addEventListener('click', function() {
+    searchGames(false);
+})
+timeoutCheckKeyButton.addEventListener('click', function() {
+    apiPassword.focus();
+})
+noMatchesDropFiltrsButton.addEventListener('click', function() {
+    state.genre = '';
+    state.platform = '';
+    state.sort = 'default';
+    syncFormWithState(state)
+    searchGames();
+})
+noMatchesShowAllGamesButton.addEventListener('click', function() {
+    state.query = '';
+    state.genre = '';
+    state.platform = '';
+    state.sort = 'default';
+    syncFormWithState(state)
+    searchGames();
+})
+DisconnectedConnectButton.addEventListener('click', function() {
+    apiPassword.focus();
+})
+fixKeyButton.addEventListener('click', function() {
+    apiPassword.focus();
 })
 
 catalog.addEventListener('click', function(event){
@@ -337,6 +415,63 @@ function updateSliderCardClasses() {
     }
 }
 
+function renderGamesState() {
+    console.log('Текущее состояние:', gamesState.status);
+    catalogLoading.classList.add('is-hidden')
+    catalogState.classList.add('is-hidden')
+    gamesCount.classList.add('is-hidden')
+    timeoutWrapper.classList.add('is-hidden')
+    wrongKeyWrapper.classList.add('is-hidden')
+    noMatchesWrapper.classList.add('is-hidden')
+    apiDisconnectedWrapper.classList.add('is-hidden')
+    catalog.classList.add('is-hidden')
+    showApiMessage('hide');
+    apiPassword.classList.remove('wrong__password');
+
+    switch(gamesState.status) {
+        case 'loading':
+            catalogLoading.classList.remove('is-hidden')
+            break;
+
+        case 'success' :
+            catalog.innerHTML = renderCatalog(gamesState.games)
+            gamesCount.textContent = `показанно ${gamesState.games.length} из ${gamesState.count}`
+            gamesCount.classList.remove('is-hidden')
+            catalog.classList.remove('is-hidden')
+            showApiMessage('approw')
+            break;
+        
+        case 'loading' :
+            catalogLoading.classList.remove('is-hidden')
+            break;
+
+        case 'empty' :
+            noMatchesText.textContent = "«" + state.query + "»"
+            gamesCount.classList.remove('is-hidden')
+            catalogState.classList.remove('is-hidden')
+            noMatchesWrapper.classList.remove('is-hidden')
+            break;  
+
+        case 'error' :
+            if(gamesState.errorType === 'timeout') {
+                catalogState.classList.remove('is-hidden')
+                timeoutWrapper.classList.remove('is-hidden')
+            }
+            else if(gamesState.errorType === 'wrong-key') {
+                catalogState.classList.remove('is-hidden')
+                wrongKeyWrapper.classList.remove('is-hidden')
+                apiPassword.classList.add('wrong__password');
+                showApiMessage('decline');
+            }
+            break;
+        case 'disconnected':
+            catalogState.classList.remove('is-hidden');
+            apiDisconnectedWrapper.classList.remove('is-hidden');
+            showApiMessage('disconnected')
+            break;
+    }
+}
+
 function getAndSaveApiKey() {
     currentApiKey = apiPassword.value.trim()
     if(!currentApiKey){
@@ -359,9 +494,6 @@ function initializeCatalog(genres, platforms) {
 }
 
 async function connectToApi(apiKey) {
-    showApiMessage('hide');
-    apiPassword.classList.remove('wrong__password');
-
     if(apiController) {
         apiController.abort()
     }
@@ -389,20 +521,10 @@ async function connectToApi(apiKey) {
         state = paramsToState(genreNames, platformNames, urlParams) // Восстанавливаем состояние из URL
         syncFormWithState(state) // Синхронизирует поля формы с состоянием приложения
 
-
-        let url = createGameUrl(state, apiKey, rawgGenres, rawgPlatforms)
-      
-        let data = await fetchData(url, apiController.signal)
-
-        totalGames = data.count
-
-        currentGames = data.results.map(function(rawGame) {
-            return normalizeGame(rawGame);
-        });
-
         initializeCatalog(rawgGenres, rawgPlatforms)
 
-        showApiMessage('approw')
+        searchGames()
+
         apiPassword.value = ''
     }
     catch(error) {
@@ -410,39 +532,132 @@ async function connectToApi(apiKey) {
             return
         }
         console.error(error);
-        apiPassword.classList.add('wrong__password');
-        showApiMessage('decline');
+        gamesState.status = 'error';
+        gamesState.errorType = 'wrong-key';
+
+        renderGamesState();
     }
     finally {
     }
 }
 
-async function searchGames() {
-    state.page = 1;
-    updateUrl(state);
+async function searchGames(resetPage) {
+    if(resetPage !== false) {
+        state.page = 1;
+        updateUrl(state);
+    }
 
     if(searchController) {
         searchController.abort()
     }
-    searchController = new AbortController();
+    let controller = new AbortController();
+    searchController = controller
+
+    gamesState.status = 'loading';
+    gamesState.games = [];
+    gamesState.count = 0;
+    gamesState.next = null;
+    gamesState.previous = null;
+    gamesState.error = null;
+    gamesState.errorType = null;
+
+    renderGamesState();
+
     try {
         let url = createGameUrl(state, currentApiKey, rawgGenres, rawgPlatforms)
-        let data = await fetchData(url, searchController.signal)
-            currentGames = data.results.map(function(rawGame) {
+        let data = await fetchData(url, controller.signal)
+        if(searchController !== controller) {
+            return
+        }
+
+        gamesState.games = data.results.map(function(rawGame) {
                 return normalizeGame(rawGame);
             });
-        totalGames = data.count
-        renderGames()
+        gamesState.count = data.count
+        gamesState.next = data.next
+        gamesState.previous = data.previous
+
+        if(data.count === 0 && data.results.length === 0) {
+            gamesState.status = 'empty'
+        }
+        else if(data.count > 0 && data.results.length === 0) {
+            gamesState.status = 'error'
+        }
+        else {
+            gamesState.status = 'success'
+        }
+
+
+        renderGamesState()
         }
     catch(error) {
+        if(searchController !== controller) {
+        return;
+
+        }
         if(error.name === 'AbortError') {
             return
         }
-        console.error(error);
-        apiPassword.classList.add('wrong__password');
-        showApiMessage('decline');
+        if(error.status === 401) {
+            wrongKeyTextLabel.textContent = 'Для загрузки каталога требуется активный API-ключ RAWG'
+            wrongKeyTextDescription.textContent = 'Сервер отклонил предоставленный API-ключ. Проверьте правильность токена и укажите действующий ключ в форме подключения выше.'
+            wrongKeyHttpStatus.textContent = 'HTTP 401 · Unauthorized'
+            gamesState.status = 'error';
+            gamesState.errorType = 'wrong-key';
         }
-    }
+        else if(error.status === 403) {
+            wrongKeyTextLabel.textContent = 'Сервер запретил доступ к каталогу'
+            wrongKeyTextDescription.textContent = 'Запрос отклонён сервером. Проверьте доступность API-ключа и его разрешения, затем попробуйте подключиться снова.'
+            wrongKeyHttpStatus.textContent = 'HTTP 403 · Forbidden'
+            gamesState.status = 'error';
+            gamesState.errorType = 'wrong-key';
+        }
+        else if(error.status === 429) {
+            timeoutTextLabel.textContent = 'Превышен лимит запросов к RAWG API'
+            timeoutTextDescription.textContent = 'Сервер временно ограничил количество запросов. Подождите немного и повторите попытку позже.'
+            timeoutHttpStatus.textContent = 'HTTP 429 · Too Many Requests'
+            gamesState.status = 'error';
+            gamesState.errorType = 'timeout';
+        }
+        else if(error.status === 500) {
+            timeoutTextLabel.textContent = 'Не удалось получить список игр'
+            timeoutTextDescription.textContent = 'На стороне RAWG API произошла внутренняя ошибка. Попробуйте повторить запрос через некоторое время.'
+            timeoutHttpStatus.textContent = 'HTTP 500 · Internal Server Error'
+            gamesState.status = 'error';
+            gamesState.errorType = 'timeout';
+        }
+        else if(error.status === 503) {
+            timeoutTextLabel.textContent = 'RAWG API временно недоступен'
+            timeoutTextDescription.textContent = 'Сервер временно не может обработать запрос. Подождите немного и попробуйте загрузить каталог снова.'
+            timeoutHttpStatus.textContent = 'HTTP 503 · Service Unavailable'
+            gamesState.status = 'error';
+            gamesState.errorType = 'timeout';
+        }
+        else if(error instanceof TypeError) {
+            timeoutTextLabel.textContent = 'Не удалось связаться с RAWG API'
+            timeoutTextDescription.textContent = 'Проверьте подключение к интернету и попробуйте загрузить каталог повторно. Возможно, соединение с сервером было прервано.'
+            timeoutHttpStatus.textContent = 'Ошибка соединения'
+            gamesState.status = 'error';
+            gamesState.errorType = 'timeout';
+        }
+        else if(error instanceof SyntaxError) {
+            timeoutTextLabel.textContent = 'Не удалось обработать ответ сервера'
+            timeoutTextDescription.textContent = 'RAWG API вернул данные в неожиданном формате. Попробуйте повторить запрос позже.'
+            timeoutHttpStatus.textContent = 'Invalid Response'
+            gamesState.status = 'error';
+            gamesState.errorType = 'timeout';
+        }
+        else {
+            timeoutTextLabel.textContent = 'Не удалось получить список игр'
+            timeoutTextDescription.textContent = 'Сервер вернул ошибку при обработке запроса. Попробуйте повторить попытку позже.'
+            timeoutHttpStatus.textContent = 'Unexpected Error'
+            gamesState.status = 'error';
+            gamesState.errorType = 'timeout';
+        }
+        renderGamesState();
+        console.error(error);
+        }
+}
 
 function saveDictionaries() {
     let platforms = rawgPlatforms.map(function(platform) {
@@ -469,7 +684,7 @@ function saveDictionaries() {
     }
     catch {
         console.warn('Ошибка сохранения справочников')
-        showApiMessage('decline')
+        showApiMessage('storage-error');
     }
 }
 
@@ -547,7 +762,9 @@ async function fetchData(url, signal) {
     let response = await fetch(url, { signal: signal });
 
     if(!response.ok) {
-        throw new Error('HTTP error: ' + response.status)
+        let error = new Error('HTTP error:' + response.status)
+        error.status = response.status
+        throw error
     }
     
     let data = await response.json()
@@ -648,17 +865,22 @@ function normalizeGame(rawGame) {
 }
 
 function showApiMessage(type) {
-    if(type === 'hide') {
         apiApprowMessage.classList.remove('is-visible')
         apiDeclineMessage.classList.remove('is-visible')
-    }
-    else if(type === 'approw') {
-        apiDeclineMessage.classList.remove('is-visible')
+        apiDisconnectedMessage.classList.remove('is-visible')   
+        apiStorageErrorMessage.classList.remove('is-visible')
+
+    if(type === 'approw') {
         apiApprowMessage.classList.add('is-visible')
     }
     else if(type === 'decline') {
-        apiApprowMessage.classList.remove('is-visible')
         apiDeclineMessage.classList.add('is-visible')
+    }
+    else if(type === 'disconnected') {
+        apiDisconnectedMessage.classList.add('is-visible')
+    }
+    else if(type === 'storage-error') {
+        apiStorageErrorMessage.classList.add('is-visible')
     }
 }
 
@@ -680,10 +902,23 @@ function deleteApiKey() {
         apiController.abort();
         apiController = null;
     }
-    //catalog.innerHTML = '';
+    if(searchController) {
+        searchController.abort();
+        searchController = null;
+    }
+
     apiPassword.value = '';
-    showApiMessage('hide');
-    apiPassword.classList.remove('wrong__password')
+
+    gamesState = {
+        status: 'disconnected',
+        games: [],
+        count: 0,
+        next: null,
+        previous: null,
+        error: null,
+        errorType: null
+    };
+    renderGamesState()
 }
 
 function createGameUrl(state, apiKey, genres, platforms) {
@@ -1050,97 +1285,5 @@ function debounce(fn, ms) {
         timer = setTimeout(function (){
             fn()
         }, ms)
-    }
-}
-
-
-let promise = new Promise(function(resolve, reject) {
-    setTimeout(function() {
-        resolve(10);
-    },2000);
-});
-promise
-    .then(function(value) {
-    return value + 1
-})
-    .then(function(value) {
-        console.log(value)
-})
-
-let promise2 = new Promise(function(resolve, reject) {
-    setTimeout(function() {
-        reject(new Error('Failed'))
-        resolve(10);
-    },2000);
-});
-promise2
-    .then(function(value) {
-    value + 1
-})
-    .then(function(value) {
-        console.log(value)
-})
-    .catch(function(error) {
-        console.log(error)
-})
-    .finally(function() {
-        console.log('выполнен finaly')
-    })
-
-    let promise3 = new Promise(function(resolve, reject) {
-    setTimeout(function() {
-        resolve(10);
-    },2000);
-});
-    promise3
-        .then(function(value) {
-        value + 1
-            throw new Error('Failed')
-        })
-        .then(function(value) {
-            console.log(value)
-        })
-        .catch(function(error) {
-            console.log(error)
-        })
-        .finally(function() {
-            console.log('выполнен finaly')
-        })
-
-let promise4 = new Promise(function(resolve) {
-    setTimeout(function() {
-        resolve('Первый промис');
-    }, 1000);
-});
-
-let promise5 = new Promise(function(resolve, reject) {
-    setTimeout(function() {
-        reject(new Error("Второй промис завершился ошибкой"));
-    }, 3000);
-});
-
-Promise.all([promise4, promise5])
-    .then(function(results) {
-        console.log(results);
-    })
-    .catch(function(error) {
-        console.log(error)
-    })
-
-async function getNumber() {
-    return Promise.resolve(5);
-}
-async function showNumber() {
-    try {
-        let result = await getNumber()
-
-        throw new Error('Failed');
-        
-        result = result * 3
-        result = result + 10
-        console.log(result)
-    }
-    catch(error) {
-        console.log(error)
     }
 }

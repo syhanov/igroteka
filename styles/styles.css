@@ -335,9 +335,6 @@ main {
     color: #b9cacb;
     text-transform: uppercase;
 }
-.catalog__filter {
-    padding-left: 0;
-}
 .filter-form {
     display: flex;
     flex-direction: column;
@@ -558,23 +555,34 @@ main {
     font-size: 0.6875rem;
 }
 .games {
-    background-color: #13131599;
+    background-color: #131315;
     border: 1px dotted #3B494B66;
     border-radius: 10px;
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
 }
 .games__title {
-    font-size: 1rem;
+    font-size: 1.75rem;
     font-weight: bold;
-    color: #b9cacb;
-    text-transform: uppercase;
+    color: #e5e2e1;
     margin-top: 0;
+    margin: 0;
 }
-.games__count {
+.games__subscribe {
+    font-size: 1rem;
+    color: #b9cacb;
+    font-weight: bold;
+    margin: 0;
+}
+.games__count,
+.pagination__count {
     margin: 0;
     color: #B9CACB;
     font-size: 1rem;
 }
-.games__grid {
+.games__cards {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
     gap: 0.5rem;
@@ -583,12 +591,6 @@ main {
 .game-card--catalog {
     background-color: #201F1F66;
     border: 0;
-}
-.games__filter {
-    display: flex;
-    justify-content: space-between;
-    flex-direction: column;
-    padding: 16px;
 }
 .games__info {
     display: flex;
@@ -687,6 +689,7 @@ main {
 .site-footer__info{
     color: #b9cacb;
     font-size: 0.75rem;
+    margin-bottom: 0;
 }
 .game-card--modal .game-card__title {
     font-size: 1.5rem;
@@ -716,7 +719,7 @@ main {
     display: flex;
     flex-direction: column;
     gap: 13px;
-    background-color: #1C1B1B;
+    background-color: #201F1F66;
     border: 1px solid #3B494B;;
     border-radius: 5px;
 }
@@ -820,7 +823,7 @@ main {
     gap: 8px;
 }
 .api__login-info-wrapper {
-    padding: 20px;
+    padding: 12px;
     background-color: #201F1F;
     border: 1px solid #3B494B66;
     display: flex;
@@ -845,7 +848,9 @@ main {
     margin: 0;
 }
 .api__approw,
-.api__decline {
+.api__decline,
+.api__disconnected,
+.api__storage-error {
     background-color: #0E0E0E;
     padding: 12px;
     max-width: fit-content;
@@ -853,11 +858,17 @@ main {
 .api__approw {
     border-left: 2px solid #00F0FF;
 }
-.api__decline {
+.api__decline,
+.api__disconnected {
     border-left: 2px solid #FFB4AB;
 }
+.api__storage-error {
+    border-left: 2px solid #D6AE55;
+}
 .approw__title,
-.decline__title {
+.decline__title,
+.disconnected__title,
+.storage-error__title {
     display: flex;
     align-items: center;
     gap: 12px;
@@ -868,11 +879,17 @@ main {
 .approw__title {
     color: #00F0FF;
 }
-.decline__title {
+.decline__title,
+.disconnected__title {
     color: #FFB4AB;
 }
+.storage-error__title {
+    color: #D6AE55;
+}
 .approw__description,
-.decline__description {
+.decline__description,
+.disconnected__description,
+.storage-error__description {
     font-size: 0.75rem;
     color: #E5E2E1;
     margin: 0;
@@ -889,11 +906,11 @@ main {
 
 .catalog__progress-bar {
     display: block;
-    width: 0%;
+    width: 35%;
     height: 100%;
-    border-radius: inherit;
-    background-color: #DBFCFF;
-    transition: width 0.3s ease;
+    animation: catalog-loading 1.5s ease-in-out infinite;
+    background-color: #00F0FF;
+    box-shadow: 0 0 8px rgba(0, 240, 255, 0.35);
 }
 .catalog__loading {
     padding: 14px;
@@ -1076,8 +1093,85 @@ main {
     width: 100%;
     height: 48px;
 }
+.catalog__disconnected {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 24px 24px 30px;
+    gap: 24px;
+    border-radius: 5px;
+}
+
+.catalog__disconnected-wrapper {
+    background:
+        radial-gradient(
+            ellipse at top right,
+            rgba(0, 240, 255, 0.09),
+            transparent 35%
+        ),
+        radial-gradient(
+            ellipse at bottom left,
+            rgba(0, 240, 255, 0.09),
+            transparent 35%
+        ),
+        #17191D;
+    border: 1px solid #00F0FF66;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.catalog__disconnected-icon-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 64px;
+    height: 64px;
+    background-color: #201F1F;
+    border: 1px solid #00F0FF66;
+    filter: drop-shadow(0 0 20px #00F0FF1A);
+}
+.catalog__disconnected-icon {
+    width: 22px;
+    height: 12px;
+}
+.catalog__disconnected-text-wrapper {
+    text-align: center;
+}
+
+.catalog__disconnected-text-label {
+    font-size: 1.25rem;
+    font-weight: bold;
+    color: #E5E2E1;
+    margin: 0 0 12px;
+}
+
+.catalog__disconnected-text-description {
+    font-size: 0.875rem;
+    font-weight: 400;
+    color: #B9CACB;
+    margin: 0;
+}
+
+.catalog__disconnected-connect-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    border-radius: 5px;
+    font-size: 0.875rem;
+    font-weight: bold;
+    color: #002022;
+    background-color: #00F0FF;
+    width: 100%;
+    height: 48px;
+    border: none;
+}
 .api__approw,
-.api__decline {
+.api__decline,
+.api__disconnected,
+.api__storage-error {
     display: none;
 }
 .is-visible {
@@ -1125,7 +1219,7 @@ main {
 
     cursor: pointer;
     transition: background-color 0.2s ease,
-                color 0.2s ease;
+    color 0.2s ease;
 }
 
 .pagination__button--active {
@@ -1143,10 +1237,132 @@ main {
     color: #B9CACB;
     padding: 0 4px;
 }
+.is-hidden {
+    display: none;
+}
+.login__button--connect,
+.login__button--delete,
+.catalog__timeout-reconnect-button,
+.catalog__timeout-check-key-button,
+.catalog__fix-key-button,
+.catalog__no-matches-drop-filtrs-button,
+.catalog__no-matches-show-all-games-button,
+.catalog__disconnected-connect-button {
+    cursor: pointer;
+    transition:
+        background-color 0.2s ease,
+        color 0.2s ease,
+        border-color 0.2s ease,
+        box-shadow 0.2s ease,
+        transform 0.2s ease;
+}
+.login__button--connect:hover,
+.catalog__timeout-reconnect-button:hover,
+.catalog__no-matches-drop-filtrs-button:hover,
+.catalog__disconnected-connect-button:hover {
+    background-color: #5BFAFF;
+    box-shadow: 0 0 15px #00F0FF55;
+    transform: translateY(-2px);
+}
+.login__button--delete:hover,
+.catalog__timeout-check-key-button:hover,
+.catalog__no-matches-show-all-games-button:hover {
+    background-color: #292E2F;
+    border-color: #00AAB3;
+    color: #00F0FF;
+    transform: translateY(-2px);
+}
+.catalog__fix-key-button:hover {
+    background-color: #00F0FF18;
+    box-shadow: 0 0 12px #00F0FF33;
+    transform: translateY(-2px);
+}
+.login__button--connect:active,
+.login__button--delete:active,
+.catalog__timeout-reconnect-button:active,
+.catalog__timeout-check-key-button:active,
+.catalog__fix-key-button:active,
+.catalog__no-matches-drop-filtrs-button:active,
+.catalog__no-matches-show-all-games-button:active,
+.catalog__disconnected-connect-button:active {
+    transform: translateY(0);
+    box-shadow: none;
+}
+.login__button--connect:focus-visible,
+.login__button--delete:focus-visible,
+.catalog__timeout-reconnect-button:focus-visible,
+.catalog__timeout-check-key-button:focus-visible,
+.catalog__fix-key-button:focus-visible,
+.catalog__no-matches-drop-filtrs-button:focus-visible,
+.catalog__no-matches-show-all-games-button:focus-visible,
+.catalog__disconnected-connect-button:focus-visible {
+    outline: 2px solid #00F0FF;
+    outline-offset: 3px;
+}
+.login__password-wrapper {
+    position: relative;
+}
+.login__password {
+    padding-right: 45px;
+}
+.login__password-toggle {
+    position: absolute;
+    right: 12px;
+    bottom: 12px;
 
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
+    padding: 4px;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+}
+.login__password-toggle {
+    color: #B9CACB;
+    transition: color 0.2s ease, transform 0.2s ease;
+}
+.login__password-toggle:hover {
+    color: #00F0FF;
+    transform: scale(1.1);
+}
+.login__password-toggle:active {
+    transform: scale(0.95);
+}
+.icon-eye {
+    font-size: 18px;
+    line-height: 1;
+}
+.catalog__wrong-key-http-status,
+.catalog__timeout-http-status {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: fit-content;
+    padding: 5px 10px;
+
+    font-family: inherit;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+
+    color: #D58D80;
+    background-color: rgba(213, 141, 128, 0.08);
+    border: 1px solid rgba(213, 141, 128, 0.25);
+    border-radius: 4px;
+}
 /*Изначально брейкпоинт был запланирован на 680 px с учётом будущих возможностей. Позже я увеличил его значение  на 40 px, чтобы объединить несколько изменений в одном медиазапросе и избежать создания отдельного брейкпоинта для этого списка. Благодаря этому форма поиска и футер корректно отображаются при увеличенной ширине экрана.*/
 @media (min-width:753px) {
+    .catalog__disconnected {
+        max-width: 670px;
+    }
+    .catalog__disconnected-wrapper {
+        padding: 48px 0 72px;
+    }
+    .games {
+        padding: 32px;
+    }
     .catalog__timeout-reconnect-button,
     .catalog__no-matches-drop-filtrs-button,
     .catalog__timeout-check-key-button,
@@ -1246,21 +1462,16 @@ main {
     .games__info {
         display: block;
     }
-    .games__filter {
-        display: flex;
-        justify-content: space-between;
-        flex-direction: row;
-    }
-        .catalog__filter {
-        padding-left: 24px;
-    }
 }
 /*Этот брейкпоинт специально подобран под адаптацию навигации и футера. Раньше я пробовал его сдвинуть, но при этом пункты меню сильно сжимались и буквально «налипали» друг на друга — из‑за этого страдала читаемость и удобство клика. Поэтому оставил текущее значение: оно даёт элементам достаточно пространства и сохраняет структуру.*/
 @media (min-width:927px) {
-.login__button--connect,
-.login__button--delete {
-    max-width: 200px;
-}
+    .logo {
+        justify-content: start;
+    }
+    .login__button--connect,
+    .login__button--delete {
+        max-width: 200px;
+    }
     main {
         padding: 0 32px;
         gap: 3rem;
@@ -1288,10 +1499,10 @@ main {
         min-height: 36px;
         display: flex;
     }
-    .games__grid {
+    .games__cards {
         grid-template-columns: repeat(auto-fit, minmax(min(380px, 100%), 1fr));
     }
-        .site-nav {
+    .site-nav {
         justify-content: space-between;
         padding: 1rem 32px;
     }
@@ -1337,6 +1548,12 @@ main {
 }
 /* Верстка возвращена к десктоп-версии. Брейкпоинт выбран так, чтобы картинка в хедере встала на своё место: при меньших значениях либо текст сильно сжимается, либо картинка искажается (становится вытянутой) — оба варианта выглядят плохо. */
 @media (min-width:1070px) {
+    .catalog__timeout-wrapper,
+    .catalog__disconnected-wrapper,
+    .catalog__no-matches-wrapper,
+    .catalog__wrong-key-wrapper {
+        min-height: 600px;
+    }
     .api__login-form {
         width: 70%;
     }
@@ -1346,10 +1563,9 @@ main {
     .api__login {
         display: flex;
         flex-direction: row;
-        gap: 32px;
-    }
-    .api__login {
-        padding: 48px 32px;
+        gap: 20px;
+        padding: 16px;
+        align-items: center;
     }
     main {
         padding: 0 64px;
@@ -1383,7 +1599,7 @@ main {
     .anons-archive__link {
         min-height: auto;
     }
-    .games__grid {
+    .games__cards {
         grid-template-columns: repeat(auto-fit, minmax(min(450px, 100%), 1fr));
     }
     .anons__content,
@@ -1532,5 +1748,41 @@ main {
     .pagination__button:not(:disabled):not(.pagination__button--active):hover {
         color: #00F0FF;
         border-color: #00F0FF;
+    }
+}
+@media (hover: none) {
+    .login__button--connect:hover,
+    .catalog__timeout-reconnect-button:hover,
+    .catalog__no-matches-drop-filtrs-button:hover,
+    .catalog__disconnected-connect-button:hover {
+        background-color: #00F0FF;
+        box-shadow: none;
+        transform: none;
+    }
+    .login__button--delete:hover,
+    .catalog__timeout-check-key-button:hover,
+    .catalog__no-matches-show-all-games-button:hover {
+        background-color: #201F1F;
+        border-color: #3B494B;
+        color: #B9CACB;
+        transform: none;
+    }
+    .catalog__fix-key-button:hover {
+        background-color: #13131399;
+        box-shadow: none;
+        transform: none;
+    }
+    .login__password-toggle:hover {
+        color: #B9CACB;
+        transform: none;
+    }
+}
+@keyframes catalog-loading {
+    0% {
+        transform: translateX(-100%);
+    }
+
+    100% {
+        transform: translateX(300%);
     }
 }
