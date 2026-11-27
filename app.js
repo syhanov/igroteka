@@ -94,6 +94,7 @@ const paginationContainer = document.querySelector('.games__pagination')
 const paginationNumbers = document.querySelector('.pagination__pages')
 const prevPageButtonArrow = document.querySelector('.pagination__button--prev')
 const nextPageButtonArrow = document.querySelector('.pagination__button--next')
+const pagesCount = document.querySelector('.pagination__count')
 //Блок 2. Запуск
 
 async function init() {
@@ -461,6 +462,8 @@ function renderGamesState() {
     catalogLoading.classList.add('is-hidden')
     catalogState.classList.add('is-hidden')
     gamesCount.classList.add('is-hidden')
+    pagesCount.classList.add('is-hidden')
+    let totalPages = Math.ceil(gamesState.count / 20);
     timeoutWrapper.classList.add('is-hidden')
     wrongKeyWrapper.classList.add('is-hidden')
     noMatchesWrapper.classList.add('is-hidden')
@@ -478,6 +481,8 @@ function renderGamesState() {
             catalog.innerHTML = renderCatalog(gamesState.games)
             gamesCount.textContent = `показанно ${gamesState.games.length} из ${gamesState.count}`
             gamesCount.classList.remove('is-hidden')
+            pagesCount.textContent = `страница ${state.page} из ${totalPages}`
+            pagesCount.classList.remove('is-hidden')
             catalog.classList.remove('is-hidden')
             showApiMessage('approw')
             break;
@@ -656,7 +661,6 @@ function initializeCatalog(genres, platforms) {
 
     saveDictionaries()
 
-    renderGames()
 }
 
 async function connectToApi(apiKey) {
@@ -664,7 +668,9 @@ async function connectToApi(apiKey) {
         apiController.abort()
     }
     apiController = new AbortController();
-    
+
+    gamesState.status = 'loading';
+    renderGamesState();
     try {
         let results = await loadDictionaries()
         let dictionaries = results
@@ -686,6 +692,7 @@ async function connectToApi(apiKey) {
         const urlParams = getUrlParams()
         state = paramsToState(genreNames, platformNames, urlParams) // Восстанавливаем состояние из URL
         syncFormWithState(state) // Синхронизирует поля формы с состоянием приложения
+        updateUrl(state)
 
         initializeCatalog(rawgGenres, rawgPlatforms)
 
@@ -735,7 +742,6 @@ async function searchGames(resetPage) {
         if(searchController !== controller) {
             return
         }
-
         gamesState.games = data.results.map(function(rawGame) {
                 return normalizeGame(rawGame);
             });
@@ -1290,7 +1296,7 @@ function createUrlFromState(state, url) {
     const paramsObject = stateToParams(state);
     const keys = Object.keys(paramsObject);
 
-    const catalogParams = ['q', 'genre', 'platform', 'sort'];
+    const catalogParams = ['q', 'genre', 'platform', 'sort', 'page'];
 
     for (let i = 0; i < catalogParams.length; i++) {
         params.delete(catalogParams[i]);
