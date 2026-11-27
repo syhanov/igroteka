@@ -66,29 +66,34 @@ let gamesState = {
     errorType: null
 };
 
-let catalogLoading = document.querySelector('.catalog__loading');
-let catalogState = document.querySelector('.catalog__state');
+const catalogLoading = document.querySelector('.catalog__loading');
+const catalogState = document.querySelector('.catalog__state');
 
-let timeoutWrapper = document.querySelector('.catalog__timeout-wrapper');
-let wrongKeyWrapper = document.querySelector('.catalog__wrong-key-wrapper');
-let noMatchesWrapper = document.querySelector('.catalog__no-matches-wrapper');
-let apiDisconnectedWrapper = document.querySelector('.catalog__disconnected-wrapper')
+const timeoutWrapper = document.querySelector('.catalog__timeout-wrapper');
+const wrongKeyWrapper = document.querySelector('.catalog__wrong-key-wrapper');
+const noMatchesWrapper = document.querySelector('.catalog__no-matches-wrapper');
+const apiDisconnectedWrapper = document.querySelector('.catalog__disconnected-wrapper')
 
-let timeoutReconnectButton = document.querySelector('.catalog__timeout-reconnect-button')
-let timeoutCheckKeyButton = document.querySelector('.catalog__timeout-check-key-button')
-let noMatchesDropFiltrsButton = document.querySelector('.catalog__no-matches-drop-filtrs-button')
-let noMatchesShowAllGamesButton = document.querySelector('.catalog__no-matches-show-all-games-button')
-let DisconnectedConnectButton = document.querySelector('.catalog__disconnected-connect-button')
-let fixKeyButton = document.querySelector('.catalog__fix-key-button')
+const timeoutReconnectButton = document.querySelector('.catalog__timeout-reconnect-button')
+const timeoutCheckKeyButton = document.querySelector('.catalog__timeout-check-key-button')
+const noMatchesDropFiltrsButton = document.querySelector('.catalog__no-matches-drop-filtrs-button')
+const noMatchesShowAllGamesButton = document.querySelector('.catalog__no-matches-show-all-games-button')
+const DisconnectedConnectButton = document.querySelector('.catalog__disconnected-connect-button')
+const fixKeyButton = document.querySelector('.catalog__fix-key-button')
 
-let wrongKeyHttpStatus = document.querySelector('.catalog__wrong-key-http-status')
-let wrongKeyTextLabel = document.querySelector('.catalog__wrong-key-text-label')
-let wrongKeyTextDescription = document.querySelector('.catalog__wrong-key-text-description')
-let timeoutTextLabel = document.querySelector('.catalog__timeout-text-label')
-let timeoutTextDescription = document.querySelector('.catalog__timeout-text-description')
-let timeoutHttpStatus = document.querySelector('.catalog__timeout-http-status')
-let noMatchesText = document.getElementById('nomatchestext')
+const wrongKeyHttpStatus = document.querySelector('.catalog__wrong-key-http-status')
+const wrongKeyTextLabel = document.querySelector('.catalog__wrong-key-text-label')
+const wrongKeyTextDescription = document.querySelector('.catalog__wrong-key-text-description')
+const timeoutTextLabel = document.querySelector('.catalog__timeout-text-label')
+const timeoutTextDescription = document.querySelector('.catalog__timeout-text-description')
+const timeoutHttpStatus = document.querySelector('.catalog__timeout-http-status')
+const noMatchesText = document.getElementById('nomatchestext')
 
+
+const paginationContainer = document.querySelector('.games__pagination')
+const paginationNumbers = document.querySelector('.pagination__pages')
+const prevPageButtonArrow = document.querySelector('.pagination__button--prev')
+const nextPageButtonArrow = document.querySelector('.pagination__button--next')
 //Блок 2. Запуск
 
 async function init() {
@@ -264,6 +269,8 @@ catalog.addEventListener('click', function(event){
         return
     }
     const id = card.dataset.id
+    console.log('ID карточки:', id);
+console.log('Текущие игры:', currentGames);
     const game = currentGames.find(function(currentGame){
         return currentGame.id === Number(id)
     })
@@ -329,6 +336,37 @@ resetButton.addEventListener('click', function(event) {
     state.platform = '';
     state.sort = 'default';
     searchGames();
+})
+
+paginationNumbers.addEventListener('click', function(event) {
+    if(gamesState.status === 'loading') {
+        return;
+    }
+    let currentButton = event.target.closest('button')
+    if(!currentButton|| !paginationNumbers.contains(currentButton)) {
+        return
+    }
+    if(isNaN(+currentButton.textContent)) {
+        return;
+    }
+    state.page = +(currentButton.textContent)
+    searchGames(false)
+    currentButton.classList.add('pagination__button--active')
+})
+
+prevPageButtonArrow.addEventListener('click', function() {
+    if(gamesState.previous) {
+        state.page -= 1
+        searchGames(false)
+        return
+    }
+})
+nextPageButtonArrow.addEventListener('click', function() {
+    if(gamesState.next) {
+        state.page += 1
+        searchGames(false)
+        return
+    }
 })
 
 function debounceQueryChange() {
@@ -416,7 +454,10 @@ function updateSliderCardClasses() {
 }
 
 function renderGamesState() {
-    console.log('Текущее состояние:', gamesState.status);
+    renderPagination()
+    prevPageButtonArrow.disabled = !gamesState.previous;
+    nextPageButtonArrow.disabled = !gamesState.next;
+
     catalogLoading.classList.add('is-hidden')
     catalogState.classList.add('is-hidden')
     gamesCount.classList.add('is-hidden')
@@ -441,9 +482,6 @@ function renderGamesState() {
             showApiMessage('approw')
             break;
         
-        case 'loading' :
-            catalogLoading.classList.remove('is-hidden')
-            break;
 
         case 'empty' :
             noMatchesText.textContent = "«" + state.query + "»"
@@ -454,10 +492,50 @@ function renderGamesState() {
 
         case 'error' :
             if(gamesState.errorType === 'timeout') {
+                        if(gamesState.error.status === 429) {
+                            timeoutTextLabel.textContent = 'Превышен лимит запросов к RAWG API'
+                            timeoutTextDescription.textContent = 'Сервер временно ограничил количество запросов. Подождите немного и повторите попытку позже.'
+                            timeoutHttpStatus.textContent = 'HTTP 429 · Too Many Requests'
+                        }
+                        else if(gamesState.error.status === 500) {
+                            timeoutTextLabel.textContent = 'Не удалось получить список игр'
+                            timeoutTextDescription.textContent = 'На стороне RAWG API произошла внутренняя ошибка. Попробуйте повторить запрос через некоторое время.'
+                            timeoutHttpStatus.textContent = 'HTTP 500 · Internal Server Error'
+                        }
+                        else if(gamesState.error.status === 503) {
+                            timeoutTextLabel.textContent = 'RAWG API временно недоступен'
+                            timeoutTextDescription.textContent = 'Сервер временно не может обработать запрос. Подождите немного и попробуйте загрузить каталог снова.'
+                            timeoutHttpStatus.textContent = 'HTTP 503 · Service Unavailable'
+                        }
+                        else if(gamesState.error.status instanceof TypeError) {
+                            timeoutTextLabel.textContent = 'Не удалось связаться с RAWG API'
+                            timeoutTextDescription.textContent = 'Проверьте подключение к интернету и попробуйте загрузить каталог повторно. Возможно, соединение с сервером было прервано.'
+                            timeoutHttpStatus.textContent = 'Ошибка соединения'
+                        }
+                        else if(gamesState.error.status instanceof SyntaxError) {
+                            timeoutTextLabel.textContent = 'Не удалось обработать ответ сервера'
+                            timeoutTextDescription.textContent = 'RAWG API вернул данные в неожиданном формате. Попробуйте повторить запрос позже.'
+                            timeoutHttpStatus.textContent = 'Invalid Response'
+                        }
+                        else {
+                            timeoutTextLabel.textContent = 'Не удалось получить список игр'
+                            timeoutTextDescription.textContent = 'Сервер вернул ошибку при обработке запроса. Попробуйте повторить попытку позже.'
+                            timeoutHttpStatus.textContent = 'Unexpected Error'
+                        }
                 catalogState.classList.remove('is-hidden')
                 timeoutWrapper.classList.remove('is-hidden')
             }
             else if(gamesState.errorType === 'wrong-key') {
+                if(gamesState.error.status === 401) {
+                    wrongKeyTextLabel.textContent = 'Для загрузки каталога требуется активный API-ключ RAWG'
+                    wrongKeyTextDescription.textContent = 'Сервер отклонил предоставленный API-ключ. Проверьте правильность токена и укажите действующий ключ в форме подключения выше.'
+                    wrongKeyHttpStatus.textContent = 'HTTP 401 · Unauthorized'
+                }
+                else if(gamesState.error.status === 403) {
+                    wrongKeyTextLabel.textContent = 'Сервер запретил доступ к каталогу'
+                    wrongKeyTextDescription.textContent = 'Запрос отклонён сервером. Проверьте доступность API-ключа и его разрешения, затем попробуйте подключиться снова.'
+                    wrongKeyHttpStatus.textContent = 'HTTP 403 · Forbidden'
+                }
                 catalogState.classList.remove('is-hidden')
                 wrongKeyWrapper.classList.remove('is-hidden')
                 apiPassword.classList.add('wrong__password');
@@ -470,6 +548,94 @@ function renderGamesState() {
             showApiMessage('disconnected')
             break;
     }
+}
+
+function renderPagination() {
+    let totalPages = Math.ceil(gamesState.count / 20)
+    let paginationHtml = ''
+    let currentPage = state.page;
+    let nextPage  = Math.min(totalPages, currentPage + 1)
+    let previousPage  = Math.max(1, currentPage - 1)
+
+    if(totalPages < 2 || gamesState.status !== 'success') {
+        paginationContainer.classList.add('is-hidden')
+        paginationNumbers.innerHTML = paginationHtml
+        return
+    }
+
+    if(totalPages <= 3) {
+        for(let page = 1; page <= totalPages; page++) {
+            if(page === currentPage) {
+                paginationHtml += `<button class="pagination__button pagination__button--active"
+                                    disabled
+                                    type="button">${page}</button>`;
+            }
+            else {
+                paginationHtml += `<button class="pagination__button"
+                                    type="button">${page}</button>`;
+            }
+        }
+
+        paginationNumbers.innerHTML = paginationHtml;
+        paginationContainer.classList.remove('is-hidden');
+        return;
+    }
+    else {
+        if(currentPage === 1) {
+            paginationHtml += `<button class="pagination__button pagination__button--active"
+                                disabled
+                                type="button">`+ currentPage + `</button>`;
+            paginationHtml += `<button class="pagination__button"
+                                type="button">`+ nextPage + `</button>`;
+            paginationHtml += `<button class="pagination__button"
+                                type="button">`+ (nextPage + 1)+ `</button>`;
+            paginationHtml += `<button class="pagination__button"
+                                type="button">`+ '...'+ `</button>`;
+            paginationHtml += `<button class="pagination__button"
+                                type="button">`+ totalPages + `</button>`;
+        }
+        else if(currentPage === totalPages) {
+            paginationHtml += `<button class="pagination__button"
+                                type="button">`+ '1'+ `</button>`;
+            paginationHtml += `<button class="pagination__button"
+                                type="button">`+ '...'+ `</button>`;
+            paginationHtml += `<button class="pagination__button"
+                                type="button">`+ (previousPage - 1)+ `</button>`;
+            paginationHtml += `<button class="pagination__button"
+                                type="button">`+ previousPage + `</button>`;
+            paginationHtml += `<button class="pagination__button pagination__button--active"
+                                disabled
+                                type="button">`+ totalPages + `</button>`;
+        }
+        else {
+                paginationHtml += `<button class="pagination__button"
+                                type="button">`+ '1'+ `</button>`;
+                if(previousPage>2){
+                    paginationHtml += `<button class="pagination__button"
+                                        type="button">`+ '...'+ `</button>`;
+                }
+                if(previousPage > 1) {
+                    paginationHtml += `<button class="pagination__button"
+                                        type="button">`+ previousPage + `</button>`;
+                }
+                paginationHtml += `<button class="pagination__button pagination__button--active"
+                                disabled
+                                type="button">`+ currentPage + `</button>`;
+                if(nextPage < totalPages) {
+                    paginationHtml += `<button class="pagination__button"
+                                    type="button">`+ nextPage + `</button>`;
+                }
+                if(nextPage < totalPages - 1){
+                paginationHtml += `<button class="pagination__button"
+                                        type="button">`+ '...'+ `</button>`;
+                }
+                paginationHtml += `<button class="pagination__button"
+                                type="button">`+ totalPages + `</button>`;
+            }
+        }
+
+    paginationNumbers.innerHTML = paginationHtml
+    paginationContainer.classList.remove('is-hidden')
 }
 
 function getAndSaveApiKey() {
@@ -523,7 +689,7 @@ async function connectToApi(apiKey) {
 
         initializeCatalog(rawgGenres, rawgPlatforms)
 
-        searchGames()
+        searchGames(false)
 
         apiPassword.value = ''
     }
@@ -544,9 +710,9 @@ async function connectToApi(apiKey) {
 async function searchGames(resetPage) {
     if(resetPage !== false) {
         state.page = 1;
-        updateUrl(state);
     }
 
+    updateUrl(state);
     if(searchController) {
         searchController.abort()
     }
@@ -573,6 +739,7 @@ async function searchGames(resetPage) {
         gamesState.games = data.results.map(function(rawGame) {
                 return normalizeGame(rawGame);
             });
+        currentGames = gamesState.games;
         gamesState.count = data.count
         gamesState.next = data.next
         gamesState.previous = data.previous
@@ -587,7 +754,6 @@ async function searchGames(resetPage) {
             gamesState.status = 'success'
         }
 
-
         renderGamesState()
         }
     catch(error) {
@@ -598,59 +764,36 @@ async function searchGames(resetPage) {
         if(error.name === 'AbortError') {
             return
         }
+        gamesState.error = error
         if(error.status === 401) {
-            wrongKeyTextLabel.textContent = 'Для загрузки каталога требуется активный API-ключ RAWG'
-            wrongKeyTextDescription.textContent = 'Сервер отклонил предоставленный API-ключ. Проверьте правильность токена и укажите действующий ключ в форме подключения выше.'
-            wrongKeyHttpStatus.textContent = 'HTTP 401 · Unauthorized'
             gamesState.status = 'error';
             gamesState.errorType = 'wrong-key';
         }
         else if(error.status === 403) {
-            wrongKeyTextLabel.textContent = 'Сервер запретил доступ к каталогу'
-            wrongKeyTextDescription.textContent = 'Запрос отклонён сервером. Проверьте доступность API-ключа и его разрешения, затем попробуйте подключиться снова.'
-            wrongKeyHttpStatus.textContent = 'HTTP 403 · Forbidden'
             gamesState.status = 'error';
             gamesState.errorType = 'wrong-key';
         }
         else if(error.status === 429) {
-            timeoutTextLabel.textContent = 'Превышен лимит запросов к RAWG API'
-            timeoutTextDescription.textContent = 'Сервер временно ограничил количество запросов. Подождите немного и повторите попытку позже.'
-            timeoutHttpStatus.textContent = 'HTTP 429 · Too Many Requests'
             gamesState.status = 'error';
             gamesState.errorType = 'timeout';
         }
         else if(error.status === 500) {
-            timeoutTextLabel.textContent = 'Не удалось получить список игр'
-            timeoutTextDescription.textContent = 'На стороне RAWG API произошла внутренняя ошибка. Попробуйте повторить запрос через некоторое время.'
-            timeoutHttpStatus.textContent = 'HTTP 500 · Internal Server Error'
             gamesState.status = 'error';
             gamesState.errorType = 'timeout';
         }
         else if(error.status === 503) {
-            timeoutTextLabel.textContent = 'RAWG API временно недоступен'
-            timeoutTextDescription.textContent = 'Сервер временно не может обработать запрос. Подождите немного и попробуйте загрузить каталог снова.'
-            timeoutHttpStatus.textContent = 'HTTP 503 · Service Unavailable'
             gamesState.status = 'error';
             gamesState.errorType = 'timeout';
         }
         else if(error instanceof TypeError) {
-            timeoutTextLabel.textContent = 'Не удалось связаться с RAWG API'
-            timeoutTextDescription.textContent = 'Проверьте подключение к интернету и попробуйте загрузить каталог повторно. Возможно, соединение с сервером было прервано.'
-            timeoutHttpStatus.textContent = 'Ошибка соединения'
             gamesState.status = 'error';
             gamesState.errorType = 'timeout';
         }
         else if(error instanceof SyntaxError) {
-            timeoutTextLabel.textContent = 'Не удалось обработать ответ сервера'
-            timeoutTextDescription.textContent = 'RAWG API вернул данные в неожиданном формате. Попробуйте повторить запрос позже.'
-            timeoutHttpStatus.textContent = 'Invalid Response'
             gamesState.status = 'error';
             gamesState.errorType = 'timeout';
         }
         else {
-            timeoutTextLabel.textContent = 'Не удалось получить список игр'
-            timeoutTextDescription.textContent = 'Сервер вернул ошибку при обработке запроса. Попробуйте повторить попытку позже.'
-            timeoutHttpStatus.textContent = 'Unexpected Error'
             gamesState.status = 'error';
             gamesState.errorType = 'timeout';
         }
@@ -1049,49 +1192,77 @@ function syncFormWithState(state) {
     sortFilteredGames.value = state.sort
 }
 
+
 function paramsToState(genres, platforms, urlParams) {
-    let paramsGenre = urlParams.get('genre')
-    let paramsQuery = urlParams.get('q')
-    let paramsPlatform = urlParams.get('platform')
-    let paramsSort = urlParams.get('sort')
-    let paramsPage = +urlParams.get('page')
+    let paramsGenre = urlParams.get('genre');
+    let paramsQuery = urlParams.get('q');
+    let paramsPlatform = urlParams.get('platform');
+    let paramsSort = urlParams.get('sort');
+    let paramsPage = urlParams.get('page');
+
+    let pageNumber = Number(paramsPage);
+    let hasInvalidFilters = false;
+
     let newState = {
         query: '',
         genre: '',
         platform: '',
         sort: 'default',
         page: 1
-    }
-    for(let i = 0; i<genres.length; i++){
+    };
+
+    for(let i = 0; i < genres.length; i++) {
         if(paramsGenre === genres[i]) {
-            newState.genre = genres[i]
+            newState.genre = genres[i];
+            break;
         }
     }
-    for(let i = 0; i<platforms.length; i++){
+
+    if(paramsGenre && newState.genre === '') {
+        hasInvalidFilters = true;
+    }
+
+    for(let i = 0; i < platforms.length; i++) {
         if(paramsPlatform === platforms[i]) {
-            newState.platform = platforms[i]
+            newState.platform = platforms[i];
+            break;
         }
     }
-    if(paramsQuery === '' || !paramsQuery){
-        newState.query = ''
+
+    if(paramsPlatform && newState.platform === '') {
+        hasInvalidFilters = true;
     }
-    else{
-        newState.query = paramsQuery 
+
+    if(paramsQuery) {
+        newState.query = paramsQuery;
     }
-    if(paramsSort !== 'rating-desc' && paramsSort !== 'released-desc' && paramsSort !== 'name-asc') {
-        newState.sort = 'default'
+
+    if(paramsSort === 'rating-desc' ||
+       paramsSort === 'released-desc' ||
+       paramsSort === 'name-asc') {
+
+        newState.sort = paramsSort;
     }
-    else {
-        newState.sort = paramsSort
+    else if(paramsSort && paramsSort !== 'default') {
+        hasInvalidFilters = true;
     }
-    if(!Number.isInteger(paramsPage) || paramsPage < 1) {
-        newState.page = 1
+
+    if(
+        paramsPage !== null &&
+        /^[0-9]+$/.test(paramsPage) &&
+        Number.isSafeInteger(pageNumber) &&
+        pageNumber > 0
+    ) {
+        newState.page = pageNumber;
     }
-    else {
-        newState.page = paramsPage
+
+    if(hasInvalidFilters) {
+        newState.page = 1;
     }
-    return newState
+
+    return newState;
 }
+
 
 function stateToParams(state) {
     let newUrl = {}
